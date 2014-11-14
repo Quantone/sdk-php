@@ -13,8 +13,7 @@ $albumQuery->setTitle("Rumours");
 $artistQuery = new \DecibelSDK\ArtistsQuery();
 $artistQuery->setName("Fleetwood Mac");
 
-$albumResult = $decibel->execute($albumQuery);
-$artistResult = $decibel->execute($artistQuery);
+$albumResult = $decibel->executeAlbumsQuery($albumQuery);
 
 
 

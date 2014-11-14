@@ -542,68 +542,11 @@ class DecibelEntity{
 
 /*
  * 
-    How a particular artist contributed to an album, recording, or work.
-    
-*/
-class Participation{
-    private $_activityLiteral;
-
-    public function getActivityLiteral(){
-        return $this->_activityLiteral;
-    }
-
-    public function setActivityLiteral($activityLiteral) {
-        $this->_activityLiteral = $activityLiteral;
-    }
-
-    private $_activities;
-
-    public function getActivities(){
-        return $this->_activities;
-    }
-
-    public function setActivities($activities) {
-        $this->_activities = $activities;
-    }
-
-    private $_isFeatured;
-
-    public function getIsFeatured(){
-        return $this->_isFeatured;
-    }
-
-    public function setIsFeatured($isFeatured) {
-        $this->_isFeatured = $isFeatured;
-    }
-
-    private $_artistsLiteral;
-
-    public function getArtistsLiteral(){
-        return $this->_artistsLiteral;
-    }
-
-    public function setArtistsLiteral($artistsLiteral) {
-        $this->_artistsLiteral = $artistsLiteral;
-    }
-
-    private $_artists;
-
-    public function getArtists(){
-        return $this->_artists;
-    }
-
-    public function setArtists($artists) {
-        $this->_artists = $artists;
-    }
-
-}
-
-/*
- * 
     Base class for *QueryObject items
     
 */
 class QueryObject{
+    /* @var $_language Language */
     private $_language;
 
     public function getLanguage(){
@@ -615,34 +558,15 @@ class QueryObject{
     }
 
     public function __construct($obj){
-        $this->language = $obj->Language;
+        $this->_language = isset($obj->Language) ? $obj->Language : null;
     }
 }
 
 class ByIdQueryResult{
-    private $_result;
-
-    public function getResult(){
-        return $this->_result;
-    }
-
-    public function setResult($result) {
-        $this->_result = $result;
-    }
-
 }
 
 class BaseQueryResult{
-    private $_results;
-
-    public function getResults(){
-        return $this->_results;
-    }
-
-    public function setResults($results) {
-        $this->_results = $results;
-    }
-
+    /* @var $_count int */
     private $_count;
 
     public function getCount(){
@@ -656,6 +580,7 @@ class BaseQueryResult{
 }
 
 class ErrorResult{
+    /* @var $_error Error */
     private $_error;
 
     public function getError(){
@@ -674,6 +599,7 @@ class ErrorResult{
     
 */
 class Error{
+    /* @var $_errorMessage string */
     private $_errorMessage;
 
     public function getErrorMessage(){
@@ -684,6 +610,7 @@ class Error{
         $this->_errorMessage = $errorMessage;
     }
 
+    /* @var $_errorCode int */
     private $_errorCode;
 
     public function getErrorCode(){
@@ -702,6 +629,7 @@ class Error{
     
 */
 class Activity extends DecibelEntity{
+    /* @var $_id string */
     private $_id;
 
     public function getId(){
@@ -712,6 +640,7 @@ class Activity extends DecibelEntity{
         $this->_id = $id;
     }
 
+    /* @var $_name string */
     private $_name;
 
     public function getName(){
@@ -722,6 +651,7 @@ class Activity extends DecibelEntity{
         $this->_name = $name;
     }
 
+    /* @var $_probability Probability */
     private $_probability;
 
     public function getProbability(){
@@ -733,13 +663,14 @@ class Activity extends DecibelEntity{
     }
 
     public function __construct($obj){
-        $this->id = $obj->Id;
-        $this->name = $obj->Name;
-        $this->probability = $obj->Probability;
+        $this->_id = isset($obj->Id) ? $obj->Id : null;
+        $this->_name = isset($obj->Name) ? $obj->Name : null;
+        $this->_probability = isset($obj->Probability) ? $obj->Probability : null;
     }
 }
 
 class AlbumsByIdQueryObject extends QueryObject{
+    /* @var $_id string */
     private $_id;
 
     public function getId(){
@@ -750,6 +681,7 @@ class AlbumsByIdQueryObject extends QueryObject{
         $this->_id = $id;
     }
 
+    /* @var $_retrievalDepth AlbumRetrievalDepth */
     private $_retrievalDepth;
 
     public function getRetrievalDepth(){
@@ -761,12 +693,13 @@ class AlbumsByIdQueryObject extends QueryObject{
     }
 
     public function __construct($obj){
-        $this->id = $obj->Id;
-        $this->retrievalDepth = $obj->RetrievalDepth;
+        $this->_id = isset($obj->Id) ? $obj->Id : null;
+        $this->_retrievalDepth = isset($obj->RetrievalDepth) ? $obj->RetrievalDepth : null;
     }
 }
 
 class QueryResult extends BaseQueryResult{
+    /* @var $_totalCount long */
     private $_totalCount;
 
     public function getTotalCount(){
@@ -777,6 +710,7 @@ class QueryResult extends BaseQueryResult{
         $this->_totalCount = $totalCount;
     }
 
+    /* @var $_pageCount int */
     private $_pageCount;
 
     public function getPageCount(){
@@ -787,6 +721,7 @@ class QueryResult extends BaseQueryResult{
         $this->_pageCount = $pageCount;
     }
 
+    /* @var $_pageSize int */
     private $_pageSize;
 
     public function getPageSize(){
@@ -806,16 +741,24 @@ class QueryResult extends BaseQueryResult{
     
 */
 class AlbumsQueryResult extends QueryResult{
+    /* @var $_results Album[] */
+    private $_results;
+
+    public function getResults(){
+        return $this->_results;
+    }
+
     public function __construct($jsonStr){
         $obj = json_decode($jsonStr);
 
-        $this->resultSet = [];
-        foreach($obj->ResultSet as $item){
-            array_push($this->resultSet, new Album($item));
+        $this->_results = [];
+        foreach($obj->Results as $item){
+            array_push($this->_results, new Album($item));
         }
-        $this->resultCount = $obj->ResultCount;
-        $this->pageCount = $obj->PageCount;
-        $this->totalResultCount = $obj->TotalResultCount;
+        $this->setPageSize($obj->PageSize);
+        $this->setPageCount($obj->PageCount);
+        $this->setCount($obj->Count);
+        $this->setTotalCount($obj->TotalCount);
     }
 }
 
@@ -825,10 +768,17 @@ class AlbumsQueryResult extends QueryResult{
     
 */
 class AlbumsByIdQueryResult extends ByIdQueryResult{
+    /* @var $_result Album */
+    private $_result;
+
+    public function getResult(){
+        return $this->_result;
+    }
+
     public function __construct($jsonStr){
         $obj = json_decode($jsonStr);
 
-        $this->result = new Album($obj->Result);
+        $this->_result = new Album($obj->Result);
     }
 }
 
@@ -838,6 +788,7 @@ class AlbumsByIdQueryResult extends ByIdQueryResult{
     
 */
 class Album extends DecibelEntity{
+    /* @var $_id string */
     private $_id;
 
     public function getId(){
@@ -848,6 +799,7 @@ class Album extends DecibelEntity{
         $this->_id = $id;
     }
 
+    /* @var $_title string */
     private $_title;
 
     public function getTitle(){
@@ -858,6 +810,7 @@ class Album extends DecibelEntity{
         $this->_title = $title;
     }
 
+    /* @var $_artistsLiteral string */
     private $_artistsLiteral;
 
     public function getArtistsLiteral(){
@@ -868,6 +821,7 @@ class Album extends DecibelEntity{
         $this->_artistsLiteral = $artistsLiteral;
     }
 
+    /* @var $_artists Artist[] */
     private $_artists;
 
     public function getArtists(){
@@ -878,6 +832,7 @@ class Album extends DecibelEntity{
         $this->_artists = $artists;
     }
 
+    /* @var $_originalReleaseDate string */
     private $_originalReleaseDate;
 
     public function getOriginalReleaseDate(){
@@ -888,6 +843,7 @@ class Album extends DecibelEntity{
         $this->_originalReleaseDate = $originalReleaseDate;
     }
 
+    /* @var $_format ContentFormat */
     private $_format;
 
     public function getFormat(){
@@ -898,6 +854,7 @@ class Album extends DecibelEntity{
         $this->_format = $format;
     }
 
+    /* @var $_isLive bool */
     private $_isLive;
 
     public function getIsLive(){
@@ -908,6 +865,7 @@ class Album extends DecibelEntity{
         $this->_isLive = $isLive;
     }
 
+    /* @var $_isUnofficial bool */
     private $_isUnofficial;
 
     public function getIsUnofficial(){
@@ -918,6 +876,7 @@ class Album extends DecibelEntity{
         $this->_isUnofficial = $isUnofficial;
     }
 
+    /* @var $_genres Genre[] */
     private $_genres;
 
     public function getGenres(){
@@ -928,6 +887,7 @@ class Album extends DecibelEntity{
         $this->_genres = $genres;
     }
 
+    /* @var $_imageId string */
     private $_imageId;
 
     public function getImageId(){
@@ -938,6 +898,7 @@ class Album extends DecibelEntity{
         $this->_imageId = $imageId;
     }
 
+    /* @var $_participations Participation[] */
     private $_participations;
 
     public function getParticipations(){
@@ -948,6 +909,7 @@ class Album extends DecibelEntity{
         $this->_participations = $participations;
     }
 
+    /* @var $_identifiers AlbumIdentifier[] */
     private $_identifiers;
 
     public function getIdentifiers(){
@@ -958,6 +920,7 @@ class Album extends DecibelEntity{
         $this->_identifiers = $identifiers;
     }
 
+    /* @var $_recordings Recording[] */
     private $_recordings;
 
     public function getRecordings(){
@@ -968,6 +931,7 @@ class Album extends DecibelEntity{
         $this->_recordings = $recordings;
     }
 
+    /* @var $_releases Release[] */
     private $_releases;
 
     public function getReleases(){
@@ -979,24 +943,55 @@ class Album extends DecibelEntity{
     }
 
     public function __construct($obj){
-        $this->id = $obj->Id;
-        $this->title = $obj->Title;
-        $this->artistsLiteral = $obj->ArtistsLiteral;
-        $this->artists = $obj->Artists;
-        $this->originalReleaseDate = $obj->OriginalReleaseDate;
-        $this->format = $obj->Format;
-        $this->isLive = $obj->IsLive;
-        $this->isUnofficial = $obj->IsUnofficial;
-        $this->genres = $obj->Genres;
-        $this->imageId = $obj->ImageId;
-        $this->participations = $obj->Participations;
-        $this->identifiers = $obj->Identifiers;
-        $this->recordings = $obj->Recordings;
-        $this->releases = $obj->Releases;
+        $this->_id = isset($obj->Id) ? $obj->Id : null;
+        $this->_title = isset($obj->Title) ? $obj->Title : null;
+        $this->_artistsLiteral = isset($obj->ArtistsLiteral) ? $obj->ArtistsLiteral : null;
+        if(isset($obj->Artists)){
+            $this->_artists = [];
+            foreach($obj->Artists as $item){
+                array_push($this->_artists, new Artist($item));
+            }
+        }
+        $this->_originalReleaseDate = isset($obj->OriginalReleaseDate) ? $obj->OriginalReleaseDate : null;
+        $this->_format = isset($obj->Format) ? $obj->Format : null;
+        $this->_isLive = isset($obj->IsLive) ? $obj->IsLive : null;
+        $this->_isUnofficial = isset($obj->IsUnofficial) ? $obj->IsUnofficial : null;
+        if(isset($obj->Genres)){
+            $this->_genres = [];
+            foreach($obj->Genres as $item){
+                array_push($this->_genres, new Genre($item));
+            }
+        }
+        $this->_imageId = isset($obj->ImageId) ? $obj->ImageId : null;
+        if(isset($obj->Participations)){
+            $this->_participations = [];
+            foreach($obj->Participations as $item){
+                array_push($this->_participations, new Participation($item));
+            }
+        }
+        if(isset($obj->Identifiers)){
+            $this->_identifiers = [];
+            foreach($obj->Identifiers as $item){
+                array_push($this->_identifiers, new AlbumIdentifier($item));
+            }
+        }
+        if(isset($obj->Recordings)){
+            $this->_recordings = [];
+            foreach($obj->Recordings as $item){
+                array_push($this->_recordings, new Recording($item));
+            }
+        }
+        if(isset($obj->Releases)){
+            $this->_releases = [];
+            foreach($obj->Releases as $item){
+                array_push($this->_releases, new Release($item));
+            }
+        }
     }
 }
 
 class ArtistsByIdQueryObject extends QueryObject{
+    /* @var $_id string */
     private $_id;
 
     public function getId(){
@@ -1007,6 +1002,7 @@ class ArtistsByIdQueryObject extends QueryObject{
         $this->_id = $id;
     }
 
+    /* @var $_retrievalDepth ArtistRetrievalDepth */
     private $_retrievalDepth;
 
     public function getRetrievalDepth(){
@@ -1018,8 +1014,8 @@ class ArtistsByIdQueryObject extends QueryObject{
     }
 
     public function __construct($obj){
-        $this->id = $obj->Id;
-        $this->retrievalDepth = $obj->RetrievalDepth;
+        $this->_id = isset($obj->Id) ? $obj->Id : null;
+        $this->_retrievalDepth = isset($obj->RetrievalDepth) ? $obj->RetrievalDepth : null;
     }
 }
 
@@ -1030,16 +1026,24 @@ class ArtistsByIdQueryObject extends QueryObject{
     
 */
 class ArtistsQueryResult extends QueryResult{
+    /* @var $_results Artist[] */
+    private $_results;
+
+    public function getResults(){
+        return $this->_results;
+    }
+
     public function __construct($jsonStr){
         $obj = json_decode($jsonStr);
 
-        $this->resultSet = [];
-        foreach($obj->ResultSet as $item){
-            array_push($this->resultSet, new Artist($item));
+        $this->_results = [];
+        foreach($obj->Results as $item){
+            array_push($this->_results, new Artist($item));
         }
-        $this->resultCount = $obj->ResultCount;
-        $this->pageCount = $obj->PageCount;
-        $this->totalResultCount = $obj->TotalResultCount;
+        $this->setPageSize($obj->PageSize);
+        $this->setPageCount($obj->PageCount);
+        $this->setCount($obj->Count);
+        $this->setTotalCount($obj->TotalCount);
     }
 }
 
@@ -1049,10 +1053,17 @@ class ArtistsQueryResult extends QueryResult{
     
 */
 class ArtistsByIdQueryResult extends ByIdQueryResult{
+    /* @var $_result Artist */
+    private $_result;
+
+    public function getResult(){
+        return $this->_result;
+    }
+
     public function __construct($jsonStr){
         $obj = json_decode($jsonStr);
 
-        $this->result = new Artist($obj->Result);
+        $this->_result = new Artist($obj->Result);
     }
 }
 
@@ -1062,6 +1073,7 @@ class ArtistsByIdQueryResult extends ByIdQueryResult{
     
 */
 class DiscTag extends DecibelEntity{
+    /* @var $_fileTags FileTag[] */
     private $_fileTags;
 
     public function getFileTags(){
@@ -1073,11 +1085,17 @@ class DiscTag extends DecibelEntity{
     }
 
     public function __construct($obj){
-        $this->fileTags = $obj->FileTags;
+        if(isset($obj->FileTags)){
+            $this->_fileTags = [];
+            foreach($obj->FileTags as $item){
+                array_push($this->_fileTags, new FileTag($item));
+            }
+        }
     }
 }
 
 class RecordingsByIdQueryObject extends QueryObject{
+    /* @var $_id string */
     private $_id;
 
     public function getId(){
@@ -1088,6 +1106,7 @@ class RecordingsByIdQueryObject extends QueryObject{
         $this->_id = $id;
     }
 
+    /* @var $_retrievalDepth RecordingRetrievalDepth */
     private $_retrievalDepth;
 
     public function getRetrievalDepth(){
@@ -1099,8 +1118,8 @@ class RecordingsByIdQueryObject extends QueryObject{
     }
 
     public function __construct($obj){
-        $this->id = $obj->Id;
-        $this->retrievalDepth = $obj->RetrievalDepth;
+        $this->_id = isset($obj->Id) ? $obj->Id : null;
+        $this->_retrievalDepth = isset($obj->RetrievalDepth) ? $obj->RetrievalDepth : null;
     }
 }
 
@@ -1111,16 +1130,24 @@ class RecordingsByIdQueryObject extends QueryObject{
     
 */
 class RecordingsQueryResult extends QueryResult{
+    /* @var $_results Recording[] */
+    private $_results;
+
+    public function getResults(){
+        return $this->_results;
+    }
+
     public function __construct($jsonStr){
         $obj = json_decode($jsonStr);
 
-        $this->resultSet = [];
-        foreach($obj->ResultSet as $item){
-            array_push($this->resultSet, new Recording($item));
+        $this->_results = [];
+        foreach($obj->Results as $item){
+            array_push($this->_results, new Recording($item));
         }
-        $this->resultCount = $obj->ResultCount;
-        $this->pageCount = $obj->PageCount;
-        $this->totalResultCount = $obj->TotalResultCount;
+        $this->setPageSize($obj->PageSize);
+        $this->setPageCount($obj->PageCount);
+        $this->setCount($obj->Count);
+        $this->setTotalCount($obj->TotalCount);
     }
 }
 
@@ -1130,10 +1157,17 @@ class RecordingsQueryResult extends QueryResult{
     
 */
 class RecordingsByIdQueryResult extends ByIdQueryResult{
+    /* @var $_result Recording */
+    private $_result;
+
+    public function getResult(){
+        return $this->_result;
+    }
+
     public function __construct($jsonStr){
         $obj = json_decode($jsonStr);
 
-        $this->result = new Recording($obj->Result);
+        $this->_result = new Recording($obj->Result);
     }
 }
 
@@ -1143,6 +1177,7 @@ class RecordingsByIdQueryResult extends ByIdQueryResult{
     
 */
 class Location extends DecibelEntity{
+    /* @var $_id string */
     private $_id;
 
     public function getId(){
@@ -1153,6 +1188,7 @@ class Location extends DecibelEntity{
         $this->_id = $id;
     }
 
+    /* @var $_name string */
     private $_name;
 
     public function getName(){
@@ -1164,12 +1200,13 @@ class Location extends DecibelEntity{
     }
 
     public function __construct($obj){
-        $this->id = $obj->Id;
-        $this->name = $obj->Name;
+        $this->_id = isset($obj->Id) ? $obj->Id : null;
+        $this->_name = isset($obj->Name) ? $obj->Name : null;
     }
 }
 
 class AlbumsQueryObject extends SearchQueryObject{
+    /* @var $_title string */
     private $_title;
 
     public function getTitle(){
@@ -1180,6 +1217,7 @@ class AlbumsQueryObject extends SearchQueryObject{
         $this->_title = $title;
     }
 
+    /* @var $_titleSearchType AlbumSearchType */
     private $_titleSearchType;
 
     public function getTitleSearchType(){
@@ -1190,6 +1228,7 @@ class AlbumsQueryObject extends SearchQueryObject{
         $this->_titleSearchType = $titleSearchType;
     }
 
+    /* @var $_id string */
     private $_id;
 
     public function getId(){
@@ -1200,6 +1239,7 @@ class AlbumsQueryObject extends SearchQueryObject{
         $this->_id = $id;
     }
 
+    /* @var $_idType AlbumIdType */
     private $_idType;
 
     public function getIdType(){
@@ -1210,6 +1250,7 @@ class AlbumsQueryObject extends SearchQueryObject{
         $this->_idType = $idType;
     }
 
+    /* @var $_recordings string[] */
     private $_recordings;
 
     public function getRecordings(){
@@ -1220,6 +1261,7 @@ class AlbumsQueryObject extends SearchQueryObject{
         $this->_recordings = $recordings;
     }
 
+    /* @var $_recordingIds string[] */
     private $_recordingIds;
 
     public function getRecordingIds(){
@@ -1230,6 +1272,7 @@ class AlbumsQueryObject extends SearchQueryObject{
         $this->_recordingIds = $recordingIds;
     }
 
+    /* @var $_artists string[] */
     private $_artists;
 
     public function getArtists(){
@@ -1240,6 +1283,7 @@ class AlbumsQueryObject extends SearchQueryObject{
         $this->_artists = $artists;
     }
 
+    /* @var $_artistIds string[] */
     private $_artistIds;
 
     public function getArtistIds(){
@@ -1250,6 +1294,7 @@ class AlbumsQueryObject extends SearchQueryObject{
         $this->_artistIds = $artistIds;
     }
 
+    /* @var $_participants string[] */
     private $_participants;
 
     public function getParticipants(){
@@ -1260,6 +1305,7 @@ class AlbumsQueryObject extends SearchQueryObject{
         $this->_participants = $participants;
     }
 
+    /* @var $_participantIds string[] */
     private $_participantIds;
 
     public function getParticipantIds(){
@@ -1270,6 +1316,7 @@ class AlbumsQueryObject extends SearchQueryObject{
         $this->_participantIds = $participantIds;
     }
 
+    /* @var $_isLive bool */
     private $_isLive;
 
     public function getIsLive(){
@@ -1280,6 +1327,7 @@ class AlbumsQueryObject extends SearchQueryObject{
         $this->_isLive = $isLive;
     }
 
+    /* @var $_dateReleased string */
     private $_dateReleased;
 
     public function getDateReleased(){
@@ -1290,6 +1338,7 @@ class AlbumsQueryObject extends SearchQueryObject{
         $this->_dateReleased = $dateReleased;
     }
 
+    /* @var $_orderingProperties OrderAlbumsBy[] */
     private $_orderingProperties;
 
     public function getOrderingProperties(){
@@ -1300,6 +1349,7 @@ class AlbumsQueryObject extends SearchQueryObject{
         $this->_orderingProperties = $orderingProperties;
     }
 
+    /* @var $_recordingSearchType RecordingSearchType */
     private $_recordingSearchType;
 
     public function getRecordingSearchType(){
@@ -1310,6 +1360,7 @@ class AlbumsQueryObject extends SearchQueryObject{
         $this->_recordingSearchType = $recordingSearchType;
     }
 
+    /* @var $_recordingIdType RecordingIdType */
     private $_recordingIdType;
 
     public function getRecordingIdType(){
@@ -1320,6 +1371,7 @@ class AlbumsQueryObject extends SearchQueryObject{
         $this->_recordingIdType = $recordingIdType;
     }
 
+    /* @var $_artistSearchType ArtistSearchType */
     private $_artistSearchType;
 
     public function getArtistSearchType(){
@@ -1330,6 +1382,7 @@ class AlbumsQueryObject extends SearchQueryObject{
         $this->_artistSearchType = $artistSearchType;
     }
 
+    /* @var $_artistIdType ArtistIdType */
     private $_artistIdType;
 
     public function getArtistIdType(){
@@ -1340,6 +1393,7 @@ class AlbumsQueryObject extends SearchQueryObject{
         $this->_artistIdType = $artistIdType;
     }
 
+    /* @var $_participantSearchType ArtistSearchType */
     private $_participantSearchType;
 
     public function getParticipantSearchType(){
@@ -1350,6 +1404,7 @@ class AlbumsQueryObject extends SearchQueryObject{
         $this->_participantSearchType = $participantSearchType;
     }
 
+    /* @var $_participantIdType ArtistIdType */
     private $_participantIdType;
 
     public function getParticipantIdType(){
@@ -1360,6 +1415,7 @@ class AlbumsQueryObject extends SearchQueryObject{
         $this->_participantIdType = $participantIdType;
     }
 
+    /* @var $_retrievalDepth AlbumRetrievalDepth */
     private $_retrievalDepth;
 
     public function getRetrievalDepth(){
@@ -1371,26 +1427,56 @@ class AlbumsQueryObject extends SearchQueryObject{
     }
 
     public function __construct($obj){
-        $this->title = $obj->Title;
-        $this->titleSearchType = $obj->TitleSearchType;
-        $this->id = $obj->Id;
-        $this->idType = $obj->IdType;
-        $this->recordings = $obj->Recordings;
-        $this->recordingIds = $obj->RecordingIds;
-        $this->artists = $obj->Artists;
-        $this->artistIds = $obj->ArtistIds;
-        $this->participants = $obj->Participants;
-        $this->participantIds = $obj->ParticipantIds;
-        $this->isLive = $obj->IsLive;
-        $this->dateReleased = $obj->DateReleased;
-        $this->orderingProperties = $obj->OrderingProperties;
-        $this->recordingSearchType = $obj->RecordingSearchType;
-        $this->recordingIdType = $obj->RecordingIdType;
-        $this->artistSearchType = $obj->ArtistSearchType;
-        $this->artistIdType = $obj->ArtistIdType;
-        $this->participantSearchType = $obj->ParticipantSearchType;
-        $this->participantIdType = $obj->ParticipantIdType;
-        $this->retrievalDepth = $obj->RetrievalDepth;
+        $this->_title = isset($obj->Title) ? $obj->Title : null;
+        $this->_titleSearchType = isset($obj->TitleSearchType) ? $obj->TitleSearchType : null;
+        $this->_id = isset($obj->Id) ? $obj->Id : null;
+        $this->_idType = isset($obj->IdType) ? $obj->IdType : null;
+        if(isset($obj->Recordings)){
+            $this->_recordings = [];
+            foreach($obj->Recordings as $item){
+                array_push($this->_recordings, new string($item));
+            }
+        }
+        if(isset($obj->RecordingIds)){
+            $this->_recordingIds = [];
+            foreach($obj->RecordingIds as $item){
+                array_push($this->_recordingIds, new string($item));
+            }
+        }
+        if(isset($obj->Artists)){
+            $this->_artists = [];
+            foreach($obj->Artists as $item){
+                array_push($this->_artists, new string($item));
+            }
+        }
+        if(isset($obj->ArtistIds)){
+            $this->_artistIds = [];
+            foreach($obj->ArtistIds as $item){
+                array_push($this->_artistIds, new string($item));
+            }
+        }
+        if(isset($obj->Participants)){
+            $this->_participants = [];
+            foreach($obj->Participants as $item){
+                array_push($this->_participants, new string($item));
+            }
+        }
+        if(isset($obj->ParticipantIds)){
+            $this->_participantIds = [];
+            foreach($obj->ParticipantIds as $item){
+                array_push($this->_participantIds, new string($item));
+            }
+        }
+        $this->_isLive = isset($obj->IsLive) ? $obj->IsLive : null;
+        $this->_dateReleased = isset($obj->DateReleased) ? $obj->DateReleased : null;
+        $this->_orderingProperties = isset($obj->OrderingProperties) ? $obj->OrderingProperties : null;
+        $this->_recordingSearchType = isset($obj->RecordingSearchType) ? $obj->RecordingSearchType : null;
+        $this->_recordingIdType = isset($obj->RecordingIdType) ? $obj->RecordingIdType : null;
+        $this->_artistSearchType = isset($obj->ArtistSearchType) ? $obj->ArtistSearchType : null;
+        $this->_artistIdType = isset($obj->ArtistIdType) ? $obj->ArtistIdType : null;
+        $this->_participantSearchType = isset($obj->ParticipantSearchType) ? $obj->ParticipantSearchType : null;
+        $this->_participantIdType = isset($obj->ParticipantIdType) ? $obj->ParticipantIdType : null;
+        $this->_retrievalDepth = isset($obj->RetrievalDepth) ? $obj->RetrievalDepth : null;
     }
 }
 
@@ -1400,6 +1486,7 @@ class AlbumsQueryObject extends SearchQueryObject{
     
 */
 class SearchQueryObject extends QueryObject{
+    /* @var $_pageNumber int */
     private $_pageNumber;
 
     public function getPageNumber(){
@@ -1410,6 +1497,7 @@ class SearchQueryObject extends QueryObject{
         $this->_pageNumber = $pageNumber;
     }
 
+    /* @var $_pageSize int */
     private $_pageSize;
 
     public function getPageSize(){
@@ -1420,6 +1508,7 @@ class SearchQueryObject extends QueryObject{
         $this->_pageSize = $pageSize;
     }
 
+    /* @var $_updatedSince long */
     private $_updatedSince;
 
     public function getUpdatedSince(){
@@ -1431,9 +1520,9 @@ class SearchQueryObject extends QueryObject{
     }
 
     public function __construct($obj){
-        $this->pageNumber = $obj->PageNumber;
-        $this->pageSize = $obj->PageSize;
-        $this->updatedSince = $obj->UpdatedSince;
+        $this->_pageNumber = isset($obj->PageNumber) ? $obj->PageNumber : null;
+        $this->_pageSize = isset($obj->PageSize) ? $obj->PageSize : null;
+        $this->_updatedSince = isset($obj->UpdatedSince) ? $obj->UpdatedSince : null;
     }
 }
 
@@ -1443,16 +1532,24 @@ class SearchQueryObject extends QueryObject{
     
 */
 class DiscTagsQueryResult extends QueryResult{
+    /* @var $_results DiscTag[] */
+    private $_results;
+
+    public function getResults(){
+        return $this->_results;
+    }
+
     public function __construct($jsonStr){
         $obj = json_decode($jsonStr);
 
-        $this->resultSet = [];
-        foreach($obj->ResultSet as $item){
-            array_push($this->resultSet, new DiscTag($item));
+        $this->_results = [];
+        foreach($obj->Results as $item){
+            array_push($this->_results, new DiscTag($item));
         }
-        $this->resultCount = $obj->ResultCount;
-        $this->pageCount = $obj->PageCount;
-        $this->totalResultCount = $obj->TotalResultCount;
+        $this->setPageSize($obj->PageSize);
+        $this->setPageCount($obj->PageCount);
+        $this->setCount($obj->Count);
+        $this->setTotalCount($obj->TotalCount);
     }
 }
 
@@ -1462,6 +1559,7 @@ class DiscTagsQueryResult extends QueryResult{
     
 */
 class Release extends DecibelEntity{
+    /* @var $_id string */
     private $_id;
 
     public function getId(){
@@ -1472,6 +1570,7 @@ class Release extends DecibelEntity{
         $this->_id = $id;
     }
 
+    /* @var $_releaseDate string */
     private $_releaseDate;
 
     public function getReleaseDate(){
@@ -1482,6 +1581,7 @@ class Release extends DecibelEntity{
         $this->_releaseDate = $releaseDate;
     }
 
+    /* @var $_releaseRegionLiteral string */
     private $_releaseRegionLiteral;
 
     public function getReleaseRegionLiteral(){
@@ -1492,6 +1592,7 @@ class Release extends DecibelEntity{
         $this->_releaseRegionLiteral = $releaseRegionLiteral;
     }
 
+    /* @var $_labelLiteral string */
     private $_labelLiteral;
 
     public function getLabelLiteral(){
@@ -1502,6 +1603,7 @@ class Release extends DecibelEntity{
         $this->_labelLiteral = $labelLiteral;
     }
 
+    /* @var $_formatTypes string */
     private $_formatTypes;
 
     public function getFormatTypes(){
@@ -1512,6 +1614,7 @@ class Release extends DecibelEntity{
         $this->_formatTypes = $formatTypes;
     }
 
+    /* @var $_identifiers ReleaseIdentifier[] */
     private $_identifiers;
 
     public function getIdentifiers(){
@@ -1523,16 +1626,22 @@ class Release extends DecibelEntity{
     }
 
     public function __construct($obj){
-        $this->id = $obj->Id;
-        $this->releaseDate = $obj->ReleaseDate;
-        $this->releaseRegionLiteral = $obj->ReleaseRegionLiteral;
-        $this->labelLiteral = $obj->LabelLiteral;
-        $this->formatTypes = $obj->FormatTypes;
-        $this->identifiers = $obj->Identifiers;
+        $this->_id = isset($obj->Id) ? $obj->Id : null;
+        $this->_releaseDate = isset($obj->ReleaseDate) ? $obj->ReleaseDate : null;
+        $this->_releaseRegionLiteral = isset($obj->ReleaseRegionLiteral) ? $obj->ReleaseRegionLiteral : null;
+        $this->_labelLiteral = isset($obj->LabelLiteral) ? $obj->LabelLiteral : null;
+        $this->_formatTypes = isset($obj->FormatTypes) ? $obj->FormatTypes : null;
+        if(isset($obj->Identifiers)){
+            $this->_identifiers = [];
+            foreach($obj->Identifiers as $item){
+                array_push($this->_identifiers, new ReleaseIdentifier($item));
+            }
+        }
     }
 }
 
 class DiscTagsQueryObject extends SearchQueryObject{
+    /* @var $_albumDecibelId string */
     private $_albumDecibelId;
 
     public function getAlbumDecibelId(){
@@ -1543,6 +1652,7 @@ class DiscTagsQueryObject extends SearchQueryObject{
         $this->_albumDecibelId = $albumDecibelId;
     }
 
+    /* @var $_mediumDecibelId string */
     private $_mediumDecibelId;
 
     public function getMediumDecibelId(){
@@ -1553,6 +1663,7 @@ class DiscTagsQueryObject extends SearchQueryObject{
         $this->_mediumDecibelId = $mediumDecibelId;
     }
 
+    /* @var $_checksum string */
     private $_checksum;
 
     public function getChecksum(){
@@ -1563,6 +1674,7 @@ class DiscTagsQueryObject extends SearchQueryObject{
         $this->_checksum = $checksum;
     }
 
+    /* @var $_albumSpotifyUri string */
     private $_albumSpotifyUri;
 
     public function getAlbumSpotifyUri(){
@@ -1574,10 +1686,10 @@ class DiscTagsQueryObject extends SearchQueryObject{
     }
 
     public function __construct($obj){
-        $this->albumDecibelId = $obj->AlbumDecibelId;
-        $this->mediumDecibelId = $obj->MediumDecibelId;
-        $this->checksum = $obj->Checksum;
-        $this->albumSpotifyUri = $obj->AlbumSpotifyUri;
+        $this->_albumDecibelId = isset($obj->AlbumDecibelId) ? $obj->AlbumDecibelId : null;
+        $this->_mediumDecibelId = isset($obj->MediumDecibelId) ? $obj->MediumDecibelId : null;
+        $this->_checksum = isset($obj->Checksum) ? $obj->Checksum : null;
+        $this->_albumSpotifyUri = isset($obj->AlbumSpotifyUri) ? $obj->AlbumSpotifyUri : null;
     }
 }
 
@@ -1587,6 +1699,7 @@ class DiscTagsQueryObject extends SearchQueryObject{
     
 */
 class WebAddress extends DecibelEntity{
+    /* @var $_address string */
     private $_address;
 
     public function getAddress(){
@@ -1597,6 +1710,7 @@ class WebAddress extends DecibelEntity{
         $this->_address = $address;
     }
 
+    /* @var $_website string */
     private $_website;
 
     public function getWebsite(){
@@ -1608,12 +1722,13 @@ class WebAddress extends DecibelEntity{
     }
 
     public function __construct($obj){
-        $this->address = $obj->Address;
-        $this->website = $obj->Website;
+        $this->_address = isset($obj->Address) ? $obj->Address : null;
+        $this->_website = isset($obj->Website) ? $obj->Website : null;
     }
 }
 
 class ArtistsQueryObject extends SearchQueryObject{
+    /* @var $_name string */
     private $_name;
 
     public function getName(){
@@ -1624,6 +1739,7 @@ class ArtistsQueryObject extends SearchQueryObject{
         $this->_name = $name;
     }
 
+    /* @var $_nameSearchType ArtistSearchType */
     private $_nameSearchType;
 
     public function getNameSearchType(){
@@ -1634,6 +1750,7 @@ class ArtistsQueryObject extends SearchQueryObject{
         $this->_nameSearchType = $nameSearchType;
     }
 
+    /* @var $_id string */
     private $_id;
 
     public function getId(){
@@ -1644,6 +1761,7 @@ class ArtistsQueryObject extends SearchQueryObject{
         $this->_id = $id;
     }
 
+    /* @var $_idType ArtistIdType */
     private $_idType;
 
     public function getIdType(){
@@ -1654,6 +1772,7 @@ class ArtistsQueryObject extends SearchQueryObject{
         $this->_idType = $idType;
     }
 
+    /* @var $_birthDate string */
     private $_birthDate;
 
     public function getBirthDate(){
@@ -1664,6 +1783,7 @@ class ArtistsQueryObject extends SearchQueryObject{
         $this->_birthDate = $birthDate;
     }
 
+    /* @var $_deathDate string */
     private $_deathDate;
 
     public function getDeathDate(){
@@ -1674,6 +1794,7 @@ class ArtistsQueryObject extends SearchQueryObject{
         $this->_deathDate = $deathDate;
     }
 
+    /* @var $_gender Gender */
     private $_gender;
 
     public function getGender(){
@@ -1684,6 +1805,7 @@ class ArtistsQueryObject extends SearchQueryObject{
         $this->_gender = $gender;
     }
 
+    /* @var $_genre string */
     private $_genre;
 
     public function getGenre(){
@@ -1694,6 +1816,7 @@ class ArtistsQueryObject extends SearchQueryObject{
         $this->_genre = $genre;
     }
 
+    /* @var $_retrievalDepth ArtistRetrievalDepth */
     private $_retrievalDepth;
 
     public function getRetrievalDepth(){
@@ -1704,6 +1827,7 @@ class ArtistsQueryObject extends SearchQueryObject{
         $this->_retrievalDepth = $retrievalDepth;
     }
 
+    /* @var $_orderingProperties OrderArtistsBy[] */
     private $_orderingProperties;
 
     public function getOrderingProperties(){
@@ -1715,16 +1839,16 @@ class ArtistsQueryObject extends SearchQueryObject{
     }
 
     public function __construct($obj){
-        $this->name = $obj->Name;
-        $this->nameSearchType = $obj->NameSearchType;
-        $this->id = $obj->Id;
-        $this->idType = $obj->IdType;
-        $this->birthDate = $obj->BirthDate;
-        $this->deathDate = $obj->DeathDate;
-        $this->gender = $obj->Gender;
-        $this->genre = $obj->Genre;
-        $this->retrievalDepth = $obj->RetrievalDepth;
-        $this->orderingProperties = $obj->OrderingProperties;
+        $this->_name = isset($obj->Name) ? $obj->Name : null;
+        $this->_nameSearchType = isset($obj->NameSearchType) ? $obj->NameSearchType : null;
+        $this->_id = isset($obj->Id) ? $obj->Id : null;
+        $this->_idType = isset($obj->IdType) ? $obj->IdType : null;
+        $this->_birthDate = isset($obj->BirthDate) ? $obj->BirthDate : null;
+        $this->_deathDate = isset($obj->DeathDate) ? $obj->DeathDate : null;
+        $this->_gender = isset($obj->Gender) ? $obj->Gender : null;
+        $this->_genre = isset($obj->Genre) ? $obj->Genre : null;
+        $this->_retrievalDepth = isset($obj->RetrievalDepth) ? $obj->RetrievalDepth : null;
+        $this->_orderingProperties = isset($obj->OrderingProperties) ? $obj->OrderingProperties : null;
     }
 }
 
@@ -1734,6 +1858,7 @@ class ArtistsQueryObject extends SearchQueryObject{
     
 */
 class Annotation extends DecibelEntity{
+    /* @var $_text string */
     private $_text;
 
     public function getText(){
@@ -1745,11 +1870,12 @@ class Annotation extends DecibelEntity{
     }
 
     public function __construct($obj){
-        $this->text = $obj->Text;
+        $this->_text = isset($obj->Text) ? $obj->Text : null;
     }
 }
 
 class RecordingsQueryObject extends SearchQueryObject{
+    /* @var $_title string */
     private $_title;
 
     public function getTitle(){
@@ -1760,6 +1886,7 @@ class RecordingsQueryObject extends SearchQueryObject{
         $this->_title = $title;
     }
 
+    /* @var $_titleSearchType RecordingSearchType */
     private $_titleSearchType;
 
     public function getTitleSearchType(){
@@ -1770,6 +1897,7 @@ class RecordingsQueryObject extends SearchQueryObject{
         $this->_titleSearchType = $titleSearchType;
     }
 
+    /* @var $_id string */
     private $_id;
 
     public function getId(){
@@ -1780,6 +1908,7 @@ class RecordingsQueryObject extends SearchQueryObject{
         $this->_id = $id;
     }
 
+    /* @var $_idType RecordingIdType */
     private $_idType;
 
     public function getIdType(){
@@ -1790,6 +1919,7 @@ class RecordingsQueryObject extends SearchQueryObject{
         $this->_idType = $idType;
     }
 
+    /* @var $_dateProduced string */
     private $_dateProduced;
 
     public function getDateProduced(){
@@ -1800,6 +1930,7 @@ class RecordingsQueryObject extends SearchQueryObject{
         $this->_dateProduced = $dateProduced;
     }
 
+    /* @var $_composers string[] */
     private $_composers;
 
     public function getComposers(){
@@ -1810,6 +1941,7 @@ class RecordingsQueryObject extends SearchQueryObject{
         $this->_composers = $composers;
     }
 
+    /* @var $_composerIds string[] */
     private $_composerIds;
 
     public function getComposerIds(){
@@ -1820,6 +1952,7 @@ class RecordingsQueryObject extends SearchQueryObject{
         $this->_composerIds = $composerIds;
     }
 
+    /* @var $_participants string[] */
     private $_participants;
 
     public function getParticipants(){
@@ -1830,6 +1963,7 @@ class RecordingsQueryObject extends SearchQueryObject{
         $this->_participants = $participants;
     }
 
+    /* @var $_participantIds string[] */
     private $_participantIds;
 
     public function getParticipantIds(){
@@ -1840,6 +1974,7 @@ class RecordingsQueryObject extends SearchQueryObject{
         $this->_participantIds = $participantIds;
     }
 
+    /* @var $_artists string[] */
     private $_artists;
 
     public function getArtists(){
@@ -1850,6 +1985,7 @@ class RecordingsQueryObject extends SearchQueryObject{
         $this->_artists = $artists;
     }
 
+    /* @var $_artistIds string[] */
     private $_artistIds;
 
     public function getArtistIds(){
@@ -1860,6 +1996,7 @@ class RecordingsQueryObject extends SearchQueryObject{
         $this->_artistIds = $artistIds;
     }
 
+    /* @var $_isLive bool */
     private $_isLive;
 
     public function getIsLive(){
@@ -1870,6 +2007,7 @@ class RecordingsQueryObject extends SearchQueryObject{
         $this->_isLive = $isLive;
     }
 
+    /* @var $_maxSeconds double */
     private $_maxSeconds;
 
     public function getMaxSeconds(){
@@ -1880,6 +2018,7 @@ class RecordingsQueryObject extends SearchQueryObject{
         $this->_maxSeconds = $maxSeconds;
     }
 
+    /* @var $_minSeconds double */
     private $_minSeconds;
 
     public function getMinSeconds(){
@@ -1890,6 +2029,7 @@ class RecordingsQueryObject extends SearchQueryObject{
         $this->_minSeconds = $minSeconds;
     }
 
+    /* @var $_orderingProperties OrderRecordingsBy[] */
     private $_orderingProperties;
 
     public function getOrderingProperties(){
@@ -1900,6 +2040,7 @@ class RecordingsQueryObject extends SearchQueryObject{
         $this->_orderingProperties = $orderingProperties;
     }
 
+    /* @var $_artistSearchType ArtistSearchType */
     private $_artistSearchType;
 
     public function getArtistSearchType(){
@@ -1910,6 +2051,7 @@ class RecordingsQueryObject extends SearchQueryObject{
         $this->_artistSearchType = $artistSearchType;
     }
 
+    /* @var $_artistIdType ArtistIdType */
     private $_artistIdType;
 
     public function getArtistIdType(){
@@ -1920,6 +2062,7 @@ class RecordingsQueryObject extends SearchQueryObject{
         $this->_artistIdType = $artistIdType;
     }
 
+    /* @var $_composerSearchType ArtistSearchType */
     private $_composerSearchType;
 
     public function getComposerSearchType(){
@@ -1930,6 +2073,7 @@ class RecordingsQueryObject extends SearchQueryObject{
         $this->_composerSearchType = $composerSearchType;
     }
 
+    /* @var $_composerIdType ArtistIdType */
     private $_composerIdType;
 
     public function getComposerIdType(){
@@ -1940,6 +2084,7 @@ class RecordingsQueryObject extends SearchQueryObject{
         $this->_composerIdType = $composerIdType;
     }
 
+    /* @var $_participantSearchType ArtistSearchType */
     private $_participantSearchType;
 
     public function getParticipantSearchType(){
@@ -1950,6 +2095,7 @@ class RecordingsQueryObject extends SearchQueryObject{
         $this->_participantSearchType = $participantSearchType;
     }
 
+    /* @var $_participantIdType ArtistIdType */
     private $_participantIdType;
 
     public function getParticipantIdType(){
@@ -1960,6 +2106,7 @@ class RecordingsQueryObject extends SearchQueryObject{
         $this->_participantIdType = $participantIdType;
     }
 
+    /* @var $_retrievalDepth RecordingRetrievalDepth */
     private $_retrievalDepth;
 
     public function getRetrievalDepth(){
@@ -1971,28 +2118,58 @@ class RecordingsQueryObject extends SearchQueryObject{
     }
 
     public function __construct($obj){
-        $this->title = $obj->Title;
-        $this->titleSearchType = $obj->TitleSearchType;
-        $this->id = $obj->Id;
-        $this->idType = $obj->IdType;
-        $this->dateProduced = $obj->DateProduced;
-        $this->composers = $obj->Composers;
-        $this->composerIds = $obj->ComposerIds;
-        $this->participants = $obj->Participants;
-        $this->participantIds = $obj->ParticipantIds;
-        $this->artists = $obj->Artists;
-        $this->artistIds = $obj->ArtistIds;
-        $this->isLive = $obj->IsLive;
-        $this->maxSeconds = $obj->MaxSeconds;
-        $this->minSeconds = $obj->MinSeconds;
-        $this->orderingProperties = $obj->OrderingProperties;
-        $this->artistSearchType = $obj->ArtistSearchType;
-        $this->artistIdType = $obj->ArtistIdType;
-        $this->composerSearchType = $obj->ComposerSearchType;
-        $this->composerIdType = $obj->ComposerIdType;
-        $this->participantSearchType = $obj->ParticipantSearchType;
-        $this->participantIdType = $obj->ParticipantIdType;
-        $this->retrievalDepth = $obj->RetrievalDepth;
+        $this->_title = isset($obj->Title) ? $obj->Title : null;
+        $this->_titleSearchType = isset($obj->TitleSearchType) ? $obj->TitleSearchType : null;
+        $this->_id = isset($obj->Id) ? $obj->Id : null;
+        $this->_idType = isset($obj->IdType) ? $obj->IdType : null;
+        $this->_dateProduced = isset($obj->DateProduced) ? $obj->DateProduced : null;
+        if(isset($obj->Composers)){
+            $this->_composers = [];
+            foreach($obj->Composers as $item){
+                array_push($this->_composers, new string($item));
+            }
+        }
+        if(isset($obj->ComposerIds)){
+            $this->_composerIds = [];
+            foreach($obj->ComposerIds as $item){
+                array_push($this->_composerIds, new string($item));
+            }
+        }
+        if(isset($obj->Participants)){
+            $this->_participants = [];
+            foreach($obj->Participants as $item){
+                array_push($this->_participants, new string($item));
+            }
+        }
+        if(isset($obj->ParticipantIds)){
+            $this->_participantIds = [];
+            foreach($obj->ParticipantIds as $item){
+                array_push($this->_participantIds, new string($item));
+            }
+        }
+        if(isset($obj->Artists)){
+            $this->_artists = [];
+            foreach($obj->Artists as $item){
+                array_push($this->_artists, new string($item));
+            }
+        }
+        if(isset($obj->ArtistIds)){
+            $this->_artistIds = [];
+            foreach($obj->ArtistIds as $item){
+                array_push($this->_artistIds, new string($item));
+            }
+        }
+        $this->_isLive = isset($obj->IsLive) ? $obj->IsLive : null;
+        $this->_maxSeconds = isset($obj->MaxSeconds) ? $obj->MaxSeconds : null;
+        $this->_minSeconds = isset($obj->MinSeconds) ? $obj->MinSeconds : null;
+        $this->_orderingProperties = isset($obj->OrderingProperties) ? $obj->OrderingProperties : null;
+        $this->_artistSearchType = isset($obj->ArtistSearchType) ? $obj->ArtistSearchType : null;
+        $this->_artistIdType = isset($obj->ArtistIdType) ? $obj->ArtistIdType : null;
+        $this->_composerSearchType = isset($obj->ComposerSearchType) ? $obj->ComposerSearchType : null;
+        $this->_composerIdType = isset($obj->ComposerIdType) ? $obj->ComposerIdType : null;
+        $this->_participantSearchType = isset($obj->ParticipantSearchType) ? $obj->ParticipantSearchType : null;
+        $this->_participantIdType = isset($obj->ParticipantIdType) ? $obj->ParticipantIdType : null;
+        $this->_retrievalDepth = isset($obj->RetrievalDepth) ? $obj->RetrievalDepth : null;
     }
 }
 
@@ -2002,6 +2179,7 @@ class RecordingsQueryObject extends SearchQueryObject{
     
 */
 class FileTag extends DecibelEntity{
+    /* @var $_albumId string */
     private $_albumId;
 
     public function getAlbumId(){
@@ -2012,6 +2190,7 @@ class FileTag extends DecibelEntity{
         $this->_albumId = $albumId;
     }
 
+    /* @var $_albumTitle string */
     private $_albumTitle;
 
     public function getAlbumTitle(){
@@ -2022,6 +2201,7 @@ class FileTag extends DecibelEntity{
         $this->_albumTitle = $albumTitle;
     }
 
+    /* @var $_albumMediumId string */
     private $_albumMediumId;
 
     public function getAlbumMediumId(){
@@ -2032,6 +2212,7 @@ class FileTag extends DecibelEntity{
         $this->_albumMediumId = $albumMediumId;
     }
 
+    /* @var $_mediaType string */
     private $_mediaType;
 
     public function getMediaType(){
@@ -2042,6 +2223,7 @@ class FileTag extends DecibelEntity{
         $this->_mediaType = $mediaType;
     }
 
+    /* @var $_albumEAN string */
     private $_albumEAN;
 
     public function getAlbumEAN(){
@@ -2052,6 +2234,7 @@ class FileTag extends DecibelEntity{
         $this->_albumEAN = $albumEAN;
     }
 
+    /* @var $_publisher string */
     private $_publisher;
 
     public function getPublisher(){
@@ -2062,6 +2245,7 @@ class FileTag extends DecibelEntity{
         $this->_publisher = $publisher;
     }
 
+    /* @var $_catalogNum string */
     private $_catalogNum;
 
     public function getCatalogNum(){
@@ -2072,6 +2256,7 @@ class FileTag extends DecibelEntity{
         $this->_catalogNum = $catalogNum;
     }
 
+    /* @var $_releaseDate string */
     private $_releaseDate;
 
     public function getReleaseDate(){
@@ -2082,6 +2267,7 @@ class FileTag extends DecibelEntity{
         $this->_releaseDate = $releaseDate;
     }
 
+    /* @var $_discTitle string */
     private $_discTitle;
 
     public function getDiscTitle(){
@@ -2092,6 +2278,7 @@ class FileTag extends DecibelEntity{
         $this->_discTitle = $discTitle;
     }
 
+    /* @var $_discNum int */
     private $_discNum;
 
     public function getDiscNum(){
@@ -2102,6 +2289,7 @@ class FileTag extends DecibelEntity{
         $this->_discNum = $discNum;
     }
 
+    /* @var $_discCount int */
     private $_discCount;
 
     public function getDiscCount(){
@@ -2112,6 +2300,7 @@ class FileTag extends DecibelEntity{
         $this->_discCount = $discCount;
     }
 
+    /* @var $_discEAN string */
     private $_discEAN;
 
     public function getDiscEAN(){
@@ -2122,6 +2311,7 @@ class FileTag extends DecibelEntity{
         $this->_discEAN = $discEAN;
     }
 
+    /* @var $_cddbId string */
     private $_cddbId;
 
     public function getCddbId(){
@@ -2132,6 +2322,7 @@ class FileTag extends DecibelEntity{
         $this->_cddbId = $cddbId;
     }
 
+    /* @var $_recordingId string */
     private $_recordingId;
 
     public function getRecordingId(){
@@ -2142,6 +2333,7 @@ class FileTag extends DecibelEntity{
         $this->_recordingId = $recordingId;
     }
 
+    /* @var $_duration double */
     private $_duration;
 
     public function getDuration(){
@@ -2152,6 +2344,7 @@ class FileTag extends DecibelEntity{
         $this->_duration = $duration;
     }
 
+    /* @var $_trackNumber int */
     private $_trackNumber;
 
     public function getTrackNumber(){
@@ -2162,6 +2355,7 @@ class FileTag extends DecibelEntity{
         $this->_trackNumber = $trackNumber;
     }
 
+    /* @var $_trackCount int */
     private $_trackCount;
 
     public function getTrackCount(){
@@ -2172,6 +2366,7 @@ class FileTag extends DecibelEntity{
         $this->_trackCount = $trackCount;
     }
 
+    /* @var $_trackNumberLiteral string */
     private $_trackNumberLiteral;
 
     public function getTrackNumberLiteral(){
@@ -2182,6 +2377,7 @@ class FileTag extends DecibelEntity{
         $this->_trackNumberLiteral = $trackNumberLiteral;
     }
 
+    /* @var $_trackTitle string */
     private $_trackTitle;
 
     public function getTrackTitle(){
@@ -2192,6 +2388,7 @@ class FileTag extends DecibelEntity{
         $this->_trackTitle = $trackTitle;
     }
 
+    /* @var $_puid string */
     private $_puid;
 
     public function getPuid(){
@@ -2202,6 +2399,7 @@ class FileTag extends DecibelEntity{
         $this->_puid = $puid;
     }
 
+    /* @var $_works string */
     private $_works;
 
     public function getWorks(){
@@ -2212,6 +2410,7 @@ class FileTag extends DecibelEntity{
         $this->_works = $works;
     }
 
+    /* @var $_trackArtist string */
     private $_trackArtist;
 
     public function getTrackArtist(){
@@ -2222,6 +2421,7 @@ class FileTag extends DecibelEntity{
         $this->_trackArtist = $trackArtist;
     }
 
+    /* @var $_genres string */
     private $_genres;
 
     public function getGenres(){
@@ -2232,6 +2432,7 @@ class FileTag extends DecibelEntity{
         $this->_genres = $genres;
     }
 
+    /* @var $_conductor string */
     private $_conductor;
 
     public function getConductor(){
@@ -2242,6 +2443,7 @@ class FileTag extends DecibelEntity{
         $this->_conductor = $conductor;
     }
 
+    /* @var $_recordingDate string */
     private $_recordingDate;
 
     public function getRecordingDate(){
@@ -2252,6 +2454,7 @@ class FileTag extends DecibelEntity{
         $this->_recordingDate = $recordingDate;
     }
 
+    /* @var $_recordingVenue string */
     private $_recordingVenue;
 
     public function getRecordingVenue(){
@@ -2262,6 +2465,7 @@ class FileTag extends DecibelEntity{
         $this->_recordingVenue = $recordingVenue;
     }
 
+    /* @var $_matrix string */
     private $_matrix;
 
     public function getMatrix(){
@@ -2272,6 +2476,7 @@ class FileTag extends DecibelEntity{
         $this->_matrix = $matrix;
     }
 
+    /* @var $_participants string */
     private $_participants;
 
     public function getParticipants(){
@@ -2282,6 +2487,7 @@ class FileTag extends DecibelEntity{
         $this->_participants = $participants;
     }
 
+    /* @var $_beatsPerMinute string */
     private $_beatsPerMinute;
 
     public function getBeatsPerMinute(){
@@ -2293,35 +2499,35 @@ class FileTag extends DecibelEntity{
     }
 
     public function __construct($obj){
-        $this->albumId = $obj->AlbumId;
-        $this->albumTitle = $obj->AlbumTitle;
-        $this->albumMediumId = $obj->AlbumMediumId;
-        $this->mediaType = $obj->MediaType;
-        $this->albumEAN = $obj->AlbumEAN;
-        $this->publisher = $obj->Publisher;
-        $this->catalogNum = $obj->CatalogNum;
-        $this->releaseDate = $obj->ReleaseDate;
-        $this->discTitle = $obj->DiscTitle;
-        $this->discNum = $obj->DiscNum;
-        $this->discCount = $obj->DiscCount;
-        $this->discEAN = $obj->DiscEAN;
-        $this->cddbId = $obj->CddbId;
-        $this->recordingId = $obj->RecordingId;
-        $this->duration = $obj->Duration;
-        $this->trackNumber = $obj->TrackNumber;
-        $this->trackCount = $obj->TrackCount;
-        $this->trackNumberLiteral = $obj->TrackNumberLiteral;
-        $this->trackTitle = $obj->TrackTitle;
-        $this->puid = $obj->Puid;
-        $this->works = $obj->Works;
-        $this->trackArtist = $obj->TrackArtist;
-        $this->genres = $obj->Genres;
-        $this->conductor = $obj->Conductor;
-        $this->recordingDate = $obj->RecordingDate;
-        $this->recordingVenue = $obj->RecordingVenue;
-        $this->matrix = $obj->Matrix;
-        $this->participants = $obj->Participants;
-        $this->beatsPerMinute = $obj->BeatsPerMinute;
+        $this->_albumId = isset($obj->AlbumId) ? $obj->AlbumId : null;
+        $this->_albumTitle = isset($obj->AlbumTitle) ? $obj->AlbumTitle : null;
+        $this->_albumMediumId = isset($obj->AlbumMediumId) ? $obj->AlbumMediumId : null;
+        $this->_mediaType = isset($obj->MediaType) ? $obj->MediaType : null;
+        $this->_albumEAN = isset($obj->AlbumEAN) ? $obj->AlbumEAN : null;
+        $this->_publisher = isset($obj->Publisher) ? $obj->Publisher : null;
+        $this->_catalogNum = isset($obj->CatalogNum) ? $obj->CatalogNum : null;
+        $this->_releaseDate = isset($obj->ReleaseDate) ? $obj->ReleaseDate : null;
+        $this->_discTitle = isset($obj->DiscTitle) ? $obj->DiscTitle : null;
+        $this->_discNum = isset($obj->DiscNum) ? $obj->DiscNum : null;
+        $this->_discCount = isset($obj->DiscCount) ? $obj->DiscCount : null;
+        $this->_discEAN = isset($obj->DiscEAN) ? $obj->DiscEAN : null;
+        $this->_cddbId = isset($obj->CddbId) ? $obj->CddbId : null;
+        $this->_recordingId = isset($obj->RecordingId) ? $obj->RecordingId : null;
+        $this->_duration = isset($obj->Duration) ? $obj->Duration : null;
+        $this->_trackNumber = isset($obj->TrackNumber) ? $obj->TrackNumber : null;
+        $this->_trackCount = isset($obj->TrackCount) ? $obj->TrackCount : null;
+        $this->_trackNumberLiteral = isset($obj->TrackNumberLiteral) ? $obj->TrackNumberLiteral : null;
+        $this->_trackTitle = isset($obj->TrackTitle) ? $obj->TrackTitle : null;
+        $this->_puid = isset($obj->Puid) ? $obj->Puid : null;
+        $this->_works = isset($obj->Works) ? $obj->Works : null;
+        $this->_trackArtist = isset($obj->TrackArtist) ? $obj->TrackArtist : null;
+        $this->_genres = isset($obj->Genres) ? $obj->Genres : null;
+        $this->_conductor = isset($obj->Conductor) ? $obj->Conductor : null;
+        $this->_recordingDate = isset($obj->RecordingDate) ? $obj->RecordingDate : null;
+        $this->_recordingVenue = isset($obj->RecordingVenue) ? $obj->RecordingVenue : null;
+        $this->_matrix = isset($obj->Matrix) ? $obj->Matrix : null;
+        $this->_participants = isset($obj->Participants) ? $obj->Participants : null;
+        $this->_beatsPerMinute = isset($obj->BeatsPerMinute) ? $obj->BeatsPerMinute : null;
     }
 }
 
@@ -2331,6 +2537,7 @@ class FileTag extends DecibelEntity{
     
 */
 class Identifier extends DecibelEntity{
+    /* @var $_identifierType TIdentifierType */
     private $_identifierType;
 
     public function getIdentifierType(){
@@ -2341,6 +2548,7 @@ class Identifier extends DecibelEntity{
         $this->_identifierType = $identifierType;
     }
 
+    /* @var $_value string */
     private $_value;
 
     public function getValue(){
@@ -2351,6 +2559,7 @@ class Identifier extends DecibelEntity{
         $this->_value = $value;
     }
 
+    /* @var $_additionalInformation string */
     private $_additionalInformation;
 
     public function getAdditionalInformation(){
@@ -2362,9 +2571,9 @@ class Identifier extends DecibelEntity{
     }
 
     public function __construct($obj){
-        $this->identifierType = $obj->IdentifierType;
-        $this->value = $obj->Value;
-        $this->additionalInformation = $obj->AdditionalInformation;
+        $this->_identifierType = isset($obj->IdentifierType) ? $obj->IdentifierType : null;
+        $this->_value = isset($obj->Value) ? $obj->Value : null;
+        $this->_additionalInformation = isset($obj->AdditionalInformation) ? $obj->AdditionalInformation : null;
     }
 }
 
@@ -2390,6 +2599,7 @@ class ArtistIdentifier extends Identifier{
     
 */
 class Artist extends DecibelEntity{
+    /* @var $_id string */
     private $_id;
 
     public function getId(){
@@ -2400,6 +2610,7 @@ class Artist extends DecibelEntity{
         $this->_id = $id;
     }
 
+    /* @var $_probability Probability */
     private $_probability;
 
     public function getProbability(){
@@ -2410,6 +2621,7 @@ class Artist extends DecibelEntity{
         $this->_probability = $probability;
     }
 
+    /* @var $_join string */
     private $_join;
 
     public function getJoin(){
@@ -2420,6 +2632,7 @@ class Artist extends DecibelEntity{
         $this->_join = $join;
     }
 
+    /* @var $_appearanceType AppearanceType */
     private $_appearanceType;
 
     public function getAppearanceType(){
@@ -2430,6 +2643,7 @@ class Artist extends DecibelEntity{
         $this->_appearanceType = $appearanceType;
     }
 
+    /* @var $_nameLiteral string */
     private $_nameLiteral;
 
     public function getNameLiteral(){
@@ -2440,6 +2654,7 @@ class Artist extends DecibelEntity{
         $this->_nameLiteral = $nameLiteral;
     }
 
+    /* @var $_stageName string */
     private $_stageName;
 
     public function getStageName(){
@@ -2450,6 +2665,7 @@ class Artist extends DecibelEntity{
         $this->_stageName = $stageName;
     }
 
+    /* @var $_legalName string */
     private $_legalName;
 
     public function getLegalName(){
@@ -2460,6 +2676,7 @@ class Artist extends DecibelEntity{
         $this->_legalName = $legalName;
     }
 
+    /* @var $_membershipDate string */
     private $_membershipDate;
 
     public function getMembershipDate(){
@@ -2470,6 +2687,7 @@ class Artist extends DecibelEntity{
         $this->_membershipDate = $membershipDate;
     }
 
+    /* @var $_artistType ArtistType */
     private $_artistType;
 
     public function getArtistType(){
@@ -2480,6 +2698,7 @@ class Artist extends DecibelEntity{
         $this->_artistType = $artistType;
     }
 
+    /* @var $_gender Gender */
     private $_gender;
 
     public function getGender(){
@@ -2490,6 +2709,7 @@ class Artist extends DecibelEntity{
         $this->_gender = $gender;
     }
 
+    /* @var $_isFictional bool */
     private $_isFictional;
 
     public function getIsFictional(){
@@ -2500,6 +2720,7 @@ class Artist extends DecibelEntity{
         $this->_isFictional = $isFictional;
     }
 
+    /* @var $_genres Genre[] */
     private $_genres;
 
     public function getGenres(){
@@ -2510,6 +2731,7 @@ class Artist extends DecibelEntity{
         $this->_genres = $genres;
     }
 
+    /* @var $_birthDate string */
     private $_birthDate;
 
     public function getBirthDate(){
@@ -2520,6 +2742,7 @@ class Artist extends DecibelEntity{
         $this->_birthDate = $birthDate;
     }
 
+    /* @var $_deathDate string */
     private $_deathDate;
 
     public function getDeathDate(){
@@ -2530,6 +2753,7 @@ class Artist extends DecibelEntity{
         $this->_deathDate = $deathDate;
     }
 
+    /* @var $_birthPlace string */
     private $_birthPlace;
 
     public function getBirthPlace(){
@@ -2540,6 +2764,7 @@ class Artist extends DecibelEntity{
         $this->_birthPlace = $birthPlace;
     }
 
+    /* @var $_deathPlace string */
     private $_deathPlace;
 
     public function getDeathPlace(){
@@ -2550,6 +2775,7 @@ class Artist extends DecibelEntity{
         $this->_deathPlace = $deathPlace;
     }
 
+    /* @var $_biographies Annotation[] */
     private $_biographies;
 
     public function getBiographies(){
@@ -2560,6 +2786,7 @@ class Artist extends DecibelEntity{
         $this->_biographies = $biographies;
     }
 
+    /* @var $_shortDescriptions Annotation[] */
     private $_shortDescriptions;
 
     public function getShortDescriptions(){
@@ -2570,6 +2797,7 @@ class Artist extends DecibelEntity{
         $this->_shortDescriptions = $shortDescriptions;
     }
 
+    /* @var $_webAddresses WebAddress[] */
     private $_webAddresses;
 
     public function getWebAddresses(){
@@ -2580,6 +2808,7 @@ class Artist extends DecibelEntity{
         $this->_webAddresses = $webAddresses;
     }
 
+    /* @var $_members Artist[] */
     private $_members;
 
     public function getMembers(){
@@ -2590,6 +2819,7 @@ class Artist extends DecibelEntity{
         $this->_members = $members;
     }
 
+    /* @var $_groups Artist[] */
     private $_groups;
 
     public function getGroups(){
@@ -2600,6 +2830,7 @@ class Artist extends DecibelEntity{
         $this->_groups = $groups;
     }
 
+    /* @var $_relatedArtists Artist[] */
     private $_relatedArtists;
 
     public function getRelatedArtists(){
@@ -2610,6 +2841,7 @@ class Artist extends DecibelEntity{
         $this->_relatedArtists = $relatedArtists;
     }
 
+    /* @var $_identifiers ArtistIdentifier[] */
     private $_identifiers;
 
     public function getIdentifiers(){
@@ -2621,29 +2853,69 @@ class Artist extends DecibelEntity{
     }
 
     public function __construct($obj){
-        $this->id = $obj->Id;
-        $this->probability = $obj->Probability;
-        $this->join = $obj->Join;
-        $this->appearanceType = $obj->AppearanceType;
-        $this->nameLiteral = $obj->NameLiteral;
-        $this->stageName = $obj->StageName;
-        $this->legalName = $obj->LegalName;
-        $this->membershipDate = $obj->MembershipDate;
-        $this->artistType = $obj->ArtistType;
-        $this->gender = $obj->Gender;
-        $this->isFictional = $obj->IsFictional;
-        $this->genres = $obj->Genres;
-        $this->birthDate = $obj->BirthDate;
-        $this->deathDate = $obj->DeathDate;
-        $this->birthPlace = $obj->BirthPlace;
-        $this->deathPlace = $obj->DeathPlace;
-        $this->biographies = $obj->Biographies;
-        $this->shortDescriptions = $obj->ShortDescriptions;
-        $this->webAddresses = $obj->WebAddresses;
-        $this->members = $obj->Members;
-        $this->groups = $obj->Groups;
-        $this->relatedArtists = $obj->RelatedArtists;
-        $this->identifiers = $obj->Identifiers;
+        $this->_id = isset($obj->Id) ? $obj->Id : null;
+        $this->_probability = isset($obj->Probability) ? $obj->Probability : null;
+        $this->_join = isset($obj->Join) ? $obj->Join : null;
+        $this->_appearanceType = isset($obj->AppearanceType) ? $obj->AppearanceType : null;
+        $this->_nameLiteral = isset($obj->NameLiteral) ? $obj->NameLiteral : null;
+        $this->_stageName = isset($obj->StageName) ? $obj->StageName : null;
+        $this->_legalName = isset($obj->LegalName) ? $obj->LegalName : null;
+        $this->_membershipDate = isset($obj->MembershipDate) ? $obj->MembershipDate : null;
+        $this->_artistType = isset($obj->ArtistType) ? $obj->ArtistType : null;
+        $this->_gender = isset($obj->Gender) ? $obj->Gender : null;
+        $this->_isFictional = isset($obj->IsFictional) ? $obj->IsFictional : null;
+        if(isset($obj->Genres)){
+            $this->_genres = [];
+            foreach($obj->Genres as $item){
+                array_push($this->_genres, new Genre($item));
+            }
+        }
+        $this->_birthDate = isset($obj->BirthDate) ? $obj->BirthDate : null;
+        $this->_deathDate = isset($obj->DeathDate) ? $obj->DeathDate : null;
+        $this->_birthPlace = isset($obj->BirthPlace) ? $obj->BirthPlace : null;
+        $this->_deathPlace = isset($obj->DeathPlace) ? $obj->DeathPlace : null;
+        if(isset($obj->Biographies)){
+            $this->_biographies = [];
+            foreach($obj->Biographies as $item){
+                array_push($this->_biographies, new Annotation($item));
+            }
+        }
+        if(isset($obj->ShortDescriptions)){
+            $this->_shortDescriptions = [];
+            foreach($obj->ShortDescriptions as $item){
+                array_push($this->_shortDescriptions, new Annotation($item));
+            }
+        }
+        if(isset($obj->WebAddresses)){
+            $this->_webAddresses = [];
+            foreach($obj->WebAddresses as $item){
+                array_push($this->_webAddresses, new WebAddress($item));
+            }
+        }
+        if(isset($obj->Members)){
+            $this->_members = [];
+            foreach($obj->Members as $item){
+                array_push($this->_members, new Artist($item));
+            }
+        }
+        if(isset($obj->Groups)){
+            $this->_groups = [];
+            foreach($obj->Groups as $item){
+                array_push($this->_groups, new Artist($item));
+            }
+        }
+        if(isset($obj->RelatedArtists)){
+            $this->_relatedArtists = [];
+            foreach($obj->RelatedArtists as $item){
+                array_push($this->_relatedArtists, new Artist($item));
+            }
+        }
+        if(isset($obj->Identifiers)){
+            $this->_identifiers = [];
+            foreach($obj->Identifiers as $item){
+                array_push($this->_identifiers, new ArtistIdentifier($item));
+            }
+        }
     }
 }
 
@@ -2657,77 +2929,81 @@ class RecordingIdentifier extends Identifier{
 
 /*
  * 
-    An event associated with the creation of a recording.
+    How a particular artist contributed to an album, recording, or work.
     
 */
-class ProductionEvent extends DecibelEntity{
-    private $_isRecording;
+class Participation extends DecibelEntity{
+    /* @var $_activityLiteral string */
+    private $_activityLiteral;
 
-    public function getIsRecording(){
-        return $this->_isRecording;
+    public function getActivityLiteral(){
+        return $this->_activityLiteral;
     }
 
-    public function setIsRecording($isRecording) {
-        $this->_isRecording = $isRecording;
+    public function setActivityLiteral($activityLiteral) {
+        $this->_activityLiteral = $activityLiteral;
     }
 
-    private $_isMixing;
+    /* @var $_activities Activity[] */
+    private $_activities;
 
-    public function getIsMixing(){
-        return $this->_isMixing;
+    public function getActivities(){
+        return $this->_activities;
     }
 
-    public function setIsMixing($isMixing) {
-        $this->_isMixing = $isMixing;
+    public function setActivities($activities) {
+        $this->_activities = $activities;
     }
 
-    private $_isMastering;
+    /* @var $_isFeatured bool */
+    private $_isFeatured;
 
-    public function getIsMastering(){
-        return $this->_isMastering;
+    public function getIsFeatured(){
+        return $this->_isFeatured;
     }
 
-    public function setIsMastering($isMastering) {
-        $this->_isMastering = $isMastering;
+    public function setIsFeatured($isFeatured) {
+        $this->_isFeatured = $isFeatured;
     }
 
-    private $_isRemastering;
+    /* @var $_artistsLiteral string */
+    private $_artistsLiteral;
 
-    public function getIsRemastering(){
-        return $this->_isRemastering;
+    public function getArtistsLiteral(){
+        return $this->_artistsLiteral;
     }
 
-    public function setIsRemastering($isRemastering) {
-        $this->_isRemastering = $isRemastering;
+    public function setArtistsLiteral($artistsLiteral) {
+        $this->_artistsLiteral = $artistsLiteral;
     }
 
-    private $_date;
+    /* @var $_artists Artist[] */
+    private $_artists;
 
-    public function getDate(){
-        return $this->_date;
+    public function getArtists(){
+        return $this->_artists;
     }
 
-    public function setDate($date) {
-        $this->_date = $date;
-    }
-
-    private $_locations;
-
-    public function getLocations(){
-        return $this->_locations;
-    }
-
-    public function setLocations($locations) {
-        $this->_locations = $locations;
+    public function setArtists($artists) {
+        $this->_artists = $artists;
     }
 
     public function __construct($obj){
-        $this->isRecording = $obj->IsRecording;
-        $this->isMixing = $obj->IsMixing;
-        $this->isMastering = $obj->IsMastering;
-        $this->isRemastering = $obj->IsRemastering;
-        $this->date = $obj->Date;
-        $this->locations = $obj->Locations;
+        $this->_activityLiteral = isset($obj->ActivityLiteral) ? $obj->ActivityLiteral : null;
+        if(isset($obj->Activities)){
+            $this->_activities = [];
+            foreach($obj->Activities as $item){
+                array_push($this->_activities, new Activity($item));
+            }
+        }
+        $this->_isFeatured = isset($obj->IsFeatured) ? $obj->IsFeatured : null;
+        $this->_artistsLiteral = isset($obj->ArtistsLiteral) ? $obj->ArtistsLiteral : null;
+        if(isset($obj->Artists)){
+            $this->_artists = [];
+            foreach($obj->Artists as $item){
+                array_push($this->_artists, new Artist($item));
+            }
+        }
     }
 }
 
@@ -2741,10 +3017,98 @@ class ReleaseIdentifier extends Identifier{
 
 /*
  * 
+    An event associated with the creation of a recording.
+    
+*/
+class ProductionEvent extends DecibelEntity{
+    /* @var $_isRecording bool */
+    private $_isRecording;
+
+    public function getIsRecording(){
+        return $this->_isRecording;
+    }
+
+    public function setIsRecording($isRecording) {
+        $this->_isRecording = $isRecording;
+    }
+
+    /* @var $_isMixing bool */
+    private $_isMixing;
+
+    public function getIsMixing(){
+        return $this->_isMixing;
+    }
+
+    public function setIsMixing($isMixing) {
+        $this->_isMixing = $isMixing;
+    }
+
+    /* @var $_isMastering bool */
+    private $_isMastering;
+
+    public function getIsMastering(){
+        return $this->_isMastering;
+    }
+
+    public function setIsMastering($isMastering) {
+        $this->_isMastering = $isMastering;
+    }
+
+    /* @var $_isRemastering bool */
+    private $_isRemastering;
+
+    public function getIsRemastering(){
+        return $this->_isRemastering;
+    }
+
+    public function setIsRemastering($isRemastering) {
+        $this->_isRemastering = $isRemastering;
+    }
+
+    /* @var $_date string */
+    private $_date;
+
+    public function getDate(){
+        return $this->_date;
+    }
+
+    public function setDate($date) {
+        $this->_date = $date;
+    }
+
+    /* @var $_locations Location[] */
+    private $_locations;
+
+    public function getLocations(){
+        return $this->_locations;
+    }
+
+    public function setLocations($locations) {
+        $this->_locations = $locations;
+    }
+
+    public function __construct($obj){
+        $this->_isRecording = isset($obj->IsRecording) ? $obj->IsRecording : null;
+        $this->_isMixing = isset($obj->IsMixing) ? $obj->IsMixing : null;
+        $this->_isMastering = isset($obj->IsMastering) ? $obj->IsMastering : null;
+        $this->_isRemastering = isset($obj->IsRemastering) ? $obj->IsRemastering : null;
+        $this->_date = isset($obj->Date) ? $obj->Date : null;
+        if(isset($obj->Locations)){
+            $this->_locations = [];
+            foreach($obj->Locations as $item){
+                array_push($this->_locations, new Location($item));
+            }
+        }
+    }
+}
+
+/*
+ * 
     A single distinct recording of sound. 
     
 */
 class Recording extends DecibelEntity{
+    /* @var $_id string */
     private $_id;
 
     public function getId(){
@@ -2755,6 +3119,7 @@ class Recording extends DecibelEntity{
         $this->_id = $id;
     }
 
+    /* @var $_title string */
     private $_title;
 
     public function getTitle(){
@@ -2765,6 +3130,7 @@ class Recording extends DecibelEntity{
         $this->_title = $title;
     }
 
+    /* @var $_addenda string */
     private $_addenda;
 
     public function getAddenda(){
@@ -2775,6 +3141,7 @@ class Recording extends DecibelEntity{
         $this->_addenda = $addenda;
     }
 
+    /* @var $_originalAlbumTitle string */
     private $_originalAlbumTitle;
 
     public function getOriginalAlbumTitle(){
@@ -2785,6 +3152,7 @@ class Recording extends DecibelEntity{
         $this->_originalAlbumTitle = $originalAlbumTitle;
     }
 
+    /* @var $_originalAlbumId string */
     private $_originalAlbumId;
 
     public function getOriginalAlbumId(){
@@ -2795,6 +3163,7 @@ class Recording extends DecibelEntity{
         $this->_originalAlbumId = $originalAlbumId;
     }
 
+    /* @var $_originalReleaseDate string */
     private $_originalReleaseDate;
 
     public function getOriginalReleaseDate(){
@@ -2805,6 +3174,7 @@ class Recording extends DecibelEntity{
         $this->_originalReleaseDate = $originalReleaseDate;
     }
 
+    /* @var $_albumSequence int */
     private $_albumSequence;
 
     public function getAlbumSequence(){
@@ -2815,6 +3185,7 @@ class Recording extends DecibelEntity{
         $this->_albumSequence = $albumSequence;
     }
 
+    /* @var $_duration double */
     private $_duration;
 
     public function getDuration(){
@@ -2825,6 +3196,7 @@ class Recording extends DecibelEntity{
         $this->_duration = $duration;
     }
 
+    /* @var $_isLive bool */
     private $_isLive;
 
     public function getIsLive(){
@@ -2835,6 +3207,7 @@ class Recording extends DecibelEntity{
         $this->_isLive = $isLive;
     }
 
+    /* @var $_isConcert bool */
     private $_isConcert;
 
     public function getIsConcert(){
@@ -2845,6 +3218,7 @@ class Recording extends DecibelEntity{
         $this->_isConcert = $isConcert;
     }
 
+    /* @var $_beatsPerMinute double */
     private $_beatsPerMinute;
 
     public function getBeatsPerMinute(){
@@ -2855,6 +3229,7 @@ class Recording extends DecibelEntity{
         $this->_beatsPerMinute = $beatsPerMinute;
     }
 
+    /* @var $_mainArtistsLiteral string */
     private $_mainArtistsLiteral;
 
     public function getMainArtistsLiteral(){
@@ -2865,6 +3240,7 @@ class Recording extends DecibelEntity{
         $this->_mainArtistsLiteral = $mainArtistsLiteral;
     }
 
+    /* @var $_featuredArtistsLiteral string */
     private $_featuredArtistsLiteral;
 
     public function getFeaturedArtistsLiteral(){
@@ -2875,6 +3251,7 @@ class Recording extends DecibelEntity{
         $this->_featuredArtistsLiteral = $featuredArtistsLiteral;
     }
 
+    /* @var $_artists Artist[] */
     private $_artists;
 
     public function getArtists(){
@@ -2885,6 +3262,7 @@ class Recording extends DecibelEntity{
         $this->_artists = $artists;
     }
 
+    /* @var $_participations Participation[] */
     private $_participations;
 
     public function getParticipations(){
@@ -2895,6 +3273,7 @@ class Recording extends DecibelEntity{
         $this->_participations = $participations;
     }
 
+    /* @var $_works Work[] */
     private $_works;
 
     public function getWorks(){
@@ -2905,6 +3284,7 @@ class Recording extends DecibelEntity{
         $this->_works = $works;
     }
 
+    /* @var $_identifiers RecordingIdentifier[] */
     private $_identifiers;
 
     public function getIdentifiers(){
@@ -2915,6 +3295,7 @@ class Recording extends DecibelEntity{
         $this->_identifiers = $identifiers;
     }
 
+    /* @var $_genres Genre[] */
     private $_genres;
 
     public function getGenres(){
@@ -2925,6 +3306,7 @@ class Recording extends DecibelEntity{
         $this->_genres = $genres;
     }
 
+    /* @var $_musicalKeys MusicKey[] */
     private $_musicalKeys;
 
     public function getMusicalKeys(){
@@ -2935,6 +3317,7 @@ class Recording extends DecibelEntity{
         $this->_musicalKeys = $musicalKeys;
     }
 
+    /* @var $_productionEvents ProductionEvent[] */
     private $_productionEvents;
 
     public function getProductionEvents(){
@@ -2945,6 +3328,7 @@ class Recording extends DecibelEntity{
         $this->_productionEvents = $productionEvents;
     }
 
+    /* @var $_constituentRecordings Recording[] */
     private $_constituentRecordings;
 
     public function getConstituentRecordings(){
@@ -2955,6 +3339,7 @@ class Recording extends DecibelEntity{
         $this->_constituentRecordings = $constituentRecordings;
     }
 
+    /* @var $_constituentRecordingType ConstituentRecordingType */
     private $_constituentRecordingType;
 
     public function getConstituentRecordingType(){
@@ -2966,28 +3351,68 @@ class Recording extends DecibelEntity{
     }
 
     public function __construct($obj){
-        $this->id = $obj->Id;
-        $this->title = $obj->Title;
-        $this->addenda = $obj->Addenda;
-        $this->originalAlbumTitle = $obj->OriginalAlbumTitle;
-        $this->originalAlbumId = $obj->OriginalAlbumId;
-        $this->originalReleaseDate = $obj->OriginalReleaseDate;
-        $this->albumSequence = $obj->AlbumSequence;
-        $this->duration = $obj->Duration;
-        $this->isLive = $obj->IsLive;
-        $this->isConcert = $obj->IsConcert;
-        $this->beatsPerMinute = $obj->BeatsPerMinute;
-        $this->mainArtistsLiteral = $obj->MainArtistsLiteral;
-        $this->featuredArtistsLiteral = $obj->FeaturedArtistsLiteral;
-        $this->artists = $obj->Artists;
-        $this->participations = $obj->Participations;
-        $this->works = $obj->Works;
-        $this->identifiers = $obj->Identifiers;
-        $this->genres = $obj->Genres;
-        $this->musicalKeys = $obj->MusicalKeys;
-        $this->productionEvents = $obj->ProductionEvents;
-        $this->constituentRecordings = $obj->ConstituentRecordings;
-        $this->constituentRecordingType = $obj->ConstituentRecordingType;
+        $this->_id = isset($obj->Id) ? $obj->Id : null;
+        $this->_title = isset($obj->Title) ? $obj->Title : null;
+        $this->_addenda = isset($obj->Addenda) ? $obj->Addenda : null;
+        $this->_originalAlbumTitle = isset($obj->OriginalAlbumTitle) ? $obj->OriginalAlbumTitle : null;
+        $this->_originalAlbumId = isset($obj->OriginalAlbumId) ? $obj->OriginalAlbumId : null;
+        $this->_originalReleaseDate = isset($obj->OriginalReleaseDate) ? $obj->OriginalReleaseDate : null;
+        $this->_albumSequence = isset($obj->AlbumSequence) ? $obj->AlbumSequence : null;
+        $this->_duration = isset($obj->Duration) ? $obj->Duration : null;
+        $this->_isLive = isset($obj->IsLive) ? $obj->IsLive : null;
+        $this->_isConcert = isset($obj->IsConcert) ? $obj->IsConcert : null;
+        $this->_beatsPerMinute = isset($obj->BeatsPerMinute) ? $obj->BeatsPerMinute : null;
+        $this->_mainArtistsLiteral = isset($obj->MainArtistsLiteral) ? $obj->MainArtistsLiteral : null;
+        $this->_featuredArtistsLiteral = isset($obj->FeaturedArtistsLiteral) ? $obj->FeaturedArtistsLiteral : null;
+        if(isset($obj->Artists)){
+            $this->_artists = [];
+            foreach($obj->Artists as $item){
+                array_push($this->_artists, new Artist($item));
+            }
+        }
+        if(isset($obj->Participations)){
+            $this->_participations = [];
+            foreach($obj->Participations as $item){
+                array_push($this->_participations, new Participation($item));
+            }
+        }
+        if(isset($obj->Works)){
+            $this->_works = [];
+            foreach($obj->Works as $item){
+                array_push($this->_works, new Work($item));
+            }
+        }
+        if(isset($obj->Identifiers)){
+            $this->_identifiers = [];
+            foreach($obj->Identifiers as $item){
+                array_push($this->_identifiers, new RecordingIdentifier($item));
+            }
+        }
+        if(isset($obj->Genres)){
+            $this->_genres = [];
+            foreach($obj->Genres as $item){
+                array_push($this->_genres, new Genre($item));
+            }
+        }
+        if(isset($obj->MusicalKeys)){
+            $this->_musicalKeys = [];
+            foreach($obj->MusicalKeys as $item){
+                array_push($this->_musicalKeys, new MusicKey($item));
+            }
+        }
+        if(isset($obj->ProductionEvents)){
+            $this->_productionEvents = [];
+            foreach($obj->ProductionEvents as $item){
+                array_push($this->_productionEvents, new ProductionEvent($item));
+            }
+        }
+        if(isset($obj->ConstituentRecordings)){
+            $this->_constituentRecordings = [];
+            foreach($obj->ConstituentRecordings as $item){
+                array_push($this->_constituentRecordings, new Recording($item));
+            }
+        }
+        $this->_constituentRecordingType = isset($obj->ConstituentRecordingType) ? $obj->ConstituentRecordingType : null;
     }
 }
 
@@ -3005,6 +3430,7 @@ class Genre extends Tag{
     
 */
 class Tag extends DecibelEntity{
+    /* @var $_id string */
     private $_id;
 
     public function getId(){
@@ -3015,6 +3441,7 @@ class Tag extends DecibelEntity{
         $this->_id = $id;
     }
 
+    /* @var $_name string */
     private $_name;
 
     public function getName(){
@@ -3026,8 +3453,8 @@ class Tag extends DecibelEntity{
     }
 
     public function __construct($obj){
-        $this->id = $obj->Id;
-        $this->name = $obj->Name;
+        $this->_id = isset($obj->Id) ? $obj->Id : null;
+        $this->_name = isset($obj->Name) ? $obj->Name : null;
     }
 }
 
@@ -3045,6 +3472,7 @@ class MusicKey extends Tag{
     
 */
 class Work extends DecibelEntity{
+    /* @var $_id string */
     private $_id;
 
     public function getId(){
@@ -3055,6 +3483,7 @@ class Work extends DecibelEntity{
         $this->_id = $id;
     }
 
+    /* @var $_name string */
     private $_name;
 
     public function getName(){
@@ -3065,6 +3494,7 @@ class Work extends DecibelEntity{
         $this->_name = $name;
     }
 
+    /* @var $_recordingSequence int */
     private $_recordingSequence;
 
     public function getRecordingSequence(){
@@ -3075,6 +3505,7 @@ class Work extends DecibelEntity{
         $this->_recordingSequence = $recordingSequence;
     }
 
+    /* @var $_participations Participation[] */
     private $_participations;
 
     public function getParticipations(){
@@ -3086,10 +3517,15 @@ class Work extends DecibelEntity{
     }
 
     public function __construct($obj){
-        $this->id = $obj->Id;
-        $this->name = $obj->Name;
-        $this->recordingSequence = $obj->RecordingSequence;
-        $this->participations = $obj->Participations;
+        $this->_id = isset($obj->Id) ? $obj->Id : null;
+        $this->_name = isset($obj->Name) ? $obj->Name : null;
+        $this->_recordingSequence = isset($obj->RecordingSequence) ? $obj->RecordingSequence : null;
+        if(isset($obj->Participations)){
+            $this->_participations = [];
+            foreach($obj->Participations as $item){
+                array_push($this->_participations, new Participation($item));
+            }
+        }
     }
 }
 

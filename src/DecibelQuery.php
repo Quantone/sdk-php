@@ -3,7 +3,6 @@
 namespace DecibelSDK;
 
 require_once 'DecibelObjectModel.php';
-require_once 'QueryBuilder.php';
 require_once 'iQuery.php';
 
 class AlbumsQuery implements iQuery {
@@ -11,13 +10,10 @@ class AlbumsQuery implements iQuery {
         return AlbumsQuery::buildQueryString();
     }
 
-    public function getResultType() {
-        return "AlbumsQueryResult";
-    }
-
     public function __construct(){
     }
 
+    /* @var $_artists string[] */
     private $_artists;
 
     public function getArtists(){
@@ -28,6 +24,7 @@ class AlbumsQuery implements iQuery {
         $this->_artists = $artists;
     }
 
+    /* @var $_artistIds string[] */
     private $_artistIds;
 
     public function getArtistIds(){
@@ -38,6 +35,7 @@ class AlbumsQuery implements iQuery {
         $this->_artistIds = $artistIds;
     }
 
+    /* @var $_participants string[] */
     private $_participants;
 
     public function getParticipants(){
@@ -48,6 +46,7 @@ class AlbumsQuery implements iQuery {
         $this->_participants = $participants;
     }
 
+    /* @var $_participantIds string[] */
     private $_participantIds;
 
     public function getParticipantIds(){
@@ -58,6 +57,7 @@ class AlbumsQuery implements iQuery {
         $this->_participantIds = $participantIds;
     }
 
+    /* @var $_recordings string[] */
     private $_recordings;
 
     public function getRecordings(){
@@ -68,6 +68,7 @@ class AlbumsQuery implements iQuery {
         $this->_recordings = $recordings;
     }
 
+    /* @var $_recordingIds string[] */
     private $_recordingIds;
 
     public function getRecordingIds(){
@@ -78,6 +79,7 @@ class AlbumsQuery implements iQuery {
         $this->_recordingIds = $recordingIds;
     }
 
+    /* @var $_orderBy OrderAlbumsBy[] */
     private $_orderBy;
 
     public function getOrderBy(){
@@ -88,6 +90,7 @@ class AlbumsQuery implements iQuery {
         $this->_orderBy = $orderBy;
     }
 
+    /* @var $_depth AlbumRetrievalDepth[] */
     private $_depth;
 
     public function getDepth(){
@@ -98,6 +101,7 @@ class AlbumsQuery implements iQuery {
         $this->_depth = $depth;
     }
 
+    /* @var $_titleSearchType AlbumSearchType */
     private $_titleSearchType;
 
     public function getTitleSearchType(){
@@ -108,6 +112,7 @@ class AlbumsQuery implements iQuery {
         $this->_titleSearchType = $titleSearchType;
     }
 
+    /* @var $_idType AlbumIdType */
     private $_idType;
 
     public function getIdType(){
@@ -118,6 +123,7 @@ class AlbumsQuery implements iQuery {
         $this->_idType = $idType;
     }
 
+    /* @var $_artistSearchType ArtistSearchType */
     private $_artistSearchType;
 
     public function getArtistSearchType(){
@@ -128,6 +134,7 @@ class AlbumsQuery implements iQuery {
         $this->_artistSearchType = $artistSearchType;
     }
 
+    /* @var $_artistIdType ArtistIdType */
     private $_artistIdType;
 
     public function getArtistIdType(){
@@ -138,6 +145,7 @@ class AlbumsQuery implements iQuery {
         $this->_artistIdType = $artistIdType;
     }
 
+    /* @var $_participantSearchType ArtistSearchType */
     private $_participantSearchType;
 
     public function getParticipantSearchType(){
@@ -148,6 +156,7 @@ class AlbumsQuery implements iQuery {
         $this->_participantSearchType = $participantSearchType;
     }
 
+    /* @var $_participantIdType ArtistIdType */
     private $_participantIdType;
 
     public function getParticipantIdType(){
@@ -158,6 +167,7 @@ class AlbumsQuery implements iQuery {
         $this->_participantIdType = $participantIdType;
     }
 
+    /* @var $_recordingSearchType RecordingSearchType */
     private $_recordingSearchType;
 
     public function getRecordingSearchType(){
@@ -168,6 +178,7 @@ class AlbumsQuery implements iQuery {
         $this->_recordingSearchType = $recordingSearchType;
     }
 
+    /* @var $_recordingIdType RecordingIdType */
     private $_recordingIdType;
 
     public function getRecordingIdType(){
@@ -178,6 +189,7 @@ class AlbumsQuery implements iQuery {
         $this->_recordingIdType = $recordingIdType;
     }
 
+    /* @var $_title string */
     private $_title;
 
     public function getTitle(){
@@ -188,6 +200,7 @@ class AlbumsQuery implements iQuery {
         $this->_title = $title;
     }
 
+    /* @var $_id string */
     private $_id;
 
     public function getId(){
@@ -198,6 +211,7 @@ class AlbumsQuery implements iQuery {
         $this->_id = $id;
     }
 
+    /* @var $_language Language */
     private $_language;
 
     public function getLanguage(){
@@ -208,6 +222,7 @@ class AlbumsQuery implements iQuery {
         $this->_language = $language;
     }
 
+    /* @var $_dateReleased string */
     private $_dateReleased;
 
     public function getDateReleased(){
@@ -218,6 +233,7 @@ class AlbumsQuery implements iQuery {
         $this->_dateReleased = $dateReleased;
     }
 
+    /* @var $_isLive bool */
     private $_isLive;
 
     public function getIsLive(){
@@ -228,6 +244,7 @@ class AlbumsQuery implements iQuery {
         $this->_isLive = $isLive;
     }
 
+    /* @var $_pageNumber int */
     private $_pageNumber;
 
     public function getPageNumber(){
@@ -238,6 +255,7 @@ class AlbumsQuery implements iQuery {
         $this->_pageNumber = $pageNumber;
     }
 
+    /* @var $_pageSize int */
     private $_pageSize;
 
     public function getPageSize(){
@@ -248,6 +266,7 @@ class AlbumsQuery implements iQuery {
         $this->_pageSize = $pageSize;
     }
 
+    /* @var $_updatedSince long */
     private $_updatedSince;
 
     public function getUpdatedSince(){
@@ -259,8 +278,7 @@ class AlbumsQuery implements iQuery {
     }
 
     private function buildQueryString(){
-        $queryStr = InternalUtilities::BASEURL;
-        $queryStr .= "Albums?";
+        $queryStr = "Albums?";
 
         $queryStr .= AlbumsQuery::valueOrDefault("artists", $this->_artists, null);
         $queryStr .= AlbumsQuery::valueOrDefault("artistids", $this->_artistIds, null);
@@ -293,11 +311,11 @@ class AlbumsQuery implements iQuery {
     private static function valueOrDefault($paramName, $value, $defaultValue){
         if($value == null || $value == $defaultValue) return "";
         if(!is_array($value))
-            return $paramName . "=" . $value . "&";
+            return $paramName . "=" . (is_bool($value) ? (($value == 1) ? "true" : "false") : $value) . "&";
 
         $queryStr = $paramName . "=";
         foreach($value as $item){
-            $queryStr .= $item;
+            $queryStr .= (is_bool($item) ? (($item == 1) ? "true" : "false") : $item);
             $queryStr .= ",";
         }
 
@@ -310,13 +328,10 @@ class AlbumsByIdQuery implements iQuery {
         return AlbumsByIdQuery::buildQueryString();
     }
 
-    public function getResultType() {
-        return "AlbumsByIdQueryResult";
-    }
-
     public function __construct(){
     }
 
+    /* @var $_depth AlbumRetrievalDepth[] */
     private $_depth;
 
     public function getDepth(){
@@ -327,6 +342,7 @@ class AlbumsByIdQuery implements iQuery {
         $this->_depth = $depth;
     }
 
+    /* @var $_id string */
     private $_id;
 
     public function getId(){
@@ -337,6 +353,7 @@ class AlbumsByIdQuery implements iQuery {
         $this->_id = $id;
     }
 
+    /* @var $_language Language */
     private $_language;
 
     public function getLanguage(){
@@ -348,8 +365,7 @@ class AlbumsByIdQuery implements iQuery {
     }
 
     private function buildQueryString(){
-        $queryStr = InternalUtilities::BASEURL;
-        $queryStr .= "Albums/";
+        $queryStr = "Albums/";
         $queryStr .= "id?";
 
         $queryStr .= AlbumsByIdQuery::valueOrDefault("depth", $this->_depth, null);
@@ -362,11 +378,11 @@ class AlbumsByIdQuery implements iQuery {
     private static function valueOrDefault($paramName, $value, $defaultValue){
         if($value == null || $value == $defaultValue) return "";
         if(!is_array($value))
-            return $paramName . "=" . $value . "&";
+            return $paramName . "=" . (is_bool($value) ? (($value == 1) ? "true" : "false") : $value) . "&";
 
         $queryStr = $paramName . "=";
         foreach($value as $item){
-            $queryStr .= $item;
+            $queryStr .= (is_bool($item) ? (($item == 1) ? "true" : "false") : $item);
             $queryStr .= ",";
         }
 
@@ -379,13 +395,10 @@ class RecordingsQuery implements iQuery {
         return RecordingsQuery::buildQueryString();
     }
 
-    public function getResultType() {
-        return "RecordingsQueryResult";
-    }
-
     public function __construct(){
     }
 
+    /* @var $_artists string[] */
     private $_artists;
 
     public function getArtists(){
@@ -396,6 +409,7 @@ class RecordingsQuery implements iQuery {
         $this->_artists = $artists;
     }
 
+    /* @var $_artistIds string[] */
     private $_artistIds;
 
     public function getArtistIds(){
@@ -406,6 +420,7 @@ class RecordingsQuery implements iQuery {
         $this->_artistIds = $artistIds;
     }
 
+    /* @var $_composers string[] */
     private $_composers;
 
     public function getComposers(){
@@ -416,6 +431,7 @@ class RecordingsQuery implements iQuery {
         $this->_composers = $composers;
     }
 
+    /* @var $_composerIds string[] */
     private $_composerIds;
 
     public function getComposerIds(){
@@ -426,6 +442,7 @@ class RecordingsQuery implements iQuery {
         $this->_composerIds = $composerIds;
     }
 
+    /* @var $_participants string[] */
     private $_participants;
 
     public function getParticipants(){
@@ -436,6 +453,7 @@ class RecordingsQuery implements iQuery {
         $this->_participants = $participants;
     }
 
+    /* @var $_participantIds string[] */
     private $_participantIds;
 
     public function getParticipantIds(){
@@ -446,6 +464,7 @@ class RecordingsQuery implements iQuery {
         $this->_participantIds = $participantIds;
     }
 
+    /* @var $_orderBy OrderRecordingsBy[] */
     private $_orderBy;
 
     public function getOrderBy(){
@@ -456,6 +475,7 @@ class RecordingsQuery implements iQuery {
         $this->_orderBy = $orderBy;
     }
 
+    /* @var $_depth RecordingRetrievalDepth[] */
     private $_depth;
 
     public function getDepth(){
@@ -466,6 +486,7 @@ class RecordingsQuery implements iQuery {
         $this->_depth = $depth;
     }
 
+    /* @var $_titleSearchType RecordingSearchType */
     private $_titleSearchType;
 
     public function getTitleSearchType(){
@@ -476,6 +497,7 @@ class RecordingsQuery implements iQuery {
         $this->_titleSearchType = $titleSearchType;
     }
 
+    /* @var $_idType RecordingIdType */
     private $_idType;
 
     public function getIdType(){
@@ -486,6 +508,7 @@ class RecordingsQuery implements iQuery {
         $this->_idType = $idType;
     }
 
+    /* @var $_artistSearchType ArtistSearchType */
     private $_artistSearchType;
 
     public function getArtistSearchType(){
@@ -496,6 +519,7 @@ class RecordingsQuery implements iQuery {
         $this->_artistSearchType = $artistSearchType;
     }
 
+    /* @var $_artistIdType ArtistIdType */
     private $_artistIdType;
 
     public function getArtistIdType(){
@@ -506,6 +530,7 @@ class RecordingsQuery implements iQuery {
         $this->_artistIdType = $artistIdType;
     }
 
+    /* @var $_composerSearchType ArtistSearchType */
     private $_composerSearchType;
 
     public function getComposerSearchType(){
@@ -516,6 +541,7 @@ class RecordingsQuery implements iQuery {
         $this->_composerSearchType = $composerSearchType;
     }
 
+    /* @var $_composerIdType ArtistIdType */
     private $_composerIdType;
 
     public function getComposerIdType(){
@@ -526,6 +552,7 @@ class RecordingsQuery implements iQuery {
         $this->_composerIdType = $composerIdType;
     }
 
+    /* @var $_participantSearchType ArtistSearchType */
     private $_participantSearchType;
 
     public function getParticipantSearchType(){
@@ -536,6 +563,7 @@ class RecordingsQuery implements iQuery {
         $this->_participantSearchType = $participantSearchType;
     }
 
+    /* @var $_participantIdType ArtistIdType */
     private $_participantIdType;
 
     public function getParticipantIdType(){
@@ -546,6 +574,7 @@ class RecordingsQuery implements iQuery {
         $this->_participantIdType = $participantIdType;
     }
 
+    /* @var $_title string */
     private $_title;
 
     public function getTitle(){
@@ -556,6 +585,7 @@ class RecordingsQuery implements iQuery {
         $this->_title = $title;
     }
 
+    /* @var $_id string */
     private $_id;
 
     public function getId(){
@@ -566,6 +596,7 @@ class RecordingsQuery implements iQuery {
         $this->_id = $id;
     }
 
+    /* @var $_language Language */
     private $_language;
 
     public function getLanguage(){
@@ -576,6 +607,7 @@ class RecordingsQuery implements iQuery {
         $this->_language = $language;
     }
 
+    /* @var $_minSeconds double */
     private $_minSeconds;
 
     public function getMinSeconds(){
@@ -586,6 +618,7 @@ class RecordingsQuery implements iQuery {
         $this->_minSeconds = $minSeconds;
     }
 
+    /* @var $_maxSeconds double */
     private $_maxSeconds;
 
     public function getMaxSeconds(){
@@ -596,6 +629,7 @@ class RecordingsQuery implements iQuery {
         $this->_maxSeconds = $maxSeconds;
     }
 
+    /* @var $_isLive bool */
     private $_isLive;
 
     public function getIsLive(){
@@ -606,6 +640,7 @@ class RecordingsQuery implements iQuery {
         $this->_isLive = $isLive;
     }
 
+    /* @var $_dateMade string */
     private $_dateMade;
 
     public function getDateMade(){
@@ -616,6 +651,7 @@ class RecordingsQuery implements iQuery {
         $this->_dateMade = $dateMade;
     }
 
+    /* @var $_pageNumber int */
     private $_pageNumber;
 
     public function getPageNumber(){
@@ -626,6 +662,7 @@ class RecordingsQuery implements iQuery {
         $this->_pageNumber = $pageNumber;
     }
 
+    /* @var $_pageSize int */
     private $_pageSize;
 
     public function getPageSize(){
@@ -636,6 +673,7 @@ class RecordingsQuery implements iQuery {
         $this->_pageSize = $pageSize;
     }
 
+    /* @var $_updatedSince long */
     private $_updatedSince;
 
     public function getUpdatedSince(){
@@ -647,8 +685,7 @@ class RecordingsQuery implements iQuery {
     }
 
     private function buildQueryString(){
-        $queryStr = InternalUtilities::BASEURL;
-        $queryStr .= "Recordings?";
+        $queryStr = "Recordings?";
 
         $queryStr .= RecordingsQuery::valueOrDefault("artists", $this->_artists, null);
         $queryStr .= RecordingsQuery::valueOrDefault("artistids", $this->_artistIds, null);
@@ -683,11 +720,11 @@ class RecordingsQuery implements iQuery {
     private static function valueOrDefault($paramName, $value, $defaultValue){
         if($value == null || $value == $defaultValue) return "";
         if(!is_array($value))
-            return $paramName . "=" . $value . "&";
+            return $paramName . "=" . (is_bool($value) ? (($value == 1) ? "true" : "false") : $value) . "&";
 
         $queryStr = $paramName . "=";
         foreach($value as $item){
-            $queryStr .= $item;
+            $queryStr .= (is_bool($item) ? (($item == 1) ? "true" : "false") : $item);
             $queryStr .= ",";
         }
 
@@ -700,13 +737,10 @@ class RecordingsByIdQuery implements iQuery {
         return RecordingsByIdQuery::buildQueryString();
     }
 
-    public function getResultType() {
-        return "RecordingsByIdQueryResult";
-    }
-
     public function __construct(){
     }
 
+    /* @var $_depth RecordingRetrievalDepth[] */
     private $_depth;
 
     public function getDepth(){
@@ -717,6 +751,7 @@ class RecordingsByIdQuery implements iQuery {
         $this->_depth = $depth;
     }
 
+    /* @var $_id string */
     private $_id;
 
     public function getId(){
@@ -727,6 +762,7 @@ class RecordingsByIdQuery implements iQuery {
         $this->_id = $id;
     }
 
+    /* @var $_language Language */
     private $_language;
 
     public function getLanguage(){
@@ -738,8 +774,7 @@ class RecordingsByIdQuery implements iQuery {
     }
 
     private function buildQueryString(){
-        $queryStr = InternalUtilities::BASEURL;
-        $queryStr .= "Recordings/";
+        $queryStr = "Recordings/";
         $queryStr .= "id?";
 
         $queryStr .= RecordingsByIdQuery::valueOrDefault("depth", $this->_depth, null);
@@ -752,11 +787,11 @@ class RecordingsByIdQuery implements iQuery {
     private static function valueOrDefault($paramName, $value, $defaultValue){
         if($value == null || $value == $defaultValue) return "";
         if(!is_array($value))
-            return $paramName . "=" . $value . "&";
+            return $paramName . "=" . (is_bool($value) ? (($value == 1) ? "true" : "false") : $value) . "&";
 
         $queryStr = $paramName . "=";
         foreach($value as $item){
-            $queryStr .= $item;
+            $queryStr .= (is_bool($item) ? (($item == 1) ? "true" : "false") : $item);
             $queryStr .= ",";
         }
 
@@ -769,13 +804,10 @@ class ArtistsQuery implements iQuery {
         return ArtistsQuery::buildQueryString();
     }
 
-    public function getResultType() {
-        return "ArtistsQueryResult";
-    }
-
     public function __construct(){
     }
 
+    /* @var $_orderBy OrderArtistsBy[] */
     private $_orderBy;
 
     public function getOrderBy(){
@@ -786,6 +818,7 @@ class ArtistsQuery implements iQuery {
         $this->_orderBy = $orderBy;
     }
 
+    /* @var $_depth ArtistRetrievalDepth[] */
     private $_depth;
 
     public function getDepth(){
@@ -796,6 +829,7 @@ class ArtistsQuery implements iQuery {
         $this->_depth = $depth;
     }
 
+    /* @var $_nameSearchType ArtistSearchType */
     private $_nameSearchType;
 
     public function getNameSearchType(){
@@ -806,6 +840,7 @@ class ArtistsQuery implements iQuery {
         $this->_nameSearchType = $nameSearchType;
     }
 
+    /* @var $_idType ArtistIdType */
     private $_idType;
 
     public function getIdType(){
@@ -816,6 +851,7 @@ class ArtistsQuery implements iQuery {
         $this->_idType = $idType;
     }
 
+    /* @var $_name string */
     private $_name;
 
     public function getName(){
@@ -826,6 +862,7 @@ class ArtistsQuery implements iQuery {
         $this->_name = $name;
     }
 
+    /* @var $_id string */
     private $_id;
 
     public function getId(){
@@ -836,6 +873,7 @@ class ArtistsQuery implements iQuery {
         $this->_id = $id;
     }
 
+    /* @var $_language Language */
     private $_language;
 
     public function getLanguage(){
@@ -846,6 +884,7 @@ class ArtistsQuery implements iQuery {
         $this->_language = $language;
     }
 
+    /* @var $_dateBorn string */
     private $_dateBorn;
 
     public function getDateBorn(){
@@ -856,6 +895,7 @@ class ArtistsQuery implements iQuery {
         $this->_dateBorn = $dateBorn;
     }
 
+    /* @var $_dateDied string */
     private $_dateDied;
 
     public function getDateDied(){
@@ -866,6 +906,7 @@ class ArtistsQuery implements iQuery {
         $this->_dateDied = $dateDied;
     }
 
+    /* @var $_gender Gender */
     private $_gender;
 
     public function getGender(){
@@ -876,6 +917,7 @@ class ArtistsQuery implements iQuery {
         $this->_gender = $gender;
     }
 
+    /* @var $_pageNumber int */
     private $_pageNumber;
 
     public function getPageNumber(){
@@ -886,6 +928,7 @@ class ArtistsQuery implements iQuery {
         $this->_pageNumber = $pageNumber;
     }
 
+    /* @var $_pageSize int */
     private $_pageSize;
 
     public function getPageSize(){
@@ -896,6 +939,7 @@ class ArtistsQuery implements iQuery {
         $this->_pageSize = $pageSize;
     }
 
+    /* @var $_updatedSince long */
     private $_updatedSince;
 
     public function getUpdatedSince(){
@@ -907,8 +951,7 @@ class ArtistsQuery implements iQuery {
     }
 
     private function buildQueryString(){
-        $queryStr = InternalUtilities::BASEURL;
-        $queryStr .= "Artists?";
+        $queryStr = "Artists?";
 
         $queryStr .= ArtistsQuery::valueOrDefault("orderby", $this->_orderBy, null);
         $queryStr .= ArtistsQuery::valueOrDefault("depth", $this->_depth, null);
@@ -930,11 +973,11 @@ class ArtistsQuery implements iQuery {
     private static function valueOrDefault($paramName, $value, $defaultValue){
         if($value == null || $value == $defaultValue) return "";
         if(!is_array($value))
-            return $paramName . "=" . $value . "&";
+            return $paramName . "=" . (is_bool($value) ? (($value == 1) ? "true" : "false") : $value) . "&";
 
         $queryStr = $paramName . "=";
         foreach($value as $item){
-            $queryStr .= $item;
+            $queryStr .= (is_bool($item) ? (($item == 1) ? "true" : "false") : $item);
             $queryStr .= ",";
         }
 
@@ -947,13 +990,10 @@ class ArtistsByIdQuery implements iQuery {
         return ArtistsByIdQuery::buildQueryString();
     }
 
-    public function getResultType() {
-        return "ArtistsByIdQueryResult";
-    }
-
     public function __construct(){
     }
 
+    /* @var $_id string */
     private $_id;
 
     public function getId(){
@@ -964,6 +1004,7 @@ class ArtistsByIdQuery implements iQuery {
         $this->_id = $id;
     }
 
+    /* @var $_depth ArtistRetrievalDepth[] */
     private $_depth;
 
     public function getDepth(){
@@ -974,6 +1015,7 @@ class ArtistsByIdQuery implements iQuery {
         $this->_depth = $depth;
     }
 
+    /* @var $_language Language */
     private $_language;
 
     public function getLanguage(){
@@ -985,8 +1027,7 @@ class ArtistsByIdQuery implements iQuery {
     }
 
     private function buildQueryString(){
-        $queryStr = InternalUtilities::BASEURL;
-        $queryStr .= "Artists/";
+        $queryStr = "Artists/";
         $queryStr .= "id?";
 
         $queryStr .= ArtistsByIdQuery::valueOrDefault("id", $this->_id, null);
@@ -999,11 +1040,11 @@ class ArtistsByIdQuery implements iQuery {
     private static function valueOrDefault($paramName, $value, $defaultValue){
         if($value == null || $value == $defaultValue) return "";
         if(!is_array($value))
-            return $paramName . "=" . $value . "&";
+            return $paramName . "=" . (is_bool($value) ? (($value == 1) ? "true" : "false") : $value) . "&";
 
         $queryStr = $paramName . "=";
         foreach($value as $item){
-            $queryStr .= $item;
+            $queryStr .= (is_bool($item) ? (($item == 1) ? "true" : "false") : $item);
             $queryStr .= ",";
         }
 
