@@ -281,29 +281,29 @@ class AlbumsQuery implements iQuery {
         $queryStr = "Albums?";
 
         $queryStr .= AlbumsQuery::valueOrDefault("artists", $this->_artists, null);
-        $queryStr .= AlbumsQuery::valueOrDefault("artistids", $this->_artistIds, null);
+        $queryStr .= AlbumsQuery::valueOrDefault("artistIds", $this->_artistIds, null);
         $queryStr .= AlbumsQuery::valueOrDefault("participants", $this->_participants, null);
-        $queryStr .= AlbumsQuery::valueOrDefault("participantids", $this->_participantIds, null);
+        $queryStr .= AlbumsQuery::valueOrDefault("participantIds", $this->_participantIds, null);
         $queryStr .= AlbumsQuery::valueOrDefault("recordings", $this->_recordings, null);
-        $queryStr .= AlbumsQuery::valueOrDefault("recordingids", $this->_recordingIds, null);
-        $queryStr .= AlbumsQuery::valueOrDefault("orderby", $this->_orderBy, null);
+        $queryStr .= AlbumsQuery::valueOrDefault("recordingIds", $this->_recordingIds, null);
+        $queryStr .= AlbumsQuery::valueOrDefault("orderBy", $this->_orderBy, null);
         $queryStr .= AlbumsQuery::valueOrDefault("depth", $this->_depth, null);
-        $queryStr .= AlbumsQuery::valueOrDefault("titlesearchtype", $this->_titleSearchType, AlbumSearchType::FULL_NAME);
-        $queryStr .= AlbumsQuery::valueOrDefault("idtype", $this->_idType, AlbumIdType::DECIBEL);
-        $queryStr .= AlbumsQuery::valueOrDefault("artistsearchtype", $this->_artistSearchType, ArtistSearchType::FULL_NAME);
-        $queryStr .= AlbumsQuery::valueOrDefault("artistidtype", $this->_artistIdType, ArtistIdType::DECIBEL);
-        $queryStr .= AlbumsQuery::valueOrDefault("participantsearchtype", $this->_participantSearchType, ArtistSearchType::FULL_NAME);
-        $queryStr .= AlbumsQuery::valueOrDefault("participantidtype", $this->_participantIdType, ArtistIdType::DECIBEL);
-        $queryStr .= AlbumsQuery::valueOrDefault("recordingsearchtype", $this->_recordingSearchType, RecordingSearchType::FULL_NAME);
-        $queryStr .= AlbumsQuery::valueOrDefault("recordingidtype", $this->_recordingIdType, RecordingIdType::DECIBEL);
+        $queryStr .= AlbumsQuery::valueOrDefault("titleSearchType", $this->_titleSearchType, AlbumSearchType::FULL_NAME);
+        $queryStr .= AlbumsQuery::valueOrDefault("idType", $this->_idType, AlbumIdType::DECIBEL);
+        $queryStr .= AlbumsQuery::valueOrDefault("artistSearchType", $this->_artistSearchType, ArtistSearchType::FULL_NAME);
+        $queryStr .= AlbumsQuery::valueOrDefault("artistIdType", $this->_artistIdType, ArtistIdType::DECIBEL);
+        $queryStr .= AlbumsQuery::valueOrDefault("participantSearchType", $this->_participantSearchType, ArtistSearchType::FULL_NAME);
+        $queryStr .= AlbumsQuery::valueOrDefault("participantIdType", $this->_participantIdType, ArtistIdType::DECIBEL);
+        $queryStr .= AlbumsQuery::valueOrDefault("recordingSearchType", $this->_recordingSearchType, RecordingSearchType::FULL_NAME);
+        $queryStr .= AlbumsQuery::valueOrDefault("recordingIdType", $this->_recordingIdType, RecordingIdType::DECIBEL);
         $queryStr .= AlbumsQuery::valueOrDefault("title", $this->_title, null);
         $queryStr .= AlbumsQuery::valueOrDefault("id", $this->_id, null);
         $queryStr .= AlbumsQuery::valueOrDefault("language", $this->_language, null);
-        $queryStr .= AlbumsQuery::valueOrDefault("datereleased", $this->_dateReleased, null);
-        $queryStr .= AlbumsQuery::valueOrDefault("islive", $this->_isLive, null);
-        $queryStr .= AlbumsQuery::valueOrDefault("pagenumber", $this->_pageNumber, null);
-        $queryStr .= AlbumsQuery::valueOrDefault("pagesize", $this->_pageSize, null);
-        $queryStr .= AlbumsQuery::valueOrDefault("updatedsince", $this->_updatedSince, null);
+        $queryStr .= AlbumsQuery::valueOrDefault("dateReleased", $this->_dateReleased, null);
+        $queryStr .= AlbumsQuery::valueOrDefault("isLive", $this->_isLive, null);
+        $queryStr .= AlbumsQuery::valueOrDefault("pageNumber", $this->_pageNumber, null);
+        $queryStr .= AlbumsQuery::valueOrDefault("pageSize", $this->_pageSize, null);
+        $queryStr .= AlbumsQuery::valueOrDefault("updatedSince", $this->_updatedSince, null);
 
         return rtrim($queryStr, "&?");
     }
@@ -311,11 +311,11 @@ class AlbumsQuery implements iQuery {
     private static function valueOrDefault($paramName, $value, $defaultValue){
         if($value == null || $value == $defaultValue) return "";
         if(!is_array($value))
-            return $paramName . "=" . (is_bool($value) ? (($value == 1) ? "true" : "false") : $value) . "&";
+            return $paramName . "=" . (is_bool($value) ? (($value == 1) ? "True" : "False") : $value) . "&";
 
         $queryStr = $paramName . "=";
         foreach($value as $item){
-            $queryStr .= (is_bool($item) ? (($item == 1) ? "true" : "false") : $item);
+            $queryStr .= (is_bool($item) ? (($item == 1) ? "True" : "False") : $item);
             $queryStr .= ",";
         }
 
@@ -366,10 +366,9 @@ class AlbumsByIdQuery implements iQuery {
 
     private function buildQueryString(){
         $queryStr = "Albums/";
-        $queryStr .= "id?";
+        $queryStr .= $this->_id . "?";
 
         $queryStr .= AlbumsByIdQuery::valueOrDefault("depth", $this->_depth, null);
-        $queryStr .= AlbumsByIdQuery::valueOrDefault("id", $this->_id, null);
         $queryStr .= AlbumsByIdQuery::valueOrDefault("language", $this->_language, null);
 
         return rtrim($queryStr, "&?");
@@ -378,11 +377,11 @@ class AlbumsByIdQuery implements iQuery {
     private static function valueOrDefault($paramName, $value, $defaultValue){
         if($value == null || $value == $defaultValue) return "";
         if(!is_array($value))
-            return $paramName . "=" . (is_bool($value) ? (($value == 1) ? "true" : "false") : $value) . "&";
+            return $paramName . "=" . (is_bool($value) ? (($value == 1) ? "True" : "False") : $value) . "&";
 
         $queryStr = $paramName . "=";
         foreach($value as $item){
-            $queryStr .= (is_bool($item) ? (($item == 1) ? "true" : "false") : $item);
+            $queryStr .= (is_bool($item) ? (($item == 1) ? "True" : "False") : $item);
             $queryStr .= ",";
         }
 
@@ -688,31 +687,31 @@ class RecordingsQuery implements iQuery {
         $queryStr = "Recordings?";
 
         $queryStr .= RecordingsQuery::valueOrDefault("artists", $this->_artists, null);
-        $queryStr .= RecordingsQuery::valueOrDefault("artistids", $this->_artistIds, null);
+        $queryStr .= RecordingsQuery::valueOrDefault("artistIds", $this->_artistIds, null);
         $queryStr .= RecordingsQuery::valueOrDefault("composers", $this->_composers, null);
-        $queryStr .= RecordingsQuery::valueOrDefault("composerids", $this->_composerIds, null);
+        $queryStr .= RecordingsQuery::valueOrDefault("composerIds", $this->_composerIds, null);
         $queryStr .= RecordingsQuery::valueOrDefault("participants", $this->_participants, null);
-        $queryStr .= RecordingsQuery::valueOrDefault("participantids", $this->_participantIds, null);
-        $queryStr .= RecordingsQuery::valueOrDefault("orderby", $this->_orderBy, null);
+        $queryStr .= RecordingsQuery::valueOrDefault("participantIds", $this->_participantIds, null);
+        $queryStr .= RecordingsQuery::valueOrDefault("orderBy", $this->_orderBy, null);
         $queryStr .= RecordingsQuery::valueOrDefault("depth", $this->_depth, null);
-        $queryStr .= RecordingsQuery::valueOrDefault("titlesearchtype", $this->_titleSearchType, RecordingSearchType::FULL_NAME);
-        $queryStr .= RecordingsQuery::valueOrDefault("idtype", $this->_idType, RecordingIdType::DECIBEL);
-        $queryStr .= RecordingsQuery::valueOrDefault("artistsearchtype", $this->_artistSearchType, ArtistSearchType::FULL_NAME);
-        $queryStr .= RecordingsQuery::valueOrDefault("artistidtype", $this->_artistIdType, ArtistIdType::DECIBEL);
-        $queryStr .= RecordingsQuery::valueOrDefault("composersearchtype", $this->_composerSearchType, ArtistSearchType::FULL_NAME);
-        $queryStr .= RecordingsQuery::valueOrDefault("composeridtype", $this->_composerIdType, ArtistIdType::DECIBEL);
-        $queryStr .= RecordingsQuery::valueOrDefault("participantsearchtype", $this->_participantSearchType, ArtistSearchType::FULL_NAME);
-        $queryStr .= RecordingsQuery::valueOrDefault("participantidtype", $this->_participantIdType, ArtistIdType::DECIBEL);
+        $queryStr .= RecordingsQuery::valueOrDefault("titleSearchType", $this->_titleSearchType, RecordingSearchType::FULL_NAME);
+        $queryStr .= RecordingsQuery::valueOrDefault("idType", $this->_idType, RecordingIdType::DECIBEL);
+        $queryStr .= RecordingsQuery::valueOrDefault("artistSearchType", $this->_artistSearchType, ArtistSearchType::FULL_NAME);
+        $queryStr .= RecordingsQuery::valueOrDefault("artistIdType", $this->_artistIdType, ArtistIdType::DECIBEL);
+        $queryStr .= RecordingsQuery::valueOrDefault("composerSearchType", $this->_composerSearchType, ArtistSearchType::FULL_NAME);
+        $queryStr .= RecordingsQuery::valueOrDefault("composerIdType", $this->_composerIdType, ArtistIdType::DECIBEL);
+        $queryStr .= RecordingsQuery::valueOrDefault("participantSearchType", $this->_participantSearchType, ArtistSearchType::FULL_NAME);
+        $queryStr .= RecordingsQuery::valueOrDefault("participantIdType", $this->_participantIdType, ArtistIdType::DECIBEL);
         $queryStr .= RecordingsQuery::valueOrDefault("title", $this->_title, null);
         $queryStr .= RecordingsQuery::valueOrDefault("id", $this->_id, null);
         $queryStr .= RecordingsQuery::valueOrDefault("language", $this->_language, null);
-        $queryStr .= RecordingsQuery::valueOrDefault("minseconds", $this->_minSeconds, null);
-        $queryStr .= RecordingsQuery::valueOrDefault("maxseconds", $this->_maxSeconds, null);
-        $queryStr .= RecordingsQuery::valueOrDefault("islive", $this->_isLive, null);
-        $queryStr .= RecordingsQuery::valueOrDefault("datemade", $this->_dateMade, null);
-        $queryStr .= RecordingsQuery::valueOrDefault("pagenumber", $this->_pageNumber, null);
-        $queryStr .= RecordingsQuery::valueOrDefault("pagesize", $this->_pageSize, null);
-        $queryStr .= RecordingsQuery::valueOrDefault("updatedsince", $this->_updatedSince, null);
+        $queryStr .= RecordingsQuery::valueOrDefault("minSeconds", $this->_minSeconds, null);
+        $queryStr .= RecordingsQuery::valueOrDefault("maxSeconds", $this->_maxSeconds, null);
+        $queryStr .= RecordingsQuery::valueOrDefault("isLive", $this->_isLive, null);
+        $queryStr .= RecordingsQuery::valueOrDefault("dateMade", $this->_dateMade, null);
+        $queryStr .= RecordingsQuery::valueOrDefault("pageNumber", $this->_pageNumber, null);
+        $queryStr .= RecordingsQuery::valueOrDefault("pageSize", $this->_pageSize, null);
+        $queryStr .= RecordingsQuery::valueOrDefault("updatedSince", $this->_updatedSince, null);
 
         return rtrim($queryStr, "&?");
     }
@@ -720,11 +719,11 @@ class RecordingsQuery implements iQuery {
     private static function valueOrDefault($paramName, $value, $defaultValue){
         if($value == null || $value == $defaultValue) return "";
         if(!is_array($value))
-            return $paramName . "=" . (is_bool($value) ? (($value == 1) ? "true" : "false") : $value) . "&";
+            return $paramName . "=" . (is_bool($value) ? (($value == 1) ? "True" : "False") : $value) . "&";
 
         $queryStr = $paramName . "=";
         foreach($value as $item){
-            $queryStr .= (is_bool($item) ? (($item == 1) ? "true" : "false") : $item);
+            $queryStr .= (is_bool($item) ? (($item == 1) ? "True" : "False") : $item);
             $queryStr .= ",";
         }
 
@@ -775,10 +774,9 @@ class RecordingsByIdQuery implements iQuery {
 
     private function buildQueryString(){
         $queryStr = "Recordings/";
-        $queryStr .= "id?";
+        $queryStr .= $this->_id . "?";
 
         $queryStr .= RecordingsByIdQuery::valueOrDefault("depth", $this->_depth, null);
-        $queryStr .= RecordingsByIdQuery::valueOrDefault("id", $this->_id, null);
         $queryStr .= RecordingsByIdQuery::valueOrDefault("language", $this->_language, null);
 
         return rtrim($queryStr, "&?");
@@ -787,11 +785,11 @@ class RecordingsByIdQuery implements iQuery {
     private static function valueOrDefault($paramName, $value, $defaultValue){
         if($value == null || $value == $defaultValue) return "";
         if(!is_array($value))
-            return $paramName . "=" . (is_bool($value) ? (($value == 1) ? "true" : "false") : $value) . "&";
+            return $paramName . "=" . (is_bool($value) ? (($value == 1) ? "True" : "False") : $value) . "&";
 
         $queryStr = $paramName . "=";
         foreach($value as $item){
-            $queryStr .= (is_bool($item) ? (($item == 1) ? "true" : "false") : $item);
+            $queryStr .= (is_bool($item) ? (($item == 1) ? "True" : "False") : $item);
             $queryStr .= ",";
         }
 
@@ -953,19 +951,19 @@ class ArtistsQuery implements iQuery {
     private function buildQueryString(){
         $queryStr = "Artists?";
 
-        $queryStr .= ArtistsQuery::valueOrDefault("orderby", $this->_orderBy, null);
+        $queryStr .= ArtistsQuery::valueOrDefault("orderBy", $this->_orderBy, null);
         $queryStr .= ArtistsQuery::valueOrDefault("depth", $this->_depth, null);
-        $queryStr .= ArtistsQuery::valueOrDefault("namesearchtype", $this->_nameSearchType, ArtistSearchType::FULL_NAME);
-        $queryStr .= ArtistsQuery::valueOrDefault("idtype", $this->_idType, ArtistIdType::DECIBEL);
+        $queryStr .= ArtistsQuery::valueOrDefault("nameSearchType", $this->_nameSearchType, ArtistSearchType::FULL_NAME);
+        $queryStr .= ArtistsQuery::valueOrDefault("idType", $this->_idType, ArtistIdType::DECIBEL);
         $queryStr .= ArtistsQuery::valueOrDefault("name", $this->_name, null);
         $queryStr .= ArtistsQuery::valueOrDefault("id", $this->_id, null);
         $queryStr .= ArtistsQuery::valueOrDefault("language", $this->_language, null);
-        $queryStr .= ArtistsQuery::valueOrDefault("dateborn", $this->_dateBorn, null);
-        $queryStr .= ArtistsQuery::valueOrDefault("datedied", $this->_dateDied, null);
+        $queryStr .= ArtistsQuery::valueOrDefault("dateBorn", $this->_dateBorn, null);
+        $queryStr .= ArtistsQuery::valueOrDefault("dateDied", $this->_dateDied, null);
         $queryStr .= ArtistsQuery::valueOrDefault("gender", $this->_gender, null);
-        $queryStr .= ArtistsQuery::valueOrDefault("pagenumber", $this->_pageNumber, 1);
-        $queryStr .= ArtistsQuery::valueOrDefault("pagesize", $this->_pageSize, null);
-        $queryStr .= ArtistsQuery::valueOrDefault("updatedsince", $this->_updatedSince, null);
+        $queryStr .= ArtistsQuery::valueOrDefault("pageNumber", $this->_pageNumber, 1);
+        $queryStr .= ArtistsQuery::valueOrDefault("pageSize", $this->_pageSize, null);
+        $queryStr .= ArtistsQuery::valueOrDefault("updatedSince", $this->_updatedSince, null);
 
         return rtrim($queryStr, "&?");
     }
@@ -973,11 +971,11 @@ class ArtistsQuery implements iQuery {
     private static function valueOrDefault($paramName, $value, $defaultValue){
         if($value == null || $value == $defaultValue) return "";
         if(!is_array($value))
-            return $paramName . "=" . (is_bool($value) ? (($value == 1) ? "true" : "false") : $value) . "&";
+            return $paramName . "=" . (is_bool($value) ? (($value == 1) ? "True" : "False") : $value) . "&";
 
         $queryStr = $paramName . "=";
         foreach($value as $item){
-            $queryStr .= (is_bool($item) ? (($item == 1) ? "true" : "false") : $item);
+            $queryStr .= (is_bool($item) ? (($item == 1) ? "True" : "False") : $item);
             $queryStr .= ",";
         }
 
@@ -1028,9 +1026,8 @@ class ArtistsByIdQuery implements iQuery {
 
     private function buildQueryString(){
         $queryStr = "Artists/";
-        $queryStr .= "id?";
+        $queryStr .= $this->_id . "?";
 
-        $queryStr .= ArtistsByIdQuery::valueOrDefault("id", $this->_id, null);
         $queryStr .= ArtistsByIdQuery::valueOrDefault("depth", $this->_depth, null);
         $queryStr .= ArtistsByIdQuery::valueOrDefault("language", $this->_language, null);
 
@@ -1040,11 +1037,11 @@ class ArtistsByIdQuery implements iQuery {
     private static function valueOrDefault($paramName, $value, $defaultValue){
         if($value == null || $value == $defaultValue) return "";
         if(!is_array($value))
-            return $paramName . "=" . (is_bool($value) ? (($value == 1) ? "true" : "false") : $value) . "&";
+            return $paramName . "=" . (is_bool($value) ? (($value == 1) ? "True" : "False") : $value) . "&";
 
         $queryStr = $paramName . "=";
         foreach($value as $item){
-            $queryStr .= (is_bool($item) ? (($item == 1) ? "true" : "false") : $item);
+            $queryStr .= (is_bool($item) ? (($item == 1) ? "True" : "False") : $item);
             $queryStr .= ",";
         }
 

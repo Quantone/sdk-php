@@ -5,6 +5,9 @@ namespace SdkTests;
 require_once '../src/Decibel.php';
 require_once '../src/DecibelObjectModel.php';
 require_once '../src/DecibelQuery.php';
+require_once '../src/DecibelException.php';
+
+use DecibelSDK;
 
 class QueryTests extends \PHPUnit_Framework_TestCase {
     const NO_RESULTS = "Query returned no results.";
@@ -12,7 +15,7 @@ class QueryTests extends \PHPUnit_Framework_TestCase {
     private $_decibel;
 
     protected function setUp(){
-        // $this->_decibel = new Decibel("5589c9d1", "4154f53630c5cffd106cbe3ba0bd1eff");
+        // $this->_decibel = new Decibel("{YOUR_APP_ID}", "{YOUR_APP_KEY}");
     }
 
     public function testAlbumsQuery(){
@@ -27,7 +30,7 @@ class QueryTests extends \PHPUnit_Framework_TestCase {
         $qo->setRecordings(array("Go Your Own Way"));
 
         // Act
-        $decibel = new \DecibelSDK\Decibel("5589c9d1", "4154f53630c5cffd106cbe3ba0bd1eff");
+        $decibel = new DecibelSDK\Decibel("{YOUR_APP_ID}", "{YOUR_APP_KEY}");
         $qr = $decibel->executeAlbumsQuery($qo);
         $result = $qr->getResults()[0];
 
@@ -70,7 +73,7 @@ class QueryTests extends \PHPUnit_Framework_TestCase {
         $qo->setDepth(array(\DecibelSDK\AlbumRetrievalDepth::ARTIST_DETAILS));
 
         // Act
-        $decibel = new \DecibelSDK\Decibel("5589c9d1", "4154f53630c5cffd106cbe3ba0bd1eff");
+        $decibel = new DecibelSDK\Decibel("{YOUR_APP_ID}", "{YOUR_APP_KEY}");
         $qr = $decibel->executeAlbumsByIdQuery($qo);
         $result = $qr->getResult();
 
@@ -93,7 +96,7 @@ class QueryTests extends \PHPUnit_Framework_TestCase {
         $qo->setParticipants(array("Lindsey Buckingham"));
 
         // Act
-        $decibel = new \DecibelSDK\Decibel("5589c9d1", "4154f53630c5cffd106cbe3ba0bd1eff");
+        $decibel = new DecibelSDK\Decibel("{YOUR_APP_ID}", "{YOUR_APP_KEY}");
         $qr = $decibel->executeRecordingsQuery($qo);
         $result = $qr->getResults()[0];
 
@@ -124,7 +127,7 @@ class QueryTests extends \PHPUnit_Framework_TestCase {
         $qo->setDepth(array(\DecibelSDK\RecordingRetrievalDepth::IDENTIFIERS));
 
         // Act
-        $decibel = new \DecibelSDK\Decibel("5589c9d1", "4154f53630c5cffd106cbe3ba0bd1eff");
+        $decibel = new DecibelSDK\Decibel("{YOUR_APP_ID}", "{YOUR_APP_KEY}");
         $qr = $decibel->executeRecordingsByIdQuery($qo);
         $result = $qr->getResult();
 
@@ -144,7 +147,7 @@ class QueryTests extends \PHPUnit_Framework_TestCase {
         $qo->setGender(\DecibelSDK\Gender::MALE);
 
         // Act
-        $decibel = new \DecibelSDK\Decibel("5589c9d1", "4154f53630c5cffd106cbe3ba0bd1eff");
+        $decibel = new DecibelSDK\Decibel("{YOUR_APP_ID}", "{YOUR_APP_KEY}");
         $qr = $decibel->executeArtistsQuery($qo);
         $result = $qr->getResults()[0];
 
@@ -165,7 +168,7 @@ class QueryTests extends \PHPUnit_Framework_TestCase {
         $qo->setDepth(array(\DecibelSDK\ArtistRetrievalDepth::GROUPS,\DecibelSDK\ArtistRetrievalDepth::DATES));
 
         // Act
-        $decibel = new \DecibelSDK\Decibel("5589c9d1", "4154f53630c5cffd106cbe3ba0bd1eff");
+        $decibel = new DecibelSDK\Decibel("{YOUR_APP_ID}", "{YOUR_APP_KEY}");
         $qr = $decibel->executeArtistsByIdQuery($qo);
         $result = $qr->getResult();
 
@@ -177,4 +180,16 @@ class QueryTests extends \PHPUnit_Framework_TestCase {
         $this->assertEquals("Fleetwood Mac", $groups->getStageName());
     }
 
+    /**
+     * @expectedException DecibelSDK\DecibelException
+     */
+    public function testError(){
+        // Arrange
+        $qo = new DecibelSDK\AlbumsQuery();
+        $qo->setTitle("Rumours");
+
+        $decibel = new DecibelSDK\Decibel("", "");
+        $qr = $decibel->executeAlbumsQuery($qo);
+        $result = $qr->getResults();
+    }
 }
