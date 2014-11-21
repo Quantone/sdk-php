@@ -63,19 +63,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="QueryBuilderTests.php" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="QueryBuilderTests.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tests/QueryBuilderTests.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="74" column="47" selection-start="2426" selection-end="2426" vertical-scroll-proportion="0.0" vertical-offset="1258" max-vertical-offset="4488">
+            <state line="109" column="18" selection-start="3864" selection-end="3864" vertical-scroll-proportion="0.5752961" vertical-offset="1513" max-vertical-offset="4488">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="QueryTests.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="QueryTests.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/QueryTests.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="36" selection-start="1151" selection-end="1151" vertical-scroll-proportion="-3.9475465" vertical-offset="2826" max-vertical-offset="3417">
+            <state line="174" column="13" selection-start="8102" selection-end="8102" vertical-scroll-proportion="-5.076923" vertical-offset="2826" max-vertical-offset="3417">
               <folding />
             </state>
           </provider>
@@ -702,13 +702,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/QueryBuilderTests.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="74" column="47" selection-start="2426" selection-end="2426" vertical-scroll-proportion="0.0" vertical-offset="1258" max-vertical-offset="4488">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/DecibelObjectModel.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="2" column="20" selection-start="27" selection-end="27" vertical-scroll-proportion="0.0" vertical-offset="561" max-vertical-offset="60129">
@@ -744,7 +737,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/QueryTests.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="36" selection-start="1151" selection-end="1151" vertical-scroll-proportion="-3.9475465" vertical-offset="2826" max-vertical-offset="3417">
+        <state line="174" column="13" selection-start="8102" selection-end="8102" vertical-scroll-proportion="-5.076923" vertical-offset="2826" max-vertical-offset="3417">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/QueryBuilderTests.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="109" column="18" selection-start="3864" selection-end="3864" vertical-scroll-proportion="0.5752961" vertical-offset="1513" max-vertical-offset="4488">
           <folding />
         </state>
       </provider>
