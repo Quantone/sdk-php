@@ -1,0 +1,754 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="97e229e7-78c0-4841-95c1-046b73c1fbd3" name="Default" comment="" />
+    <ignored path="DecibelSDK.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="ComposerSettings">
+    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
+    <pharPath>C:\ProgramData\ComposerSetup\bin\composer.phar</pharPath>
+  </component>
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="DaemonCodeAnalyzer">
+    <disable_hints />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="DecibelSDK" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="DecibelObjectModel.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/DecibelObjectModel.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="2" column="20" selection-start="27" selection-end="27" vertical-scroll-proportion="0.0" vertical-offset="561" max-vertical-offset="60129">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DecibelQuery.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/DecibelQuery.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="26" selection-start="95" selection-end="95" vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="17969">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Decibel.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Decibel.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="13" column="15" selection-start="262" selection-end="262" vertical-scroll-proportion="0.0" vertical-offset="221" max-vertical-offset="2159">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DecibelException.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/DecibelException.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="6" column="0" selection-start="158" selection-end="158" vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="255">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="QueryBuilderTests.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tests/QueryBuilderTests.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="109" column="18" selection-start="3864" selection-end="3864" vertical-scroll-proportion="0.5752961" vertical-offset="1513" max-vertical-offset="4488">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="QueryTests.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/QueryTests.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="174" column="13" selection-start="8102" selection-end="8102" vertical-scroll-proportion="-5.076923" vertical-offset="2826" max-vertical-offset="3417">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Examples.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Examples.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="12" column="27" selection-start="325" selection-end="325" vertical-scroll-proportion="-7.8461537" vertical-offset="0" max-vertical-offset="884">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="InternalUtilities.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/InternalUtilities.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="38" column="5" selection-start="882" selection-end="882" vertical-scroll-proportion="0.0" vertical-offset="646" max-vertical-offset="765">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindManager">
+    <FindUsagesManager>
+      <setting name="OPEN_NEW_TAB" value="false" />
+    </FindUsagesManager>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="changedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/ObjectModel.php" />
+        <option value="$PROJECT_DIR$/ErrorHandler.php" />
+        <option value="$PROJECT_DIR$/DecibelQuery_Old.php" />
+        <option value="$USER_HOME$/Documents/Website/flatty7/archive.php" />
+        <option value="$PROJECT_DIR$/Enum.php" />
+        <option value="$PROJECT_DIR$/DecibelConfig.php" />
+        <option value="$PROJECT_DIR$/DecibelUtilities.php" />
+        <option value="$PROJECT_DIR$/InternalUtilities.php" />
+        <option value="$PROJECT_DIR$/iQuery.php" />
+        <option value="$PROJECT_DIR$/QueryBuilder.php" />
+        <option value="$PROJECT_DIR$/Decibel.php" />
+        <option value="$PROJECT_DIR$/DecibelObjectModel.php" />
+        <option value="$PROJECT_DIR$/Examples.php" />
+        <option value="$PROJECT_DIR$/DecibelQuery.php" />
+        <option value="$PROJECT_DIR$/src/iQuery.php" />
+        <option value="$USER_HOME$/AppData/Local/Temp/ide-phpunit.php" />
+        <option value="$PROJECT_DIR$/composer.json" />
+        <option value="$PROJECT_DIR$/src/Examples.php" />
+        <option value="$PROJECT_DIR$/tests/SingQueryBuilderTest.php" />
+        <option value="$PROJECT_DIR$/tests/QueryBuilderTests.php" />
+        <option value="$PROJECT_DIR$/src/DecibelException.php" />
+        <option value="$PROJECT_DIR$/src/DecibelQuery.php" />
+        <option value="$PROJECT_DIR$/src/DecibelObjectModel.php" />
+        <option value="$PROJECT_DIR$/src/InternalUtilities.php" />
+        <option value="$PROJECT_DIR$/src/Decibel.php" />
+        <option value="$PROJECT_DIR$/tests/QueryTests.php" />
+      </list>
+    </option>
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" interpreter_name="Wamp instilation">
+    <include_path>
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-code-coverage" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-token-stream" />
+      <path value="$PROJECT_DIR$/vendor/composer" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-text-template" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-file-iterator" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/phpunit-mock-objects" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/phpunit" />
+      <path value="$PROJECT_DIR$/vendor/phpunit/php-timer" />
+      <path value="$PROJECT_DIR$/vendor/symfony/yaml" />
+    </include_path>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="1672" />
+    <option name="y" value="-8" />
+    <option name="width" value="1382" />
+    <option name="height" value="784" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectReloadState">
+    <option name="STATE" value="0" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DecibelSDK" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DecibelSDK" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DecibelSDK" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DecibelSDK" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DecibelSDK" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tests" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DecibelSDK" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="DecibelSDK" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="recentsLimit" value="5" />
+    <property name="FullScreen" value="false" />
+    <property name="restartRequiresConfirmation" value="true" />
+    <property name="options.lastSelected" value="Configurable.PHP" />
+    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Source\core\Api\SDKs\Php\DecibelSDK\src" />
+    </key>
+  </component>
+  <component name="RunManager" selected="PHPUnit.QueryTests">
+    <configuration default="false" name="Examples.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" temporary="true" path="$PROJECT_DIR$/Examples.php">
+      <RunnerSettings RunnerId="PhpRunner" />
+      <RunnerSettings RunnerId="PhpScriptDebugRunner" />
+      <ConfigurationWrapper RunnerId="PhpRunner" />
+      <ConfigurationWrapper RunnerId="PhpScriptDebugRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="QueryTests" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="SdkTests\QueryTests" file="$PROJECT_DIR$/tests/QueryTests.php" scope="Class" />
+      <RunnerSettings RunnerId="PhpRunner" />
+      <RunnerSettings RunnerId="PhpUnitDebugRunner" />
+      <ConfigurationWrapper RunnerId="PhpRunner" />
+      <ConfigurationWrapper RunnerId="PhpUnitDebugRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="Examples.php (1)" type="PhpLocalRunConfigurationType" factoryName="PHP Console" temporary="true" path="$PROJECT_DIR$/src/Examples.php">
+      <RunnerSettings RunnerId="PhpRunner" />
+      <RunnerSettings RunnerId="PhpScriptDebugRunner" />
+      <ConfigurationWrapper RunnerId="PhpRunner" />
+      <ConfigurationWrapper RunnerId="PhpScriptDebugRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="QueryBuilderTests" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="SdkTests\QueryBuilderTests" file="$PROJECT_DIR$/tests/QueryBuilderTests.php" scope="Class" />
+      <RunnerSettings RunnerId="PhpRunner" />
+      <RunnerSettings RunnerId="PhpUnitDebugRunner" />
+      <ConfigurationWrapper RunnerId="PhpRunner" />
+      <ConfigurationWrapper RunnerId="PhpUnitDebugRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="SingQueryBuilderTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="SdkTests\SingQueryBuilderTest" file="$PROJECT_DIR$/tests/SingQueryBuilderTest.php" scope="Class" />
+      <RunnerSettings RunnerId="PhpRunner" />
+      <ConfigurationWrapper RunnerId="PhpRunner" />
+      <method />
+    </configuration>
+    <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
+      <method />
+    </configuration>
+    <list size="5">
+      <item index="0" class="java.lang.String" itemvalue="PHP Script.Examples.php" />
+      <item index="1" class="java.lang.String" itemvalue="PHPUnit.QueryTests" />
+      <item index="2" class="java.lang.String" itemvalue="PHP Script.Examples.php (1)" />
+      <item index="3" class="java.lang.String" itemvalue="PHPUnit.QueryBuilderTests" />
+      <item index="4" class="java.lang.String" itemvalue="PHPUnit.SingQueryBuilderTest" />
+    </list>
+    <recent_temporary>
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="PHPUnit.QueryTests" />
+        <item index="1" class="java.lang.String" itemvalue="PHPUnit.QueryBuilderTests" />
+        <item index="2" class="java.lang.String" itemvalue="PHPUnit.SingQueryBuilderTest" />
+        <item index="3" class="java.lang.String" itemvalue="PHP Script.Examples.php (1)" />
+        <item index="4" class="java.lang.String" itemvalue="PHP Script.Examples.php" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false" SSL_PROTOCOLS="all">
+    <option name="USER" value="" />
+    <option name="PASSWORD" value="" />
+    <option name="mySSHConnectionTimeout" value="30000" />
+    <option name="mySSHReadTimeout" value="30000" />
+    <option name="LAST_MERGED_REVISION" />
+    <option name="MERGE_DRY_RUN" value="false" />
+    <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
+    <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
+    <option name="IGNORE_SPACES_IN_MERGE" value="false" />
+    <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
+    <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
+    <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
+    <option name="FORCE_UPDATE" value="false" />
+    <option name="IGNORE_EXTERNALS" value="false" />
+    <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="97e229e7-78c0-4841-95c1-046b73c1fbd3" name="Default" comment="" />
+      <created>1403859583941</created>
+      <updated>1403859583941</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="1672" y="-8" width="1382" height="784" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33016106" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.47267357" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293944" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293944" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="PHP-CGI Server" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="myTodoPanelSettings">
+      <TodoPanelSettings />
+    </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/src/Examples.php</url>
+          <line>15</line>
+          <option name="timeStamp" value="48" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/src/Examples.php</url>
+          <line>9</line>
+          <option name="timeStamp" value="49" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/src/Examples.php</url>
+          <line>7</line>
+          <option name="timeStamp" value="50" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/tests/QueryBuilderTests.php</url>
+          <line>14</line>
+          <option name="timeStamp" value="56" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/vendor/phpunit/phpunit/PHPUnit/Framework/Assert.php</url>
+          <line>470</line>
+          <option name="timeStamp" value="57" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="59" />
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/DecibelQuery.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="26" selection-start="95" selection-end="95" vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="17969">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Decibel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="15" selection-start="262" selection-end="262" vertical-scroll-proportion="0.0" vertical-offset="221" max-vertical-offset="2159">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DecibelException.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="0" selection-start="158" selection-end="158" vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="255">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/QueryBuilderTests.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="74" column="47" selection-start="2426" selection-end="2426" vertical-scroll-proportion="0.0" vertical-offset="1258" max-vertical-offset="4488">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/QueryTests.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="33" selection-start="551" selection-end="551" vertical-scroll-proportion="0.0" vertical-offset="374" max-vertical-offset="3417">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/InternalUtilities.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="5" selection-start="882" selection-end="882" vertical-scroll-proportion="0.0" vertical-offset="646" max-vertical-offset="765">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DecibelObjectModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="777" column="0" selection-start="14368" selection-end="14368" vertical-scroll-proportion="0.0" vertical-offset="13686" max-vertical-offset="56542">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DecibelQuery.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="282" column="26" selection-start="6362" selection-end="6362" vertical-scroll-proportion="0.0" vertical-offset="4794" max-vertical-offset="18020">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/QueryTests.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="0" selection-start="1136" selection-end="1136" vertical-scroll-proportion="0.0" vertical-offset="493" max-vertical-offset="3162">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Decibel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="78" selection-start="712" selection-end="775" vertical-scroll-proportion="0.0" vertical-offset="392" max-vertical-offset="1666">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DecibelObjectModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="24" selection-start="781" selection-end="781" vertical-scroll-proportion="0.0" vertical-offset="2346" max-vertical-offset="25568">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DecibelQuery.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="100" column="0" selection-start="2065" selection-end="2065" vertical-scroll-proportion="0.0" vertical-offset="1583" max-vertical-offset="7820">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Examples.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="0" selection-start="501" selection-end="501" vertical-scroll-proportion="0.0" vertical-offset="21" max-vertical-offset="646">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/InternalUtilities.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="66" column="43" selection-start="1806" selection-end="1806" vertical-scroll-proportion="0.0" vertical-offset="752" max-vertical-offset="1377">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DecibelObjectModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="70" column="1" selection-start="1075" selection-end="1449" vertical-scroll-proportion="0.0" vertical-offset="916" max-vertical-offset="25568">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DecibelQuery.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="100" column="0" selection-start="2065" selection-end="2065" vertical-scroll-proportion="0.0" vertical-offset="1583" max-vertical-offset="7820">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Examples.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="0" selection-start="501" selection-end="501" vertical-scroll-proportion="0.0" vertical-offset="21" max-vertical-offset="646">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/InternalUtilities.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="66" column="43" selection-start="1806" selection-end="1806" vertical-scroll-proportion="0.0" vertical-offset="752" max-vertical-offset="1377">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DecibelObjectModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1433" column="6" selection-start="30636" selection-end="30636" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="25228">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DecibelQuery.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="288" column="19" selection-start="6513" selection-end="6513" vertical-scroll-proportion="0.0" vertical-offset="4896" max-vertical-offset="7820">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Examples.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="0" selection-start="501" selection-end="501" vertical-scroll-proportion="0.0" vertical-offset="138" max-vertical-offset="646">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/InternalUtilities.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="0" selection-start="404" selection-end="404" vertical-scroll-proportion="0.0" vertical-offset="206" max-vertical-offset="1377">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DecibelObjectModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="940" column="0" selection-start="19612" selection-end="19612" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="16082">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Enum.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="0" selection-start="30" selection-end="30" vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="629" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Examples.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="86" selection-start="228" selection-end="228" vertical-scroll-proportion="0.0" vertical-offset="19" max-vertical-offset="510">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/InternalUtilities.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="0" selection-start="842" selection-end="842" vertical-scroll-proportion="0.0" vertical-offset="496" max-vertical-offset="1377">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DecibelQuery.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="626" column="52" selection-start="13966" selection-end="13966" vertical-scroll-proportion="0.0" vertical-offset="10380" max-vertical-offset="10829">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DecibelObjectModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="796" column="0" selection-start="16950" selection-end="16950" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="13634">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Examples.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="47" selection-start="95" selection-end="95" vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="425">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DecibelQuery.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="531" column="25" selection-start="11982" selection-end="11982" vertical-scroll-proportion="0.0" vertical-offset="9027" max-vertical-offset="10846">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Documents/Website/flatty7/archive.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="227" column="8" selection-start="7348" selection-end="7348" vertical-scroll-proportion="0.0" vertical-offset="3859" max-vertical-offset="3944" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DecibelObjectModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="796" column="0" selection-start="16950" selection-end="16950" vertical-scroll-proportion="0.0" vertical-offset="12737" max-vertical-offset="13634">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Examples.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="0" selection-start="162" selection-end="162" vertical-scroll-proportion="0.0" vertical-offset="187" max-vertical-offset="459" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DecibelObjectModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="857" column="30" selection-start="18137" selection-end="18148" vertical-scroll-proportion="0.0" vertical-offset="13994" max-vertical-offset="21556">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DecibelQuery.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="522" column="51" selection-start="12233" selection-end="12233" vertical-scroll-proportion="0.0" vertical-offset="8874" max-vertical-offset="9469" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/InternalUtilities.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="45" column="25" selection-start="1142" selection-end="1142" vertical-scroll-proportion="0.0" vertical-offset="765" max-vertical-offset="1088" />
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Documents/Website/flatty7/archive.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="192" column="9" selection-start="6296" selection-end="6296" vertical-scroll-proportion="0.32303372" vertical-offset="3047" max-vertical-offset="3944" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Enum.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="57" selection-start="300" selection-end="300" vertical-scroll-proportion="0.42288557" vertical-offset="0" max-vertical-offset="629">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.lock">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="22" selection-start="1472" selection-end="1472" vertical-scroll-proportion="1.88" vertical-offset="706" max-vertical-offset="7412" />
+      </provider>
+      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Temp/ide-phpunit.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="506" column="0" selection-start="15043" selection-end="15043" vertical-scroll-proportion="-8.807693" vertical-offset="8373" max-vertical-offset="8704" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DecibelException.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="0" selection-start="158" selection-end="158" vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="255">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DecibelQuery.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="26" selection-start="95" selection-end="95" vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="17969">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/iQuery.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="0" selection-start="29" selection-end="29" vertical-scroll-proportion="0.13385826" vertical-offset="0" max-vertical-offset="381">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DecibelObjectModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="20" selection-start="27" selection-end="27" vertical-scroll-proportion="0.0" vertical-offset="561" max-vertical-offset="60129">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/InternalUtilities.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="5" selection-start="882" selection-end="882" vertical-scroll-proportion="0.0" vertical-offset="646" max-vertical-offset="765">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Decibel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="15" selection-start="262" selection-end="262" vertical-scroll-proportion="0.0" vertical-offset="221" max-vertical-offset="2159">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="16" selection-start="281" selection-end="281" vertical-scroll-proportion="0.30960265" vertical-offset="0" max-vertical-offset="604" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Examples.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="27" selection-start="325" selection-end="325" vertical-scroll-proportion="-7.8461537" vertical-offset="0" max-vertical-offset="884">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/QueryTests.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="174" column="13" selection-start="8102" selection-end="8102" vertical-scroll-proportion="-5.076923" vertical-offset="2826" max-vertical-offset="3417">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/QueryBuilderTests.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="109" column="18" selection-start="3864" selection-end="3864" vertical-scroll-proportion="0.5752961" vertical-offset="1513" max-vertical-offset="4488">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
+
