@@ -13,8 +13,8 @@ class Decibel {
      * Create a new instance of the Decibel class with your credentials.
      * This is the main class that all queries are run through
      *
-     * @param $appId string Your Decibel App Id
-     * @param $appKey string Your Decibel App Key
+     * @param $appId Your Decibel App Id
+     * @param $appKey Your Decibel App Key
      */
     public function __construct($appId, $appKey){
         $this->_appId = $appId;
@@ -37,6 +37,19 @@ class Decibel {
         // Execute cURL on the session handle
         $response = curl_exec($session);
         return $response;
+    }
+
+    public function executeImagesByIdQuery(ImagesByIdQuery $query){
+        try{
+            $resultJson = $this->run($query->getQueryString());
+            if($resultJson == null)
+                throw new DecibelException("No data returned by the Decibel API.");
+
+            return new ImagesByIdQueryResult($resultJson);
+        }
+        catch(\Exception $ex){
+            throw new DecibelException($ex->getMessage());
+        }
     }
 
     public function executeAlbumsQuery(AlbumsQuery $query){
@@ -65,6 +78,58 @@ class Decibel {
         }
     }
 
+    public function executeLabelsByIdQuery(LabelsByIdQuery $query){
+        try{
+            $resultJson = $this->run($query->getQueryString());
+            if($resultJson == null)
+                throw new DecibelException("No data returned by the Decibel API.");
+
+            return new LabelsByIdQueryResult($resultJson);
+        }
+        catch(\Exception $ex){
+            throw new DecibelException($ex->getMessage());
+        }
+    }
+
+    public function executeLabelsQuery(LabelsQuery $query){
+        try{
+            $resultJson = $this->run($query->getQueryString());
+            if($resultJson == null)
+                throw new DecibelException("No data returned by the Decibel API.");
+
+            return new LabelsQueryResult($resultJson);
+        }
+        catch(\Exception $ex){
+            throw new DecibelException($ex->getMessage());
+        }
+    }
+
+    public function executeLocationsByIdQuery(LocationsByIdQuery $query){
+        try{
+            $resultJson = $this->run($query->getQueryString());
+            if($resultJson == null)
+                throw new DecibelException("No data returned by the Decibel API.");
+
+            return new LocationsByIdQueryResult($resultJson);
+        }
+        catch(\Exception $ex){
+            throw new DecibelException($ex->getMessage());
+        }
+    }
+
+    public function executeLocationsQuery(LocationsQuery $query){
+        try{
+            $resultJson = $this->run($query->getQueryString());
+            if($resultJson == null)
+                throw new DecibelException("No data returned by the Decibel API.");
+
+            return new LocationsQueryResult($resultJson);
+        }
+        catch(\Exception $ex){
+            throw new DecibelException($ex->getMessage());
+        }
+    }
+
     public function executeRecordingsQuery(RecordingsQuery $query){
         try{
             $resultJson = $this->run($query->getQueryString());
@@ -85,6 +150,19 @@ class Decibel {
                 throw new DecibelException("No data returned by the Decibel API.");
 
             return new RecordingsByIdQueryResult($resultJson);
+        }
+        catch(\Exception $ex){
+            throw new DecibelException($ex->getMessage());
+        }
+    }
+
+    public function executeDiscTagsQuery(DiscTagsQuery $query){
+        try{
+            $resultJson = $this->run($query->getQueryString());
+            if($resultJson == null)
+                throw new DecibelException("No data returned by the Decibel API.");
+
+            return new DiscTagsQueryResult($resultJson);
         }
         catch(\Exception $ex){
             throw new DecibelException($ex->getMessage());

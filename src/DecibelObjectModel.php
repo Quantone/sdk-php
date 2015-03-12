@@ -78,6 +78,14 @@ abstract class AlbumIdType extends Enum{
 
 /*
  * 
+    Specifies what sort of data to return with <see cref="T:DecibelWebService.Annotation" />s.
+    
+*/
+abstract class AnnotationDepth extends Enum{
+}
+
+/*
+ * 
     The capacity in which an <see cref="T:DecibelWebService.Artist" /> appears on an album or recording.
     
 */
@@ -262,6 +270,14 @@ abstract class ContentFormat extends Enum{
 
 /*
  * 
+    The type of entity that is being referenced
+    
+*/
+abstract class DecibelType extends Enum{
+}
+
+/*
+ * 
     The database in which this identifies <see cref="T:DecibelWebService.DiscTag" />s.
     
 */
@@ -294,6 +310,79 @@ abstract class Gender extends Enum{
 
 /*
  * 
+    The database in which this identifier identifies <see cref="T:DecibelWebService.Label" />s.
+    
+*/
+abstract class LabelIdType extends Enum{
+    const DECIBEL = 'Decibel';
+
+    const MUSICBRAINZ = 'Musicbrainz';
+
+    const DISCOGS = 'Discogs';
+
+}
+
+abstract class LabelRetrievalDepth extends Enum{
+    const IDENTIFIERS = 'Identifiers';
+
+    const LOCATIONS = 'Locations';
+
+}
+
+/*
+ * 
+    A type of location.
+    
+*/
+abstract class LocationCategory extends Enum{
+    const NEIGHBORHOOD = 'Neighborhood';
+
+    const COUNTY = 'County';
+
+    const VILLAGE = 'Village';
+
+    const COUNTRY = 'Country';
+
+    const DEPARTMENT = 'Department';
+
+    const PROVINCE = 'Province';
+
+    const COLONY = 'Colony';
+
+    const STATE = 'State';
+
+    const HAMLET = 'Hamlet';
+
+    const TOWN = 'Town';
+
+    const VENUE = 'Venue';
+
+    const CITY = 'City';
+
+    const REGION = 'Region';
+
+    const BOROUGH = 'Borough';
+
+    const TERRITORY = 'Territory';
+
+    const PRINCIPALITY = 'Principality';
+
+}
+
+/*
+ * 
+    Specifies additional <see cref="T:DecibelWebService.Location" /> information to return.
+    
+*/
+abstract class LocationRetrievalDepth extends Enum{
+    const IDENTIFIERS = 'Identifiers';
+
+    const PARENT_LOCATIONS = 'ParentLocations';
+
+}
+
+/*
+ * 
     Size of image
     
 */
@@ -320,6 +409,18 @@ abstract class Language extends Enum{
 
 /*
  * 
+    The database in which this identifier identifies <see cref="T:DecibelWebService.Location" />s.
+    
+*/
+abstract class LocationIdType extends Enum{
+    const DECIBEL = 'Decibel';
+
+    const GEO_NAMES = 'GeoNames';
+
+}
+
+/*
+ * 
     Specifies how albums returned by the API should be sorted.
     
 */
@@ -338,6 +439,26 @@ abstract class OrderAlbumsBy extends Enum{
     
 */
 abstract class OrderArtistsBy extends Enum{
+    const DECIBEL_EMINENCE = 'DecibelEminence';
+
+}
+
+/*
+ * 
+    Specifies how labels returned by the API should be sorted.
+    
+*/
+abstract class OrderLabelsBy extends Enum{
+    const DECIBEL_EMINENCE = 'DecibelEminence';
+
+}
+
+/*
+ * 
+    Specifies how locations returned by the API should be sorted.
+    
+*/
+abstract class OrderLocationsBy extends Enum{
     const DECIBEL_EMINENCE = 'DecibelEminence';
 
 }
@@ -669,7 +790,7 @@ class Activity extends DecibelEntity{
     }
 }
 
-class AlbumsByIdQueryObject extends QueryObject{
+class LabelsByIdQueryObject extends QueryObject{
     /* @var $_id string */
     private $_id;
 
@@ -681,7 +802,7 @@ class AlbumsByIdQueryObject extends QueryObject{
         $this->_id = $id;
     }
 
-    /* @var $_retrievalDepth AlbumRetrievalDepth */
+    /* @var $_retrievalDepth LabelRetrievalDepth */
     private $_retrievalDepth;
 
     public function getRetrievalDepth(){
@@ -779,6 +900,21 @@ class AlbumsByIdQueryResult extends ByIdQueryResult{
         $obj = json_decode($jsonStr);
 
         $this->_result = new Album($obj->Result);
+    }
+}
+
+class ImagesByIdQueryResult extends ByIdQueryResult{
+    /* @var $_result Image */
+    private $_result;
+
+    public function getResult(){
+        return $this->_result;
+    }
+
+    public function __construct($jsonStr){
+        $obj = json_decode($jsonStr);
+
+        $this->_result = new Image($obj->Result);
     }
 }
 
@@ -990,6 +1126,245 @@ class Album extends DecibelEntity{
     }
 }
 
+class LocationsByIdQueryObject extends QueryObject{
+    /* @var $_id string */
+    private $_id;
+
+    public function getId(){
+        return $this->_id;
+    }
+
+    public function setId($id) {
+        $this->_id = $id;
+    }
+
+    /* @var $_retrievalDepth LocationRetrievalDepth */
+    private $_retrievalDepth;
+
+    public function getRetrievalDepth(){
+        return $this->_retrievalDepth;
+    }
+
+    public function setRetrievalDepth($retrievalDepth) {
+        $this->_retrievalDepth = $retrievalDepth;
+    }
+
+    public function __construct($obj){
+        $this->_id = isset($obj->Id) ? $obj->Id : null;
+        $this->_retrievalDepth = isset($obj->RetrievalDepth) ? $obj->RetrievalDepth : null;
+    }
+}
+
+/*
+ * 
+    The <see cref="T:DecibelWebService.Location" />s returned by the query,
+    as well as result count and page information.
+    
+*/
+class LocationsQueryResult extends QueryResult{
+    /* @var $_results Location[] */
+    private $_results;
+
+    public function getResults(){
+        return $this->_results;
+    }
+
+    public function __construct($jsonStr){
+        $obj = json_decode($jsonStr);
+
+        $this->_results = [];
+        foreach($obj->Results as $item){
+            array_push($this->_results, new Location($item));
+        }
+        $this->setPageSize($obj->PageSize);
+        $this->setPageCount($obj->PageCount);
+        $this->setCount($obj->Count);
+        $this->setTotalCount($obj->TotalCount);
+    }
+}
+
+/*
+ * 
+    The <see cref="T:DecibelWebService.Location" /> returned by the query.
+    
+*/
+class LocationsByIdQueryResult extends ByIdQueryResult{
+    /* @var $_result Location */
+    private $_result;
+
+    public function getResult(){
+        return $this->_result;
+    }
+
+    public function __construct($jsonStr){
+        $obj = json_decode($jsonStr);
+
+        $this->_result = new Location($obj->Result);
+    }
+}
+
+/*
+ * 
+    The digital file tags for tracks on a particular disc.
+    
+*/
+class DiscTag extends DecibelEntity{
+    /* @var $_fileTags FileTag[] */
+    private $_fileTags;
+
+    public function getFileTags(){
+        return $this->_fileTags;
+    }
+
+    public function setFileTags($fileTags) {
+        $this->_fileTags = $fileTags;
+    }
+
+    public function __construct($obj){
+        if(isset($obj->FileTags)){
+            $this->_fileTags = [];
+            foreach($obj->FileTags as $item){
+                array_push($this->_fileTags, new FileTag($item));
+            }
+        }
+    }
+}
+
+class AlbumsByIdQueryObject extends QueryObject{
+    /* @var $_id string */
+    private $_id;
+
+    public function getId(){
+        return $this->_id;
+    }
+
+    public function setId($id) {
+        $this->_id = $id;
+    }
+
+    /* @var $_retrievalDepth AlbumRetrievalDepth */
+    private $_retrievalDepth;
+
+    public function getRetrievalDepth(){
+        return $this->_retrievalDepth;
+    }
+
+    public function setRetrievalDepth($retrievalDepth) {
+        $this->_retrievalDepth = $retrievalDepth;
+    }
+
+    public function __construct($obj){
+        $this->_id = isset($obj->Id) ? $obj->Id : null;
+        $this->_retrievalDepth = isset($obj->RetrievalDepth) ? $obj->RetrievalDepth : null;
+    }
+}
+
+/*
+ * 
+    The <see cref="T:DecibelWebService.Label" />s returned by the query,
+    as well as result count and page information.
+    
+*/
+class LabelsQueryResult extends QueryResult{
+    /* @var $_results Label[] */
+    private $_results;
+
+    public function getResults(){
+        return $this->_results;
+    }
+
+    public function __construct($jsonStr){
+        $obj = json_decode($jsonStr);
+
+        $this->_results = [];
+        foreach($obj->Results as $item){
+            array_push($this->_results, new Label($item));
+        }
+        $this->setPageSize($obj->PageSize);
+        $this->setPageCount($obj->PageCount);
+        $this->setCount($obj->Count);
+        $this->setTotalCount($obj->TotalCount);
+    }
+}
+
+/*
+ * 
+    The <see cref="T:DecibelWebService.Label" /> returned by the query.
+    
+*/
+class LabelsByIdQueryResult extends ByIdQueryResult{
+    /* @var $_result Label */
+    private $_result;
+
+    public function getResult(){
+        return $this->_result;
+    }
+
+    public function __construct($jsonStr){
+        $obj = json_decode($jsonStr);
+
+        $this->_result = new Label($obj->Result);
+    }
+}
+
+class Image extends DecibelEntity{
+    /* @var $_rawData byte[] */
+    private $_rawData;
+
+    public function getRawData(){
+        return $this->_rawData;
+    }
+
+    public function setRawData($rawData) {
+        $this->_rawData = $rawData;
+    }
+
+    /* @var $_size ImageSize */
+    private $_size;
+
+    public function getSize(){
+        return $this->_size;
+    }
+
+    public function setSize($size) {
+        $this->_size = $size;
+    }
+
+    /* @var $_contentType string */
+    private $_contentType;
+
+    public function getContentType(){
+        return $this->_contentType;
+    }
+
+    public function setContentType($contentType) {
+        $this->_contentType = $contentType;
+    }
+
+    /* @var $_id string */
+    private $_id;
+
+    public function getId(){
+        return $this->_id;
+    }
+
+    public function setId($id) {
+        $this->_id = $id;
+    }
+
+    public function __construct($obj){
+        if(isset($obj->RawData)){
+            $this->_rawData = [];
+            foreach($obj->RawData as $item){
+                array_push($this->_rawData, new byte($item));
+            }
+        }
+        $this->_size = isset($obj->Size) ? $obj->Size : null;
+        $this->_contentType = isset($obj->ContentType) ? $obj->ContentType : null;
+        $this->_id = isset($obj->Id) ? $obj->Id : null;
+    }
+}
+
 class ArtistsByIdQueryObject extends QueryObject{
     /* @var $_id string */
     private $_id;
@@ -1069,26 +1444,67 @@ class ArtistsByIdQueryResult extends ByIdQueryResult{
 
 /*
  * 
-    The digital file tags for tracks on a particular disc.
+    A record label
     
 */
-class DiscTag extends DecibelEntity{
-    /* @var $_fileTags FileTag[] */
-    private $_fileTags;
+class Label extends DecibelEntity{
+    /* @var $_id string */
+    private $_id;
 
-    public function getFileTags(){
-        return $this->_fileTags;
+    public function getId(){
+        return $this->_id;
     }
 
-    public function setFileTags($fileTags) {
-        $this->_fileTags = $fileTags;
+    public function setId($id) {
+        $this->_id = $id;
+    }
+
+    /* @var $_name string */
+    private $_name;
+
+    public function getName(){
+        return $this->_name;
+    }
+
+    public function setName($name) {
+        $this->_name = $name;
+    }
+
+    /* @var $_locations Location[] */
+    private $_locations;
+
+    public function getLocations(){
+        return $this->_locations;
+    }
+
+    public function setLocations($locations) {
+        $this->_locations = $locations;
+    }
+
+    /* @var $_identifiers LabelIdentifier[] */
+    private $_identifiers;
+
+    public function getIdentifiers(){
+        return $this->_identifiers;
+    }
+
+    public function setIdentifiers($identifiers) {
+        $this->_identifiers = $identifiers;
     }
 
     public function __construct($obj){
-        if(isset($obj->FileTags)){
-            $this->_fileTags = [];
-            foreach($obj->FileTags as $item){
-                array_push($this->_fileTags, new FileTag($item));
+        $this->_id = isset($obj->Id) ? $obj->Id : null;
+        $this->_name = isset($obj->Name) ? $obj->Name : null;
+        if(isset($obj->Locations)){
+            $this->_locations = [];
+            foreach($obj->Locations as $item){
+                array_push($this->_locations, new Location($item));
+            }
+        }
+        if(isset($obj->Identifiers)){
+            $this->_identifiers = [];
+            foreach($obj->Identifiers as $item){
+                array_push($this->_identifiers, new LabelIdentifier($item));
             }
         }
     }
@@ -1199,9 +1615,413 @@ class Location extends DecibelEntity{
         $this->_name = $name;
     }
 
+    /* @var $_latitude double */
+    private $_latitude;
+
+    public function getLatitude(){
+        return $this->_latitude;
+    }
+
+    public function setLatitude($latitude) {
+        $this->_latitude = $latitude;
+    }
+
+    /* @var $_longitude double */
+    private $_longitude;
+
+    public function getLongitude(){
+        return $this->_longitude;
+    }
+
+    public function setLongitude($longitude) {
+        $this->_longitude = $longitude;
+    }
+
+    /* @var $_category LocationCategory */
+    private $_category;
+
+    public function getCategory(){
+        return $this->_category;
+    }
+
+    public function setCategory($category) {
+        $this->_category = $category;
+    }
+
+    /* @var $_identifiers LocationIdentifier[] */
+    private $_identifiers;
+
+    public function getIdentifiers(){
+        return $this->_identifiers;
+    }
+
+    public function setIdentifiers($identifiers) {
+        $this->_identifiers = $identifiers;
+    }
+
+    /* @var $_parentLocations Location[] */
+    private $_parentLocations;
+
+    public function getParentLocations(){
+        return $this->_parentLocations;
+    }
+
+    public function setParentLocations($parentLocations) {
+        $this->_parentLocations = $parentLocations;
+    }
+
     public function __construct($obj){
         $this->_id = isset($obj->Id) ? $obj->Id : null;
         $this->_name = isset($obj->Name) ? $obj->Name : null;
+        $this->_latitude = isset($obj->Latitude) ? $obj->Latitude : null;
+        $this->_longitude = isset($obj->Longitude) ? $obj->Longitude : null;
+        $this->_category = isset($obj->Category) ? $obj->Category : null;
+        if(isset($obj->Identifiers)){
+            $this->_identifiers = [];
+            foreach($obj->Identifiers as $item){
+                array_push($this->_identifiers, new LocationIdentifier($item));
+            }
+        }
+        if(isset($obj->ParentLocations)){
+            $this->_parentLocations = [];
+            foreach($obj->ParentLocations as $item){
+                array_push($this->_parentLocations, new Location($item));
+            }
+        }
+    }
+}
+
+class LabelsQueryObject extends SearchQueryObject{
+    /* @var $_id string */
+    private $_id;
+
+    public function getId(){
+        return $this->_id;
+    }
+
+    public function setId($id) {
+        $this->_id = $id;
+    }
+
+    /* @var $_idType LabelIdType */
+    private $_idType;
+
+    public function getIdType(){
+        return $this->_idType;
+    }
+
+    public function setIdType($idType) {
+        $this->_idType = $idType;
+    }
+
+    /* @var $_orderingProperties OrderLabelsBy[] */
+    private $_orderingProperties;
+
+    public function getOrderingProperties(){
+        return $this->_orderingProperties;
+    }
+
+    public function setOrderingProperties($orderingProperties) {
+        $this->_orderingProperties = $orderingProperties;
+    }
+
+    /* @var $_retrievalDepth LabelRetrievalDepth */
+    private $_retrievalDepth;
+
+    public function getRetrievalDepth(){
+        return $this->_retrievalDepth;
+    }
+
+    public function setRetrievalDepth($retrievalDepth) {
+        $this->_retrievalDepth = $retrievalDepth;
+    }
+
+    public function __construct($obj){
+        $this->_id = isset($obj->Id) ? $obj->Id : null;
+        $this->_idType = isset($obj->IdType) ? $obj->IdType : null;
+        $this->_orderingProperties = isset($obj->OrderingProperties) ? $obj->OrderingProperties : null;
+        $this->_retrievalDepth = isset($obj->RetrievalDepth) ? $obj->RetrievalDepth : null;
+    }
+}
+
+/*
+ * 
+    Base class for search queries (ones that return more than one result
+    
+*/
+class SearchQueryObject extends QueryObject{
+    /* @var $_pageNumber int */
+    private $_pageNumber;
+
+    public function getPageNumber(){
+        return $this->_pageNumber;
+    }
+
+    public function setPageNumber($pageNumber) {
+        $this->_pageNumber = $pageNumber;
+    }
+
+    /* @var $_pageSize int */
+    private $_pageSize;
+
+    public function getPageSize(){
+        return $this->_pageSize;
+    }
+
+    public function setPageSize($pageSize) {
+        $this->_pageSize = $pageSize;
+    }
+
+    /* @var $_updatedSince long */
+    private $_updatedSince;
+
+    public function getUpdatedSince(){
+        return $this->_updatedSince;
+    }
+
+    public function setUpdatedSince($updatedSince) {
+        $this->_updatedSince = $updatedSince;
+    }
+
+    public function __construct($obj){
+        $this->_pageNumber = isset($obj->PageNumber) ? $obj->PageNumber : null;
+        $this->_pageSize = isset($obj->PageSize) ? $obj->PageSize : null;
+        $this->_updatedSince = isset($obj->UpdatedSince) ? $obj->UpdatedSince : null;
+    }
+}
+
+/*
+ * 
+    The <see cref="T:DecibelWebService.DiscTag" /> returned by the query.
+    
+*/
+class DiscTagsQueryResult extends QueryResult{
+    /* @var $_results DiscTag[] */
+    private $_results;
+
+    public function getResults(){
+        return $this->_results;
+    }
+
+    public function __construct($jsonStr){
+        $obj = json_decode($jsonStr);
+
+        $this->_results = [];
+        foreach($obj->Results as $item){
+            array_push($this->_results, new DiscTag($item));
+        }
+        $this->setPageSize($obj->PageSize);
+        $this->setPageCount($obj->PageCount);
+        $this->setCount($obj->Count);
+        $this->setTotalCount($obj->TotalCount);
+    }
+}
+
+/*
+ * 
+    A particular release of an album.
+    
+*/
+class Release extends DecibelEntity{
+    /* @var $_id string */
+    private $_id;
+
+    public function getId(){
+        return $this->_id;
+    }
+
+    public function setId($id) {
+        $this->_id = $id;
+    }
+
+    /* @var $_releaseDate string */
+    private $_releaseDate;
+
+    public function getReleaseDate(){
+        return $this->_releaseDate;
+    }
+
+    public function setReleaseDate($releaseDate) {
+        $this->_releaseDate = $releaseDate;
+    }
+
+    /* @var $_releaseRegionLiteral string */
+    private $_releaseRegionLiteral;
+
+    public function getReleaseRegionLiteral(){
+        return $this->_releaseRegionLiteral;
+    }
+
+    public function setReleaseRegionLiteral($releaseRegionLiteral) {
+        $this->_releaseRegionLiteral = $releaseRegionLiteral;
+    }
+
+    /* @var $_labelLiteral string */
+    private $_labelLiteral;
+
+    public function getLabelLiteral(){
+        return $this->_labelLiteral;
+    }
+
+    public function setLabelLiteral($labelLiteral) {
+        $this->_labelLiteral = $labelLiteral;
+    }
+
+    /* @var $_formatTypes string */
+    private $_formatTypes;
+
+    public function getFormatTypes(){
+        return $this->_formatTypes;
+    }
+
+    public function setFormatTypes($formatTypes) {
+        $this->_formatTypes = $formatTypes;
+    }
+
+    /* @var $_identifiers ReleaseIdentifier[] */
+    private $_identifiers;
+
+    public function getIdentifiers(){
+        return $this->_identifiers;
+    }
+
+    public function setIdentifiers($identifiers) {
+        $this->_identifiers = $identifiers;
+    }
+
+    /* @var $_locations Location[] */
+    private $_locations;
+
+    public function getLocations(){
+        return $this->_locations;
+    }
+
+    public function setLocations($locations) {
+        $this->_locations = $locations;
+    }
+
+    /* @var $_labels Label[] */
+    private $_labels;
+
+    public function getLabels(){
+        return $this->_labels;
+    }
+
+    public function setLabels($labels) {
+        $this->_labels = $labels;
+    }
+
+    public function __construct($obj){
+        $this->_id = isset($obj->Id) ? $obj->Id : null;
+        $this->_releaseDate = isset($obj->ReleaseDate) ? $obj->ReleaseDate : null;
+        $this->_releaseRegionLiteral = isset($obj->ReleaseRegionLiteral) ? $obj->ReleaseRegionLiteral : null;
+        $this->_labelLiteral = isset($obj->LabelLiteral) ? $obj->LabelLiteral : null;
+        $this->_formatTypes = isset($obj->FormatTypes) ? $obj->FormatTypes : null;
+        if(isset($obj->Identifiers)){
+            $this->_identifiers = [];
+            foreach($obj->Identifiers as $item){
+                array_push($this->_identifiers, new ReleaseIdentifier($item));
+            }
+        }
+        if(isset($obj->Locations)){
+            $this->_locations = [];
+            foreach($obj->Locations as $item){
+                array_push($this->_locations, new Location($item));
+            }
+        }
+        if(isset($obj->Labels)){
+            $this->_labels = [];
+            foreach($obj->Labels as $item){
+                array_push($this->_labels, new Label($item));
+            }
+        }
+    }
+}
+
+class LocationsQueryObject extends SearchQueryObject{
+    /* @var $_id string */
+    private $_id;
+
+    public function getId(){
+        return $this->_id;
+    }
+
+    public function setId($id) {
+        $this->_id = $id;
+    }
+
+    /* @var $_idType LocationIdType */
+    private $_idType;
+
+    public function getIdType(){
+        return $this->_idType;
+    }
+
+    public function setIdType($idType) {
+        $this->_idType = $idType;
+    }
+
+    /* @var $_orderingProperties OrderLocationsBy[] */
+    private $_orderingProperties;
+
+    public function getOrderingProperties(){
+        return $this->_orderingProperties;
+    }
+
+    public function setOrderingProperties($orderingProperties) {
+        $this->_orderingProperties = $orderingProperties;
+    }
+
+    /* @var $_retrievalDepth LocationRetrievalDepth */
+    private $_retrievalDepth;
+
+    public function getRetrievalDepth(){
+        return $this->_retrievalDepth;
+    }
+
+    public function setRetrievalDepth($retrievalDepth) {
+        $this->_retrievalDepth = $retrievalDepth;
+    }
+
+    public function __construct($obj){
+        $this->_id = isset($obj->Id) ? $obj->Id : null;
+        $this->_idType = isset($obj->IdType) ? $obj->IdType : null;
+        $this->_orderingProperties = isset($obj->OrderingProperties) ? $obj->OrderingProperties : null;
+        $this->_retrievalDepth = isset($obj->RetrievalDepth) ? $obj->RetrievalDepth : null;
+    }
+}
+
+/*
+ * 
+    An address which references a resource on the world wide web.
+    
+*/
+class WebAddress extends DecibelEntity{
+    /* @var $_address string */
+    private $_address;
+
+    public function getAddress(){
+        return $this->_address;
+    }
+
+    public function setAddress($address) {
+        $this->_address = $address;
+    }
+
+    /* @var $_website string */
+    private $_website;
+
+    public function getWebsite(){
+        return $this->_website;
+    }
+
+    public function setWebsite($website) {
+        $this->_website = $website;
+    }
+
+    public function __construct($obj){
+        $this->_address = isset($obj->Address) ? $obj->Address : null;
+        $this->_website = isset($obj->Website) ? $obj->Website : null;
     }
 }
 
@@ -1426,6 +2246,17 @@ class AlbumsQueryObject extends SearchQueryObject{
         $this->_retrievalDepth = $retrievalDepth;
     }
 
+    /* @var $_genres string[] */
+    private $_genres;
+
+    public function getGenres(){
+        return $this->_genres;
+    }
+
+    public function setGenres($genres) {
+        $this->_genres = $genres;
+    }
+
     public function __construct($obj){
         $this->_title = isset($obj->Title) ? $obj->Title : null;
         $this->_titleSearchType = isset($obj->TitleSearchType) ? $obj->TitleSearchType : null;
@@ -1477,164 +2308,49 @@ class AlbumsQueryObject extends SearchQueryObject{
         $this->_participantSearchType = isset($obj->ParticipantSearchType) ? $obj->ParticipantSearchType : null;
         $this->_participantIdType = isset($obj->ParticipantIdType) ? $obj->ParticipantIdType : null;
         $this->_retrievalDepth = isset($obj->RetrievalDepth) ? $obj->RetrievalDepth : null;
-    }
-}
-
-/*
- * 
-    Base class for search queries (ones that return more than one result
-    
-*/
-class SearchQueryObject extends QueryObject{
-    /* @var $_pageNumber int */
-    private $_pageNumber;
-
-    public function getPageNumber(){
-        return $this->_pageNumber;
-    }
-
-    public function setPageNumber($pageNumber) {
-        $this->_pageNumber = $pageNumber;
-    }
-
-    /* @var $_pageSize int */
-    private $_pageSize;
-
-    public function getPageSize(){
-        return $this->_pageSize;
-    }
-
-    public function setPageSize($pageSize) {
-        $this->_pageSize = $pageSize;
-    }
-
-    /* @var $_updatedSince long */
-    private $_updatedSince;
-
-    public function getUpdatedSince(){
-        return $this->_updatedSince;
-    }
-
-    public function setUpdatedSince($updatedSince) {
-        $this->_updatedSince = $updatedSince;
-    }
-
-    public function __construct($obj){
-        $this->_pageNumber = isset($obj->PageNumber) ? $obj->PageNumber : null;
-        $this->_pageSize = isset($obj->PageSize) ? $obj->PageSize : null;
-        $this->_updatedSince = isset($obj->UpdatedSince) ? $obj->UpdatedSince : null;
-    }
-}
-
-/*
- * 
-    The <see cref="T:DecibelWebService.DiscTag" /> returned by the query.
-    
-*/
-class DiscTagsQueryResult extends QueryResult{
-    /* @var $_results DiscTag[] */
-    private $_results;
-
-    public function getResults(){
-        return $this->_results;
-    }
-
-    public function __construct($jsonStr){
-        $obj = json_decode($jsonStr);
-
-        $this->_results = [];
-        foreach($obj->Results as $item){
-            array_push($this->_results, new DiscTag($item));
+        if(isset($obj->Genres)){
+            $this->_genres = [];
+            foreach($obj->Genres as $item){
+                array_push($this->_genres, new string($item));
+            }
         }
-        $this->setPageSize($obj->PageSize);
-        $this->setPageCount($obj->PageCount);
-        $this->setCount($obj->Count);
-        $this->setTotalCount($obj->TotalCount);
     }
 }
 
 /*
  * 
-    A particular release of an album.
+    Editorial text about a particular subject.
     
 */
-class Release extends DecibelEntity{
-    /* @var $_id string */
-    private $_id;
+class Annotation extends DecibelEntity{
+    /* @var $_text string */
+    private $_text;
 
-    public function getId(){
-        return $this->_id;
+    public function getText(){
+        return $this->_text;
     }
 
-    public function setId($id) {
-        $this->_id = $id;
+    public function setText($text) {
+        $this->_text = $text;
     }
 
-    /* @var $_releaseDate string */
-    private $_releaseDate;
+    /* @var $_references AnnotationReference[] */
+    private $_references;
 
-    public function getReleaseDate(){
-        return $this->_releaseDate;
+    public function getReferences(){
+        return $this->_references;
     }
 
-    public function setReleaseDate($releaseDate) {
-        $this->_releaseDate = $releaseDate;
-    }
-
-    /* @var $_releaseRegionLiteral string */
-    private $_releaseRegionLiteral;
-
-    public function getReleaseRegionLiteral(){
-        return $this->_releaseRegionLiteral;
-    }
-
-    public function setReleaseRegionLiteral($releaseRegionLiteral) {
-        $this->_releaseRegionLiteral = $releaseRegionLiteral;
-    }
-
-    /* @var $_labelLiteral string */
-    private $_labelLiteral;
-
-    public function getLabelLiteral(){
-        return $this->_labelLiteral;
-    }
-
-    public function setLabelLiteral($labelLiteral) {
-        $this->_labelLiteral = $labelLiteral;
-    }
-
-    /* @var $_formatTypes string */
-    private $_formatTypes;
-
-    public function getFormatTypes(){
-        return $this->_formatTypes;
-    }
-
-    public function setFormatTypes($formatTypes) {
-        $this->_formatTypes = $formatTypes;
-    }
-
-    /* @var $_identifiers ReleaseIdentifier[] */
-    private $_identifiers;
-
-    public function getIdentifiers(){
-        return $this->_identifiers;
-    }
-
-    public function setIdentifiers($identifiers) {
-        $this->_identifiers = $identifiers;
+    public function setReferences($references) {
+        $this->_references = $references;
     }
 
     public function __construct($obj){
-        $this->_id = isset($obj->Id) ? $obj->Id : null;
-        $this->_releaseDate = isset($obj->ReleaseDate) ? $obj->ReleaseDate : null;
-        $this->_releaseRegionLiteral = isset($obj->ReleaseRegionLiteral) ? $obj->ReleaseRegionLiteral : null;
-        $this->_labelLiteral = isset($obj->LabelLiteral) ? $obj->LabelLiteral : null;
-        $this->_formatTypes = isset($obj->FormatTypes) ? $obj->FormatTypes : null;
-        if(isset($obj->Identifiers)){
-            $this->_identifiers = [];
-            foreach($obj->Identifiers as $item){
-                array_push($this->_identifiers, new ReleaseIdentifier($item));
+        $this->_text = isset($obj->Text) ? $obj->Text : null;
+        if(isset($obj->References)){
+            $this->_references = [];
+            foreach($obj->References as $item){
+                array_push($this->_references, new AnnotationReference($item));
             }
         }
     }
@@ -1693,37 +2409,56 @@ class DiscTagsQueryObject extends SearchQueryObject{
     }
 }
 
-/*
- * 
-    An address which references a resource on the world wide web.
-    
-*/
-class WebAddress extends DecibelEntity{
-    /* @var $_address string */
-    private $_address;
+class AnnotationReference extends DecibelEntity{
+    /* @var $_referenceNumber int */
+    private $_referenceNumber;
 
-    public function getAddress(){
-        return $this->_address;
+    public function getReferenceNumber(){
+        return $this->_referenceNumber;
     }
 
-    public function setAddress($address) {
-        $this->_address = $address;
+    public function setReferenceNumber($referenceNumber) {
+        $this->_referenceNumber = $referenceNumber;
     }
 
-    /* @var $_website string */
-    private $_website;
+    /* @var $_displayText string */
+    private $_displayText;
 
-    public function getWebsite(){
-        return $this->_website;
+    public function getDisplayText(){
+        return $this->_displayText;
     }
 
-    public function setWebsite($website) {
-        $this->_website = $website;
+    public function setDisplayText($displayText) {
+        $this->_displayText = $displayText;
+    }
+
+    /* @var $_decibelId string */
+    private $_decibelId;
+
+    public function getDecibelId(){
+        return $this->_decibelId;
+    }
+
+    public function setDecibelId($decibelId) {
+        $this->_decibelId = $decibelId;
+    }
+
+    /* @var $_decibelType DecibelType */
+    private $_decibelType;
+
+    public function getDecibelType(){
+        return $this->_decibelType;
+    }
+
+    public function setDecibelType($decibelType) {
+        $this->_decibelType = $decibelType;
     }
 
     public function __construct($obj){
-        $this->_address = isset($obj->Address) ? $obj->Address : null;
-        $this->_website = isset($obj->Website) ? $obj->Website : null;
+        $this->_referenceNumber = isset($obj->ReferenceNumber) ? $obj->ReferenceNumber : null;
+        $this->_displayText = isset($obj->DisplayText) ? $obj->DisplayText : null;
+        $this->_decibelId = isset($obj->DecibelId) ? $obj->DecibelId : null;
+        $this->_decibelType = isset($obj->DecibelType) ? $obj->DecibelType : null;
     }
 }
 
@@ -1794,6 +2529,28 @@ class ArtistsQueryObject extends SearchQueryObject{
         $this->_deathDate = $deathDate;
     }
 
+    /* @var $_birthPlaceName string */
+    private $_birthPlaceName;
+
+    public function getBirthPlaceName(){
+        return $this->_birthPlaceName;
+    }
+
+    public function setBirthPlaceName($birthPlaceName) {
+        $this->_birthPlaceName = $birthPlaceName;
+    }
+
+    /* @var $_deathPlaceName string */
+    private $_deathPlaceName;
+
+    public function getDeathPlaceName(){
+        return $this->_deathPlaceName;
+    }
+
+    public function setDeathPlaceName($deathPlaceName) {
+        $this->_deathPlaceName = $deathPlaceName;
+    }
+
     /* @var $_gender Gender */
     private $_gender;
 
@@ -1805,15 +2562,15 @@ class ArtistsQueryObject extends SearchQueryObject{
         $this->_gender = $gender;
     }
 
-    /* @var $_genre string */
-    private $_genre;
+    /* @var $_genres string[] */
+    private $_genres;
 
-    public function getGenre(){
-        return $this->_genre;
+    public function getGenres(){
+        return $this->_genres;
     }
 
-    public function setGenre($genre) {
-        $this->_genre = $genre;
+    public function setGenres($genres) {
+        $this->_genres = $genres;
     }
 
     /* @var $_retrievalDepth ArtistRetrievalDepth */
@@ -1845,331 +2602,17 @@ class ArtistsQueryObject extends SearchQueryObject{
         $this->_idType = isset($obj->IdType) ? $obj->IdType : null;
         $this->_birthDate = isset($obj->BirthDate) ? $obj->BirthDate : null;
         $this->_deathDate = isset($obj->DeathDate) ? $obj->DeathDate : null;
+        $this->_birthPlaceName = isset($obj->BirthPlaceName) ? $obj->BirthPlaceName : null;
+        $this->_deathPlaceName = isset($obj->DeathPlaceName) ? $obj->DeathPlaceName : null;
         $this->_gender = isset($obj->Gender) ? $obj->Gender : null;
-        $this->_genre = isset($obj->Genre) ? $obj->Genre : null;
+        if(isset($obj->Genres)){
+            $this->_genres = [];
+            foreach($obj->Genres as $item){
+                array_push($this->_genres, new string($item));
+            }
+        }
         $this->_retrievalDepth = isset($obj->RetrievalDepth) ? $obj->RetrievalDepth : null;
         $this->_orderingProperties = isset($obj->OrderingProperties) ? $obj->OrderingProperties : null;
-    }
-}
-
-/*
- * 
-    Editorial text about a particular subject.
-    
-*/
-class Annotation extends DecibelEntity{
-    /* @var $_text string */
-    private $_text;
-
-    public function getText(){
-        return $this->_text;
-    }
-
-    public function setText($text) {
-        $this->_text = $text;
-    }
-
-    public function __construct($obj){
-        $this->_text = isset($obj->Text) ? $obj->Text : null;
-    }
-}
-
-class RecordingsQueryObject extends SearchQueryObject{
-    /* @var $_title string */
-    private $_title;
-
-    public function getTitle(){
-        return $this->_title;
-    }
-
-    public function setTitle($title) {
-        $this->_title = $title;
-    }
-
-    /* @var $_titleSearchType RecordingSearchType */
-    private $_titleSearchType;
-
-    public function getTitleSearchType(){
-        return $this->_titleSearchType;
-    }
-
-    public function setTitleSearchType($titleSearchType) {
-        $this->_titleSearchType = $titleSearchType;
-    }
-
-    /* @var $_id string */
-    private $_id;
-
-    public function getId(){
-        return $this->_id;
-    }
-
-    public function setId($id) {
-        $this->_id = $id;
-    }
-
-    /* @var $_idType RecordingIdType */
-    private $_idType;
-
-    public function getIdType(){
-        return $this->_idType;
-    }
-
-    public function setIdType($idType) {
-        $this->_idType = $idType;
-    }
-
-    /* @var $_dateProduced string */
-    private $_dateProduced;
-
-    public function getDateProduced(){
-        return $this->_dateProduced;
-    }
-
-    public function setDateProduced($dateProduced) {
-        $this->_dateProduced = $dateProduced;
-    }
-
-    /* @var $_composers string[] */
-    private $_composers;
-
-    public function getComposers(){
-        return $this->_composers;
-    }
-
-    public function setComposers($composers) {
-        $this->_composers = $composers;
-    }
-
-    /* @var $_composerIds string[] */
-    private $_composerIds;
-
-    public function getComposerIds(){
-        return $this->_composerIds;
-    }
-
-    public function setComposerIds($composerIds) {
-        $this->_composerIds = $composerIds;
-    }
-
-    /* @var $_participants string[] */
-    private $_participants;
-
-    public function getParticipants(){
-        return $this->_participants;
-    }
-
-    public function setParticipants($participants) {
-        $this->_participants = $participants;
-    }
-
-    /* @var $_participantIds string[] */
-    private $_participantIds;
-
-    public function getParticipantIds(){
-        return $this->_participantIds;
-    }
-
-    public function setParticipantIds($participantIds) {
-        $this->_participantIds = $participantIds;
-    }
-
-    /* @var $_artists string[] */
-    private $_artists;
-
-    public function getArtists(){
-        return $this->_artists;
-    }
-
-    public function setArtists($artists) {
-        $this->_artists = $artists;
-    }
-
-    /* @var $_artistIds string[] */
-    private $_artistIds;
-
-    public function getArtistIds(){
-        return $this->_artistIds;
-    }
-
-    public function setArtistIds($artistIds) {
-        $this->_artistIds = $artistIds;
-    }
-
-    /* @var $_isLive bool */
-    private $_isLive;
-
-    public function getIsLive(){
-        return $this->_isLive;
-    }
-
-    public function setIsLive($isLive) {
-        $this->_isLive = $isLive;
-    }
-
-    /* @var $_maxSeconds double */
-    private $_maxSeconds;
-
-    public function getMaxSeconds(){
-        return $this->_maxSeconds;
-    }
-
-    public function setMaxSeconds($maxSeconds) {
-        $this->_maxSeconds = $maxSeconds;
-    }
-
-    /* @var $_minSeconds double */
-    private $_minSeconds;
-
-    public function getMinSeconds(){
-        return $this->_minSeconds;
-    }
-
-    public function setMinSeconds($minSeconds) {
-        $this->_minSeconds = $minSeconds;
-    }
-
-    /* @var $_orderingProperties OrderRecordingsBy[] */
-    private $_orderingProperties;
-
-    public function getOrderingProperties(){
-        return $this->_orderingProperties;
-    }
-
-    public function setOrderingProperties($orderingProperties) {
-        $this->_orderingProperties = $orderingProperties;
-    }
-
-    /* @var $_artistSearchType ArtistSearchType */
-    private $_artistSearchType;
-
-    public function getArtistSearchType(){
-        return $this->_artistSearchType;
-    }
-
-    public function setArtistSearchType($artistSearchType) {
-        $this->_artistSearchType = $artistSearchType;
-    }
-
-    /* @var $_artistIdType ArtistIdType */
-    private $_artistIdType;
-
-    public function getArtistIdType(){
-        return $this->_artistIdType;
-    }
-
-    public function setArtistIdType($artistIdType) {
-        $this->_artistIdType = $artistIdType;
-    }
-
-    /* @var $_composerSearchType ArtistSearchType */
-    private $_composerSearchType;
-
-    public function getComposerSearchType(){
-        return $this->_composerSearchType;
-    }
-
-    public function setComposerSearchType($composerSearchType) {
-        $this->_composerSearchType = $composerSearchType;
-    }
-
-    /* @var $_composerIdType ArtistIdType */
-    private $_composerIdType;
-
-    public function getComposerIdType(){
-        return $this->_composerIdType;
-    }
-
-    public function setComposerIdType($composerIdType) {
-        $this->_composerIdType = $composerIdType;
-    }
-
-    /* @var $_participantSearchType ArtistSearchType */
-    private $_participantSearchType;
-
-    public function getParticipantSearchType(){
-        return $this->_participantSearchType;
-    }
-
-    public function setParticipantSearchType($participantSearchType) {
-        $this->_participantSearchType = $participantSearchType;
-    }
-
-    /* @var $_participantIdType ArtistIdType */
-    private $_participantIdType;
-
-    public function getParticipantIdType(){
-        return $this->_participantIdType;
-    }
-
-    public function setParticipantIdType($participantIdType) {
-        $this->_participantIdType = $participantIdType;
-    }
-
-    /* @var $_retrievalDepth RecordingRetrievalDepth */
-    private $_retrievalDepth;
-
-    public function getRetrievalDepth(){
-        return $this->_retrievalDepth;
-    }
-
-    public function setRetrievalDepth($retrievalDepth) {
-        $this->_retrievalDepth = $retrievalDepth;
-    }
-
-    public function __construct($obj){
-        $this->_title = isset($obj->Title) ? $obj->Title : null;
-        $this->_titleSearchType = isset($obj->TitleSearchType) ? $obj->TitleSearchType : null;
-        $this->_id = isset($obj->Id) ? $obj->Id : null;
-        $this->_idType = isset($obj->IdType) ? $obj->IdType : null;
-        $this->_dateProduced = isset($obj->DateProduced) ? $obj->DateProduced : null;
-        if(isset($obj->Composers)){
-            $this->_composers = [];
-            foreach($obj->Composers as $item){
-                array_push($this->_composers, new string($item));
-            }
-        }
-        if(isset($obj->ComposerIds)){
-            $this->_composerIds = [];
-            foreach($obj->ComposerIds as $item){
-                array_push($this->_composerIds, new string($item));
-            }
-        }
-        if(isset($obj->Participants)){
-            $this->_participants = [];
-            foreach($obj->Participants as $item){
-                array_push($this->_participants, new string($item));
-            }
-        }
-        if(isset($obj->ParticipantIds)){
-            $this->_participantIds = [];
-            foreach($obj->ParticipantIds as $item){
-                array_push($this->_participantIds, new string($item));
-            }
-        }
-        if(isset($obj->Artists)){
-            $this->_artists = [];
-            foreach($obj->Artists as $item){
-                array_push($this->_artists, new string($item));
-            }
-        }
-        if(isset($obj->ArtistIds)){
-            $this->_artistIds = [];
-            foreach($obj->ArtistIds as $item){
-                array_push($this->_artistIds, new string($item));
-            }
-        }
-        $this->_isLive = isset($obj->IsLive) ? $obj->IsLive : null;
-        $this->_maxSeconds = isset($obj->MaxSeconds) ? $obj->MaxSeconds : null;
-        $this->_minSeconds = isset($obj->MinSeconds) ? $obj->MinSeconds : null;
-        $this->_orderingProperties = isset($obj->OrderingProperties) ? $obj->OrderingProperties : null;
-        $this->_artistSearchType = isset($obj->ArtistSearchType) ? $obj->ArtistSearchType : null;
-        $this->_artistIdType = isset($obj->ArtistIdType) ? $obj->ArtistIdType : null;
-        $this->_composerSearchType = isset($obj->ComposerSearchType) ? $obj->ComposerSearchType : null;
-        $this->_composerIdType = isset($obj->ComposerIdType) ? $obj->ComposerIdType : null;
-        $this->_participantSearchType = isset($obj->ParticipantSearchType) ? $obj->ParticipantSearchType : null;
-        $this->_participantIdType = isset($obj->ParticipantIdType) ? $obj->ParticipantIdType : null;
-        $this->_retrievalDepth = isset($obj->RetrievalDepth) ? $obj->RetrievalDepth : null;
     }
 }
 
@@ -2531,6 +2974,334 @@ class FileTag extends DecibelEntity{
     }
 }
 
+class RecordingsQueryObject extends SearchQueryObject{
+    /* @var $_title string */
+    private $_title;
+
+    public function getTitle(){
+        return $this->_title;
+    }
+
+    public function setTitle($title) {
+        $this->_title = $title;
+    }
+
+    /* @var $_titleSearchType RecordingSearchType */
+    private $_titleSearchType;
+
+    public function getTitleSearchType(){
+        return $this->_titleSearchType;
+    }
+
+    public function setTitleSearchType($titleSearchType) {
+        $this->_titleSearchType = $titleSearchType;
+    }
+
+    /* @var $_id string */
+    private $_id;
+
+    public function getId(){
+        return $this->_id;
+    }
+
+    public function setId($id) {
+        $this->_id = $id;
+    }
+
+    /* @var $_idType RecordingIdType */
+    private $_idType;
+
+    public function getIdType(){
+        return $this->_idType;
+    }
+
+    public function setIdType($idType) {
+        $this->_idType = $idType;
+    }
+
+    /* @var $_dateProduced string */
+    private $_dateProduced;
+
+    public function getDateProduced(){
+        return $this->_dateProduced;
+    }
+
+    public function setDateProduced($dateProduced) {
+        $this->_dateProduced = $dateProduced;
+    }
+
+    /* @var $_placeProducedName string */
+    private $_placeProducedName;
+
+    public function getPlaceProducedName(){
+        return $this->_placeProducedName;
+    }
+
+    public function setPlaceProducedName($placeProducedName) {
+        $this->_placeProducedName = $placeProducedName;
+    }
+
+    /* @var $_composers string[] */
+    private $_composers;
+
+    public function getComposers(){
+        return $this->_composers;
+    }
+
+    public function setComposers($composers) {
+        $this->_composers = $composers;
+    }
+
+    /* @var $_composerIds string[] */
+    private $_composerIds;
+
+    public function getComposerIds(){
+        return $this->_composerIds;
+    }
+
+    public function setComposerIds($composerIds) {
+        $this->_composerIds = $composerIds;
+    }
+
+    /* @var $_participants string[] */
+    private $_participants;
+
+    public function getParticipants(){
+        return $this->_participants;
+    }
+
+    public function setParticipants($participants) {
+        $this->_participants = $participants;
+    }
+
+    /* @var $_participantIds string[] */
+    private $_participantIds;
+
+    public function getParticipantIds(){
+        return $this->_participantIds;
+    }
+
+    public function setParticipantIds($participantIds) {
+        $this->_participantIds = $participantIds;
+    }
+
+    /* @var $_artists string[] */
+    private $_artists;
+
+    public function getArtists(){
+        return $this->_artists;
+    }
+
+    public function setArtists($artists) {
+        $this->_artists = $artists;
+    }
+
+    /* @var $_artistIds string[] */
+    private $_artistIds;
+
+    public function getArtistIds(){
+        return $this->_artistIds;
+    }
+
+    public function setArtistIds($artistIds) {
+        $this->_artistIds = $artistIds;
+    }
+
+    /* @var $_genres string[] */
+    private $_genres;
+
+    public function getGenres(){
+        return $this->_genres;
+    }
+
+    public function setGenres($genres) {
+        $this->_genres = $genres;
+    }
+
+    /* @var $_isLive bool */
+    private $_isLive;
+
+    public function getIsLive(){
+        return $this->_isLive;
+    }
+
+    public function setIsLive($isLive) {
+        $this->_isLive = $isLive;
+    }
+
+    /* @var $_maxSeconds double */
+    private $_maxSeconds;
+
+    public function getMaxSeconds(){
+        return $this->_maxSeconds;
+    }
+
+    public function setMaxSeconds($maxSeconds) {
+        $this->_maxSeconds = $maxSeconds;
+    }
+
+    /* @var $_minSeconds double */
+    private $_minSeconds;
+
+    public function getMinSeconds(){
+        return $this->_minSeconds;
+    }
+
+    public function setMinSeconds($minSeconds) {
+        $this->_minSeconds = $minSeconds;
+    }
+
+    /* @var $_orderingProperties OrderRecordingsBy[] */
+    private $_orderingProperties;
+
+    public function getOrderingProperties(){
+        return $this->_orderingProperties;
+    }
+
+    public function setOrderingProperties($orderingProperties) {
+        $this->_orderingProperties = $orderingProperties;
+    }
+
+    /* @var $_artistSearchType ArtistSearchType */
+    private $_artistSearchType;
+
+    public function getArtistSearchType(){
+        return $this->_artistSearchType;
+    }
+
+    public function setArtistSearchType($artistSearchType) {
+        $this->_artistSearchType = $artistSearchType;
+    }
+
+    /* @var $_artistIdType ArtistIdType */
+    private $_artistIdType;
+
+    public function getArtistIdType(){
+        return $this->_artistIdType;
+    }
+
+    public function setArtistIdType($artistIdType) {
+        $this->_artistIdType = $artistIdType;
+    }
+
+    /* @var $_composerSearchType ArtistSearchType */
+    private $_composerSearchType;
+
+    public function getComposerSearchType(){
+        return $this->_composerSearchType;
+    }
+
+    public function setComposerSearchType($composerSearchType) {
+        $this->_composerSearchType = $composerSearchType;
+    }
+
+    /* @var $_composerIdType ArtistIdType */
+    private $_composerIdType;
+
+    public function getComposerIdType(){
+        return $this->_composerIdType;
+    }
+
+    public function setComposerIdType($composerIdType) {
+        $this->_composerIdType = $composerIdType;
+    }
+
+    /* @var $_participantSearchType ArtistSearchType */
+    private $_participantSearchType;
+
+    public function getParticipantSearchType(){
+        return $this->_participantSearchType;
+    }
+
+    public function setParticipantSearchType($participantSearchType) {
+        $this->_participantSearchType = $participantSearchType;
+    }
+
+    /* @var $_participantIdType ArtistIdType */
+    private $_participantIdType;
+
+    public function getParticipantIdType(){
+        return $this->_participantIdType;
+    }
+
+    public function setParticipantIdType($participantIdType) {
+        $this->_participantIdType = $participantIdType;
+    }
+
+    /* @var $_retrievalDepth RecordingRetrievalDepth */
+    private $_retrievalDepth;
+
+    public function getRetrievalDepth(){
+        return $this->_retrievalDepth;
+    }
+
+    public function setRetrievalDepth($retrievalDepth) {
+        $this->_retrievalDepth = $retrievalDepth;
+    }
+
+    public function __construct($obj){
+        $this->_title = isset($obj->Title) ? $obj->Title : null;
+        $this->_titleSearchType = isset($obj->TitleSearchType) ? $obj->TitleSearchType : null;
+        $this->_id = isset($obj->Id) ? $obj->Id : null;
+        $this->_idType = isset($obj->IdType) ? $obj->IdType : null;
+        $this->_dateProduced = isset($obj->DateProduced) ? $obj->DateProduced : null;
+        $this->_placeProducedName = isset($obj->PlaceProducedName) ? $obj->PlaceProducedName : null;
+        if(isset($obj->Composers)){
+            $this->_composers = [];
+            foreach($obj->Composers as $item){
+                array_push($this->_composers, new string($item));
+            }
+        }
+        if(isset($obj->ComposerIds)){
+            $this->_composerIds = [];
+            foreach($obj->ComposerIds as $item){
+                array_push($this->_composerIds, new string($item));
+            }
+        }
+        if(isset($obj->Participants)){
+            $this->_participants = [];
+            foreach($obj->Participants as $item){
+                array_push($this->_participants, new string($item));
+            }
+        }
+        if(isset($obj->ParticipantIds)){
+            $this->_participantIds = [];
+            foreach($obj->ParticipantIds as $item){
+                array_push($this->_participantIds, new string($item));
+            }
+        }
+        if(isset($obj->Artists)){
+            $this->_artists = [];
+            foreach($obj->Artists as $item){
+                array_push($this->_artists, new string($item));
+            }
+        }
+        if(isset($obj->ArtistIds)){
+            $this->_artistIds = [];
+            foreach($obj->ArtistIds as $item){
+                array_push($this->_artistIds, new string($item));
+            }
+        }
+        if(isset($obj->Genres)){
+            $this->_genres = [];
+            foreach($obj->Genres as $item){
+                array_push($this->_genres, new string($item));
+            }
+        }
+        $this->_isLive = isset($obj->IsLive) ? $obj->IsLive : null;
+        $this->_maxSeconds = isset($obj->MaxSeconds) ? $obj->MaxSeconds : null;
+        $this->_minSeconds = isset($obj->MinSeconds) ? $obj->MinSeconds : null;
+        $this->_orderingProperties = isset($obj->OrderingProperties) ? $obj->OrderingProperties : null;
+        $this->_artistSearchType = isset($obj->ArtistSearchType) ? $obj->ArtistSearchType : null;
+        $this->_artistIdType = isset($obj->ArtistIdType) ? $obj->ArtistIdType : null;
+        $this->_composerSearchType = isset($obj->ComposerSearchType) ? $obj->ComposerSearchType : null;
+        $this->_composerIdType = isset($obj->ComposerIdType) ? $obj->ComposerIdType : null;
+        $this->_participantSearchType = isset($obj->ParticipantSearchType) ? $obj->ParticipantSearchType : null;
+        $this->_participantIdType = isset($obj->ParticipantIdType) ? $obj->ParticipantIdType : null;
+        $this->_retrievalDepth = isset($obj->RetrievalDepth) ? $obj->RetrievalDepth : null;
+    }
+}
+
 /*
  * 
     A code which identifies a particular entity.
@@ -2577,20 +3348,15 @@ class Identifier extends DecibelEntity{
     }
 }
 
-/*
- * 
-    A code which identifies an <see cref="T:DecibelWebService.Album" />.
-    
-*/
-class AlbumIdentifier extends Identifier{
+class LabelIdentifier extends Identifier{
 }
 
 /*
  * 
-    A code which identifies an <see cref="T:DecibelWebService.Artist" />.
+    A code which identifies an <see cref="T:DecibelWebService.Location" />.
     
 */
-class ArtistIdentifier extends Identifier{
+class LocationIdentifier extends Identifier{
 }
 
 /*
@@ -2921,10 +3687,10 @@ class Artist extends DecibelEntity{
 
 /*
  * 
-    A code which identifies a <see cref="T:DecibelWebService.Recording" />.
+    A code which identifies an <see cref="T:DecibelWebService.Album" />.
     
 */
-class RecordingIdentifier extends Identifier{
+class AlbumIdentifier extends Identifier{
 }
 
 /*
@@ -3009,10 +3775,10 @@ class Participation extends DecibelEntity{
 
 /*
  * 
-    A code which identifies a <see cref="T:DecibelWebService.Release" />.
+    A code which identifies an <see cref="T:DecibelWebService.Artist" />.
     
 */
-class ReleaseIdentifier extends Identifier{
+class ArtistIdentifier extends Identifier{
 }
 
 /*
@@ -3100,6 +3866,14 @@ class ProductionEvent extends DecibelEntity{
             }
         }
     }
+}
+
+/*
+ * 
+    A code which identifies a <see cref="T:DecibelWebService.Recording" />.
+    
+*/
+class RecordingIdentifier extends Identifier{
 }
 
 /*
@@ -3422,6 +4196,14 @@ class Recording extends DecibelEntity{
     
 */
 class Genre extends Tag{
+}
+
+/*
+ * 
+    A code which identifies a <see cref="T:DecibelWebService.Release" />.
+    
+*/
+class ReleaseIdentifier extends Identifier{
 }
 
 /*

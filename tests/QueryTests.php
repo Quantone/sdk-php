@@ -15,7 +15,22 @@ class QueryTests extends \PHPUnit_Framework_TestCase {
     private $_decibel;
 
     protected function setUp(){
-        // $this->_decibel = new Decibel("{YOUR_APP_ID}", "{YOUR_APP_KEY}");
+        // $this->_decibel = new Decibel("5589c9d1", "4154f53630c5cffd106cbe3ba0bd1eff");
+    }
+
+    public function testImagesByIdQuery(){
+        // Arrange
+        $qo = new \DecibelSDK\ImagesByIdQuery();
+        $qo->setId("5abb0387-9440-4273-aa20-bff159a89205");
+
+        // Act
+        $decibel = new DecibelSDK\Decibel("5589c9d1", "4154f53630c5cffd106cbe3ba0bd1eff");
+        $qr = $decibel->executeImagesByIdQuery($qo);
+        $result = $qr->getResult();
+
+        // Assert
+        $this->assertEquals("5abb0387-9440-4273-aa20-bff159a89205", $result->getId());
+        $this->assertEquals(\DecibelSDK\ImageSize::STANDARD, $result->getSize());
     }
 
     public function testAlbumsQuery(){
@@ -30,7 +45,7 @@ class QueryTests extends \PHPUnit_Framework_TestCase {
         $qo->setRecordings(array("Go Your Own Way"));
 
         // Act
-        $decibel = new DecibelSDK\Decibel("{YOUR_APP_ID}", "{YOUR_APP_KEY}");
+        $decibel = new DecibelSDK\Decibel("5589c9d1", "4154f53630c5cffd106cbe3ba0bd1eff");
         $qr = $decibel->executeAlbumsQuery($qo);
         $result = $qr->getResults()[0];
 
@@ -73,7 +88,7 @@ class QueryTests extends \PHPUnit_Framework_TestCase {
         $qo->setDepth(array(\DecibelSDK\AlbumRetrievalDepth::ARTIST_DETAILS));
 
         // Act
-        $decibel = new DecibelSDK\Decibel("{YOUR_APP_ID}", "{YOUR_APP_KEY}");
+        $decibel = new DecibelSDK\Decibel("5589c9d1", "4154f53630c5cffd106cbe3ba0bd1eff");
         $qr = $decibel->executeAlbumsByIdQuery($qo);
         $result = $qr->getResult();
 
@@ -82,6 +97,77 @@ class QueryTests extends \PHPUnit_Framework_TestCase {
         $this->assertEquals("Fleetwood Mac", $result->getArtistsLiteral());
         $this->assertEquals("Rumours", $result->getTitle());
         $this->assertEquals("1977", $result->getOriginalReleaseDate());
+    }
+
+    public function testLabelsByIdQuery(){
+        // Arrange
+        $qo = new \DecibelSDK\LabelsByIdQuery();
+        $qo->setId("9a0d3e1e-b75e-11e4-bec6-3085a9494443");
+
+        // Act
+        $decibel = new DecibelSDK\Decibel("5589c9d1", "4154f53630c5cffd106cbe3ba0bd1eff");
+        $qr = $decibel->executeLabelsByIdQuery($qo);
+        $result = $qr->getResult();
+
+        // Assert
+        $this->assertEquals("9a0d3e1e-b75e-11e4-bec6-3085a9494443", $result->getId());
+        $this->assertEquals("TestRecordLabel", $result->getName());
+    }
+
+    public function testLabelsQuery(){
+        // Arrange
+        $qo = new \DecibelSDK\LabelsQuery();
+        $qo->setId("9a0d3e1e-b75e-11e4-bec6-3085a9494443");
+
+        // Act
+        $decibel = new DecibelSDK\Decibel("5589c9d1", "4154f53630c5cffd106cbe3ba0bd1eff");
+        $qr = $decibel->executeLabelsQuery($qo);
+        $result = $qr->getResults()[0];
+
+        // Assert
+        $this->assertEquals("9a0d3e1e-b75e-11e4-bec6-3085a9494443", $result->getId());
+        $this->assertEquals("TestRecordLabel", $result->getName());
+    }
+
+    public function testLocationsByIdQuery(){
+        // Arrange
+        $qo = new \DecibelSDK\LocationsByIdQuery();
+        $qo->setId("ac05eb0b-0bef-426e-9d9c-8e8562ba57bc");
+        $qo->setDepth(array(\DecibelSDK\LocationRetrievalDepth::IDENTIFIERS,\DecibelSDK\LocationRetrievalDepth::PARENT_LOCATIONS));
+
+        // Act
+        $decibel = new DecibelSDK\Decibel("5589c9d1", "4154f53630c5cffd106cbe3ba0bd1eff");
+        $qr = $decibel->executeLocationsByIdQuery($qo);
+        $result = $qr->getResult();
+
+        // Assert
+        $this->assertEquals("ac05eb0b-0bef-426e-9d9c-8e8562ba57bc", $result->getId());
+        $this->assertEquals("Bottom Location", $result->getName());
+    }
+
+    public function testLocationsQuery(){
+        // Arrange
+        $qo = new \DecibelSDK\LocationsQuery();
+        $qo->setId("ac05eb0b-0bef-426e-9d9c-8e8562ba57bc");
+        $qo->setDepth(array(\DecibelSDK\LocationRetrievalDepth::IDENTIFIERS,\DecibelSDK\LocationRetrievalDepth::PARENT_LOCATIONS));
+
+        // Act
+        $decibel = new DecibelSDK\Decibel("5589c9d1", "4154f53630c5cffd106cbe3ba0bd1eff");
+        $qr = $decibel->executeLocationsQuery($qo);
+        $result = $qr->getResults()[0];
+
+        // Assert
+        $this->assertEquals("ac05eb0b-0bef-426e-9d9c-8e8562ba57bc", $result->getId());
+
+        $identifiers = $result->getIdentifiers()[0];
+        $this->assertEquals(\DecibelSDK\LocationIdType::GEO_NAMES, $identifiers->getIdentifierType());
+        $this->assertEquals("102", $identifiers->getValue());
+
+        $parentLocations = $result->getParentLocations()[0];
+        $this->assertEquals("c6f42e79-32f5-4b70-85b6-54c9eae655ad", $parentLocations->getId());
+        $this->assertEquals("Middle Location", $parentLocations->getName());
+        $this->assertEquals("4ed08017-989c-406d-a865-7c65789c8f25", $parentLocations->getParentLocations.First().Id());
+        $this->assertEquals("Top Location", $parentLocations->getParentLocations.First().Name());
     }
 
     public function testRecordingsQuery(){
@@ -96,7 +182,7 @@ class QueryTests extends \PHPUnit_Framework_TestCase {
         $qo->setParticipants(array("Lindsey Buckingham"));
 
         // Act
-        $decibel = new DecibelSDK\Decibel("{YOUR_APP_ID}", "{YOUR_APP_KEY}");
+        $decibel = new DecibelSDK\Decibel("5589c9d1", "4154f53630c5cffd106cbe3ba0bd1eff");
         $qr = $decibel->executeRecordingsQuery($qo);
         $result = $qr->getResults()[0];
 
@@ -127,13 +213,35 @@ class QueryTests extends \PHPUnit_Framework_TestCase {
         $qo->setDepth(array(\DecibelSDK\RecordingRetrievalDepth::IDENTIFIERS));
 
         // Act
-        $decibel = new DecibelSDK\Decibel("{YOUR_APP_ID}", "{YOUR_APP_KEY}");
+        $decibel = new DecibelSDK\Decibel("5589c9d1", "4154f53630c5cffd106cbe3ba0bd1eff");
         $qr = $decibel->executeRecordingsByIdQuery($qo);
         $result = $qr->getResult();
 
         // Assert
         $this->assertEquals("f0be5d06-bf74-11e3-be9b-ac220b82800d", $result->getId());
         $this->assertEquals("Wolfram Huschke", $result->getOriginalAlbumTitle());
+    }
+
+    public function testDiscTagsQuery(){
+        // Arrange
+        $qo = new \DecibelSDK\DiscTagsQuery();
+        $qo->setTaggedItemId("156dda6c-358f-e311-be87-ac220b82800d");
+        $qo->setIdType(\DecibelSDK\DiscTagIdType::DECIBEL_ALBUM);
+
+        // Act
+        $decibel = new DecibelSDK\Decibel("5589c9d1", "4154f53630c5cffd106cbe3ba0bd1eff");
+        $qr = $decibel->executeDiscTagsQuery($qo);
+        $result = $qr->getResults()[0];
+
+        // Assert
+
+        $fileTags = $result->getFileTags()[0];
+        $this->assertEquals("4011222327628", $fileTags->getAlbumEAN());
+        $this->assertEquals("156dda6c-358f-e311-be87-ac220b82800d", $fileTags->getAlbumId());
+        $this->assertEquals("baee8712-368f-e311-be87-ac220b82800d", $fileTags->getAlbumMediumId());
+        $this->assertEquals("Rumours", $fileTags->getAlbumTitle());
+        $this->assertEquals("TestCatNum", $fileTags->getCatalogNum());
+        $this->assertEquals(1, $fileTags->getDiscCount());
     }
 
     public function testArtistsQuery(){
@@ -147,7 +255,7 @@ class QueryTests extends \PHPUnit_Framework_TestCase {
         $qo->setGender(\DecibelSDK\Gender::MALE);
 
         // Act
-        $decibel = new DecibelSDK\Decibel("{YOUR_APP_ID}", "{YOUR_APP_KEY}");
+        $decibel = new DecibelSDK\Decibel("5589c9d1", "4154f53630c5cffd106cbe3ba0bd1eff");
         $qr = $decibel->executeArtistsQuery($qo);
         $result = $qr->getResults()[0];
 
@@ -168,7 +276,7 @@ class QueryTests extends \PHPUnit_Framework_TestCase {
         $qo->setDepth(array(\DecibelSDK\ArtistRetrievalDepth::GROUPS,\DecibelSDK\ArtistRetrievalDepth::DATES));
 
         // Act
-        $decibel = new DecibelSDK\Decibel("{YOUR_APP_ID}", "{YOUR_APP_KEY}");
+        $decibel = new DecibelSDK\Decibel("5589c9d1", "4154f53630c5cffd106cbe3ba0bd1eff");
         $qr = $decibel->executeArtistsByIdQuery($qo);
         $result = $qr->getResult();
 
