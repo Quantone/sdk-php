@@ -7,7 +7,7 @@ class InternalUtilities {
     /*
      * @var string The base url for all Decibel API queries
      */
-    const BASEURL = "https://rest.decibel.net/v3/";
+    const BASEURL = "http://localhost:8080/v3/"; //"https://rest.decibel.net/v3/";
 
     /*
      * Check if an object is 0, null or empty
