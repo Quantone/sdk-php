@@ -26,7 +26,8 @@ class Decibel {
         if(!isset($queryStr))
             return null;
         // Initialize the cURL session with the request URL
-        $session = curl_init(InternalUtilities::BASEURL . str_replace(" ", "%20", $queryStr));
+        $testQuery = InternalUtilities::BASEURL . str_replace(" ", "%20", $queryStr);
+        $session = curl_init($testQuery);
         curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
         $headers = array(
             'DecibelAppID: ' . $this->_appId,

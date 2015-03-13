@@ -73,12 +73,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-file-iterator.git",
-                "reference": "4a5b99b2bebab02cbea0d7517cf2ccce10cb5875"
+                "reference": "e190efce2d727ac9b7b042ae0a69ff177cfb95cc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-file-iterator/zipball/4a5b99b2bebab02cbea0d7517cf2ccce10cb5875",
-                "reference": "4a5b99b2bebab02cbea0d7517cf2ccce10cb5875",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-file-iterator/zipball/e190efce2d727ac9b7b042ae0a69ff177cfb95cc",
+                "reference": "e190efce2d727ac9b7b042ae0a69ff177cfb95cc",
                 "shasum": ""
             },
             "require": {
@@ -107,7 +107,7 @@
                 "filesystem",
                 "iterator"
             ],
-            "time": "2014-08-14 16:01:21"
+            "time": "2015-01-01 09:27:14"
         },
         {
             "name": "phpunit/php-text-template",
@@ -115,12 +115,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-text-template.git",
-                "reference": "4f0275302d7776e0470f2cc59b744bdec3cd6f12"
+                "reference": "da723fbc17274ab7093c184056a3ea836839cbb0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-text-template/zipball/4f0275302d7776e0470f2cc59b744bdec3cd6f12",
-                "reference": "4f0275302d7776e0470f2cc59b744bdec3cd6f12",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-text-template/zipball/da723fbc17274ab7093c184056a3ea836839cbb0",
+                "reference": "da723fbc17274ab7093c184056a3ea836839cbb0",
                 "shasum": ""
             },
             "require": {
@@ -148,7 +148,7 @@
             "keywords": [
                 "template"
             ],
-            "time": "2014-08-14 15:59:22"
+            "time": "2015-01-01 09:26:19"
         },
         {
             "name": "phpunit/php-timer",
@@ -156,12 +156,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-timer.git",
-                "reference": "c22baf744a31f12c936c2e731decd9aad6a14d7c"
+                "reference": "744ca6708bda5b0e1cd311d308a3410e480dc283"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-timer/zipball/c22baf744a31f12c936c2e731decd9aad6a14d7c",
-                "reference": "c22baf744a31f12c936c2e731decd9aad6a14d7c",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-timer/zipball/744ca6708bda5b0e1cd311d308a3410e480dc283",
+                "reference": "744ca6708bda5b0e1cd311d308a3410e480dc283",
                 "shasum": ""
             },
             "require": {
@@ -189,7 +189,7 @@
             "keywords": [
                 "timer"
             ],
-            "time": "2014-08-14 16:53:32"
+            "time": "2015-01-01 09:24:53"
         },
         {
             "name": "phpunit/php-token-stream",
@@ -379,16 +379,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Yaml.git",
-                "reference": "6165f4b5224c22de2873deb6a3a4e622044f0705"
+                "reference": "14c16566bbc978249ae858024da396a5c15c03ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Yaml/zipball/6165f4b5224c22de2873deb6a3a4e622044f0705",
-                "reference": "6165f4b5224c22de2873deb6a3a4e622044f0705",
+                "url": "https://api.github.com/repos/symfony/Yaml/zipball/14c16566bbc978249ae858024da396a5c15c03ed",
+                "reference": "14c16566bbc978249ae858024da396a5c15c03ed",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3"
+                "php": ">=5.3.9"
+            },
+            "require-dev": {
+                "symfony/phpunit-bridge": "~2.7|~3.0.0"
             },
             "type": "library",
             "extra": {
@@ -417,7 +420,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "http://symfony.com",
-            "time": "2014-11-10 18:00:54"
+            "time": "2015-03-12 14:31:07"
         }
     ],
     "packages-dev": [],
