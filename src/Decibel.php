@@ -34,10 +34,16 @@ class Decibel {
             'DecibelAppKey: ' . $this->_appKey,
             'DecibelTimestamp: ' . date('Ymd H:i:s', time()),
         );
-        curl_setopt($session, CURLOPT_HTTPHEADER, $headers);
-        // Execute cURL on the session handle
-        $response = curl_exec($session);
-        return $response;
+        // TODO: remove after testing - maybe
+        try{
+            curl_setopt($session, CURLOPT_HTTPHEADER, $headers);
+            // Execute cURL on the session handle
+            $response = curl_exec($session);
+            return $response;
+        }
+        catch(\Exception $ex){
+            throw new DecibelException($ex.getMessage());
+        }
     }
 
     public function executeImagesByIdQuery(ImagesByIdQuery $query){
