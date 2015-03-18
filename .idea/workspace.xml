@@ -30,7 +30,16 @@
       <file leaf-file-name="DecibelObjectModel.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/DecibelObjectModel.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="28" selection-start="389" selection-end="389" vertical-scroll-proportion="113.76923" vertical-offset="3298" max-vertical-offset="73423">
+            <state line="821" column="6" selection-start="14951" selection-end="14951" vertical-scroll-proportion="-3.5294118" vertical-offset="13777" max-vertical-offset="73423">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="QueryTests.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/tests/QueryTests.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="220" column="17" selection-start="9868" selection-end="9868" vertical-scroll-proportion="0.39492753" vertical-offset="3522" max-vertical-offset="4998">
               <folding />
             </state>
           </provider>
@@ -39,7 +48,7 @@
       <file leaf-file-name="DecibelQuery.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/DecibelQuery.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1233" column="0" selection-start="33915" selection-end="33915" vertical-scroll-proportion="-6.5384617" vertical-offset="20791" max-vertical-offset="28169">
+            <state line="25" column="0" selection-start="487" selection-end="487" vertical-scroll-proportion="2.0" vertical-offset="477" max-vertical-offset="27251">
               <folding />
             </state>
           </provider>
@@ -48,70 +57,16 @@
       <file leaf-file-name="Decibel.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Decibel.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="45" selection-start="779" selection-end="779" vertical-scroll-proportion="-10.461538" vertical-offset="204" max-vertical-offset="3604">
+            <state line="151" column="37" selection-start="5093" selection-end="5093" vertical-scroll-proportion="-11.153846" vertical-offset="2277" max-vertical-offset="3264">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Assert.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vendor/phpunit/phpunit/PHPUnit/Framework/Assert.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="2134" column="0" selection-start="69786" selection-end="69786" vertical-scroll-proportion="-6.3846154" vertical-offset="35398" max-vertical-offset="47736">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="curl.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/curl.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="1440" column="29" selection-start="35661" selection-end="35661" vertical-scroll-proportion="-27.461538" vertical-offset="23766" max-vertical-offset="28883">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="QueryBuilderTests.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/QueryBuilderTests.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="109" column="28" selection-start="3874" selection-end="3874" vertical-scroll-proportion="-71.26923" vertical-offset="0" max-vertical-offset="4488">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="QueryTests.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/QueryTests.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="222" column="0" selection-start="9962" selection-end="9962" vertical-scroll-proportion="-6.3846154" vertical-offset="3608" max-vertical-offset="5253">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TestCase.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/vendor/phpunit/phpunit/PHPUnit/Framework/TestCase.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="841" column="9" selection-start="22906" selection-end="22906" vertical-scroll-proportion="-7.6923075" vertical-offset="13383" max-vertical-offset="31637">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Examples.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Examples.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="27" selection-start="325" selection-end="325" vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="884">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="InternalUtilities.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="InternalUtilities.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/InternalUtilities.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="0" selection-start="223" selection-end="223" vertical-scroll-proportion="0.18053098" vertical-offset="102" max-vertical-offset="765">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.34615386" vertical-offset="9" max-vertical-offset="765">
               <folding />
             </state>
           </provider>
@@ -149,10 +104,10 @@
         <option value="$PROJECT_DIR$/tests/QueryBuilderTests.php" />
         <option value="$PROJECT_DIR$/src/DecibelException.php" />
         <option value="$PROJECT_DIR$/src/DecibelQuery.php" />
-        <option value="$PROJECT_DIR$/tests/QueryTests.php" />
         <option value="$PROJECT_DIR$/src/DecibelObjectModel.php" />
-        <option value="$PROJECT_DIR$/src/Decibel.php" />
         <option value="$PROJECT_DIR$/src/InternalUtilities.php" />
+        <option value="$PROJECT_DIR$/src/Decibel.php" />
+        <option value="$PROJECT_DIR$/tests/QueryTests.php" />
       </list>
     </option>
   </component>
@@ -201,7 +156,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -264,6 +218,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -373,14 +328,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16666667" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16666667" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3873776" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -388,12 +343,12 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293944" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="PHP-CGI Server" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -434,13 +389,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/tests/QueryTests.php</url>
-          <line>186</line>
+          <line>171</line>
           <option name="timeStamp" value="68" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/tests/QueryTests.php</url>
-          <line>216</line>
-          <option name="timeStamp" value="70" />
         </line-breakpoint>
       </breakpoints>
       <option name="time" value="71" />
@@ -449,9 +399,7 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/DecibelException.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="0" selection-start="158" selection-end="158" vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="255">
-          <folding />
-        </state>
+        <state line="6" column="0" selection-start="158" selection-end="158" vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="255" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/QueryBuilderTests.php">
@@ -686,11 +634,11 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/composer.lock">
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state line="36" column="22" selection-start="1472" selection-end="1472" vertical-scroll-proportion="1.88" vertical-offset="706" max-vertical-offset="7412" />
+      </provider>
+      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Temp/ide-phpunit.php">
@@ -700,9 +648,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/DecibelException.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="0" selection-start="158" selection-end="158" vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="255">
-          <folding />
-        </state>
+        <state line="6" column="0" selection-start="158" selection-end="158" vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="255" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/iQuery.php">
@@ -724,63 +670,63 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/QueryBuilderTests.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="109" column="28" selection-start="3874" selection-end="3874" vertical-scroll-proportion="-71.26923" vertical-offset="0" max-vertical-offset="4488">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/DecibelObjectModel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="28" selection-start="389" selection-end="389" vertical-scroll-proportion="113.76923" vertical-offset="3298" max-vertical-offset="73423">
+        <state line="109" column="28" selection-start="3874" selection-end="3874" vertical-scroll-proportion="0.0" vertical-offset="1853" max-vertical-offset="4488">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/com/jetbrains/php/lang/psi/stubs/data/curl.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1440" column="29" selection-start="35661" selection-end="35661" vertical-scroll-proportion="-27.461538" vertical-offset="23766" max-vertical-offset="28883">
+        <state line="1440" column="29" selection-start="35661" selection-end="35661" vertical-scroll-proportion="0.0" vertical-offset="23766" max-vertical-offset="28883">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/phpunit/phpunit/PHPUnit/Framework/Assert.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2134" column="0" selection-start="69786" selection-end="69786" vertical-scroll-proportion="-6.3846154" vertical-offset="35398" max-vertical-offset="47736">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/DecibelQuery.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1233" column="0" selection-start="33915" selection-end="33915" vertical-scroll-proportion="-6.5384617" vertical-offset="20791" max-vertical-offset="28169">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Decibel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="45" selection-start="779" selection-end="779" vertical-scroll-proportion="-10.461538" vertical-offset="204" max-vertical-offset="3604">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/QueryTests.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="222" column="0" selection-start="9962" selection-end="9962" vertical-scroll-proportion="-6.3846154" vertical-offset="3608" max-vertical-offset="5253">
+        <state line="2134" column="0" selection-start="69786" selection-end="69786" vertical-scroll-proportion="0.0" vertical-offset="36278" max-vertical-offset="48450">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/phpunit/phpunit/PHPUnit/Framework/TestCase.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="841" column="9" selection-start="22906" selection-end="22906" vertical-scroll-proportion="-7.6923075" vertical-offset="13383" max-vertical-offset="31637">
+        <state line="841" column="9" selection-start="22906" selection-end="22906" vertical-scroll-proportion="0.0" vertical-offset="14297" max-vertical-offset="32351">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DecibelQuery.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="0" selection-start="487" selection-end="487" vertical-scroll-proportion="2.0" vertical-offset="477" max-vertical-offset="27251">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/InternalUtilities.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="0" selection-start="223" selection-end="223" vertical-scroll-proportion="0.18053098" vertical-offset="102" max-vertical-offset="765">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.34615386" vertical-offset="9" max-vertical-offset="765">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Decibel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="151" column="37" selection-start="5093" selection-end="5093" vertical-scroll-proportion="-11.153846" vertical-offset="2277" max-vertical-offset="3264">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DecibelObjectModel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="821" column="6" selection-start="14951" selection-end="14951" vertical-scroll-proportion="-3.5294118" vertical-offset="13777" max-vertical-offset="73423">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/QueryTests.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="220" column="17" selection-start="9868" selection-end="9868" vertical-scroll-proportion="0.39492753" vertical-offset="3522" max-vertical-offset="4998">
           <folding />
         </state>
       </provider>

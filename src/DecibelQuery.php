@@ -5,60 +5,6 @@ namespace DecibelSDK;
 require_once 'DecibelObjectModel.php';
 require_once 'iQuery.php';
 
-class ImagesByIdQuery implements iQuery {
-    public function getQueryString() {
-        return ImagesByIdQuery::buildQueryString();
-    }
-
-    public function __construct(){
-    }
-
-    /* @var $_id string */
-    private $_id;
-
-    public function getId(){
-        return $this->_id;
-    }
-
-    public function setId($id) {
-        $this->_id = $id;
-    }
-
-    /* @var $_imageSize ImageSize */
-    private $_imageSize;
-
-    public function getImageSize(){
-        return $this->_imageSize;
-    }
-
-    public function setImageSize($imageSize) {
-        $this->_imageSize = $imageSize;
-    }
-
-    private function buildQueryString(){
-        $queryStr = "Images/";
-        $queryStr .= $this->_id . "?";
-
-        $queryStr .= ImagesByIdQuery::valueOrDefault("imageSize", $this->_imageSize, ImageSize::STANDARD);
-
-        return rtrim($queryStr, "&?");
-    }
-
-    private static function valueOrDefault($paramName, $value, $defaultValue){
-        if($value == null || $value == $defaultValue) return "";
-        if(!is_array($value))
-            return $paramName . "=" . (is_bool($value) ? (($value == 1) ? "True" : "False") : $value) . "&";
-
-        $queryStr = $paramName . "=";
-        foreach($value as $item){
-            $queryStr .= (is_bool($item) ? (($item == 1) ? "True" : "False") : $item);
-            $queryStr .= ",";
-        }
-
-        return rtrim($queryStr, ',') . "&";
-    }
-}
-
 class AlbumsQuery implements iQuery {
     public function getQueryString() {
         return AlbumsQuery::buildQueryString();

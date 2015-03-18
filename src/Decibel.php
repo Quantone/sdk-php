@@ -26,37 +26,17 @@ class Decibel {
         if(!isset($queryStr))
             return null;
         // Initialize the cURL session with the request URL
-        $testQuery = InternalUtilities::BASEURL . str_replace(" ", "%20", $queryStr); // TODO: for testing only
-        $session = curl_init($testQuery);
-        curl_setopt($session, CURLOPT_SSL_VERIFYPEER, false);
+        $session = curl_init(InternalUtilities::BASEURL . str_replace(" ", "%20", $queryStr));
         curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
         $headers = array(
             'DecibelAppID: ' . $this->_appId,
             'DecibelAppKey: ' . $this->_appKey,
             'DecibelTimestamp: ' . date('Ymd H:i:s', time()),
         );
-
         curl_setopt($session, CURLOPT_HTTPHEADER, $headers);
         // Execute cURL on the session handle
         $response = curl_exec($session);
-        if (FALSE === $response)
-            throw new \Exception(curl_error($session), curl_errno($session));
         return $response;
-
-
-    }
-
-    public function executeImagesByIdQuery(ImagesByIdQuery $query){
-        try{
-            $resultJson = $this->run($query->getQueryString());
-            if($resultJson == null)
-                throw new DecibelException("No data returned by the Decibel API.");
-
-            return new ImagesByIdQueryResult($resultJson);
-        }
-        catch(\Exception $ex){
-            throw new DecibelException($ex->getMessage());
-        }
     }
 
     public function executeAlbumsQuery(AlbumsQuery $query){

@@ -18,21 +18,6 @@ class QueryTests extends \PHPUnit_Framework_TestCase {
         // $this->_decibel = new Decibel("5589c9d1", "4154f53630c5cffd106cbe3ba0bd1eff");
     }
 
-    public function testImagesByIdQuery(){
-        // Arrange
-        $qo = new \DecibelSDK\ImagesByIdQuery();
-        $qo->setId("5abb0387-9440-4273-aa20-bff159a89205");
-
-        // Act
-        $decibel = new DecibelSDK\Decibel("5589c9d1", "4154f53630c5cffd106cbe3ba0bd1eff");
-        $qr = $decibel->executeImagesByIdQuery($qo);
-        $result = $qr->getResult();
-
-        // Assert
-        $this->assertEquals("5abb0387-9440-4273-aa20-bff159a89205", $result->getId());
-        $this->assertEquals(\DecibelSDK\ImageSize::STANDARD, $result->getSize());
-    }
-
     public function testAlbumsQuery(){
         // Arrange
         $qo = new \DecibelSDK\AlbumsQuery();
@@ -166,8 +151,8 @@ class QueryTests extends \PHPUnit_Framework_TestCase {
         $parentLocations = $result->getParentLocations()[0];
         $this->assertEquals("c6f42e79-32f5-4b70-85b6-54c9eae655ad", $parentLocations->getId());
         $this->assertEquals("Middle Location", $parentLocations->getName());
-        $this->assertEquals("4ed08017-989c-406d-a865-7c65789c8f25", $parentLocations->getParentLocations.First().Id());
-        $this->assertEquals("Top Location", $parentLocations->getParentLocations.First().Name());
+        $this->assertEquals("4ed08017-989c-406d-a865-7c65789c8f25", $parentLocations->getParentLocations()[0]->getId());
+        $this->assertEquals("Top Location", $parentLocations->getParentLocations()[0]->getName());
     }
 
     public function testRecordingsQuery(){
