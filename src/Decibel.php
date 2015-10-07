@@ -34,6 +34,7 @@ class Decibel {
             'DecibelTimestamp: ' . date('Ymd H:i:s', time()),
         );
         curl_setopt($session, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($session, CURLOPT_FOLLOWLOCATION, true);
         // Execute cURL on the session handle
         $response = curl_exec($session);
         return $response;
